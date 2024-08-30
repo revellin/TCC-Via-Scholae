@@ -1,21 +1,11 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image, CheckBox } from 'react-native';
-import Logo_ViaScholae from '../ViaScholae/assets/Logo_ViaScholae.png'
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { CustomLogo, CustomTitleText } from '../../components';
 //Importando o icon de return
 import AntDesign from '@expo/vector-icons/AntDesign';
-//Aruumar CHECKBOX
-//import CheckBox from '@react-native-community/checkbox';
+
 
 export const RegisterScreen  = () => {
-  const [form, setForm] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-  //const [isSelected, setSelection] = useState(false);
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.logoContainer}>
@@ -24,7 +14,7 @@ export const RegisterScreen  = () => {
             <AntDesign name="left" size={30} color="black" />
           </TouchableOpacity>
         </View>
-        <Image source={Logo_ViaScholae} style={styles.img}></Image>
+        <CustomLogo></CustomLogo>
       </View>
 
       <View style={styles.form}>
@@ -35,16 +25,12 @@ export const RegisterScreen  = () => {
         <TextInput
           style={styles.input}
           placeholder="Enter your full Name"
-          value={form.fullName}
-          onChangeText={(text) => setForm({ ...form, fullName: text })}
         />
 
         <Text style={styles.label}>Insert your phone</Text>
           <TextInput
             style={styles.input}
             placeholder="Insert your phone"
-            value={form.phone}
-            onChangeText={(text) => setForm({ ...form, phone: text })}
             keyboardType="phone-pad"
           />
 
@@ -52,8 +38,6 @@ export const RegisterScreen  = () => {
         <TextInput
           style={styles.input}
           placeholder="Enter your Email"
-          value={form.email}
-          onChangeText={(text) => setForm({ ...form, email: text })}
           keyboardType="email-address"
         />
 
@@ -61,8 +45,6 @@ export const RegisterScreen  = () => {
         <TextInput
           style={styles.input}
           placeholder="Enter a password"
-          value={form.password}
-          onChangeText={(text) => setForm({ ...form, password: text })}
           secureTextEntry
         />
 
@@ -70,21 +52,8 @@ export const RegisterScreen  = () => {
         <TextInput
           style={styles.input}
           placeholder="Confirm your password"
-          value={form.confirmPassword}
-          onChangeText={(text) => setForm({ ...form, confirmPassword: text })}
           secureTextEntry
         />
-
-        {/*CHECKBOX <View style={styles.checkboxContainer}>
-          <CheckBox
-            value={isSelected}
-            onValueChange={setSelection}
-            style={styles.checkbox}/>
-          <Text style={styles.checkboxLabel}>
-            Concordo com os Termos bla bla bla...
-            Read More.
-          </Text>
-        </View>*/}
 
         <TouchableOpacity style={styles.buttonNext}>
           <Text style={styles.buttonText}>Next</Text>
