@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
      fontSize: 20, //Tamnho da fonte
      color: "#262626", //Cor do texto
      fontFamily: 'SourceSansPro_400Regular',
+     marginBottom: 2,
    },
 
  });

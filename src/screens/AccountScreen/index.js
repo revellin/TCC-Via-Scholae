@@ -1,25 +1,19 @@
 //Importa o React
-import React from 'react';
+import React from 'react'
 //Importa os componentes do React-Native
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-//Importa a bibloteca de icones
-import { FontAwesome } from '@expo/vector-icons';
-//Imposta a foto
-import User from './assets/Foto-User-teste.jpg'
-
+import { View, Text, StyleSheet } from 'react-native'
+import { ProfilePic, ButtonChildren, ButtonEdit, ButtonSettings } from '../../components'
 
 export const AccountScreen = () => {
   return (
     //Container princiapl
     <View style={styles.container}>
-
       {/* Conteiner do profile*/}
       <View style={styles.profileContainer}>
-
         {/* Foto */}
         <View style={styles.profilePic}>
           {/* Adiciona a foto*/}
-          <Image style={styles.profilePic} source={User} />
+          <ProfilePic />
         </View>
         {/* Nome */}
         <Text style={styles.profileName}>Matheus Romano</Text>
@@ -27,25 +21,17 @@ export const AccountScreen = () => {
 
       {/* Container dos botoes */}
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
-          <FontAwesome name="users" size={25} color="black" />
-          <Text style={styles.buttonText}>Children</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Edit Perfil</Text>
-        </TouchableOpacity>
+        <ButtonChildren></ButtonChildren>
+        <ButtonEdit></ButtonEdit>
       </View>
 
       {/* linha */}
       <View style={styles.linha} />
 
       {/* Container Settings */}
-      <TouchableOpacity style={styles.settingsContainer}>
-        <FontAwesome name="cog" size={25} color="black" />
-        <Text style={styles.settingsText}>Settings</Text>
-      </TouchableOpacity>
+      <ButtonSettings></ButtonSettings>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -63,15 +49,6 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 
-  profilePic: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#C4C4C4', // Placeholder color for the profile picture
-    marginBottom: 10,
-    resizeMode: 'cover', // Para garantir que a imagem preencha o círculo
-  },
-
   profileName: {
     fontSize: 30,
     fontWeight: 'bold',
@@ -83,36 +60,10 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#E0E0E0',
-    padding: 11,
-    borderRadius: 10,
-    minWidth: '40%',
-    justifyContent: 'center',
-  },
-
-  buttonText: {
-    marginLeft: 10,
-    fontSize: 20,
-    justifyContent: 'center',
-  },
-
   linha: {
     height: 2,
     backgroundColor: '#D2A236',
     marginVertical: 20,
   },
 
-  settingsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 5,
-  },
-
-  settingsText: {
-    marginLeft: 15,
-    fontSize: 20,
-  },
-});
+})
