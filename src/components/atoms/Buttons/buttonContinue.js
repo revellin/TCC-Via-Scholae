@@ -1,9 +1,9 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 
-export const ButtonContinue = () => {
+export const ButtonContinue = ({ onPress }) => {
   return(
-     <TouchableOpacity style={styles.buttonContinue}>
+     <TouchableOpacity style={styles.buttonContinue} onPress={onPress}>
         <Text style={styles.buttonContinueText}>Continue</Text>
      </TouchableOpacity>
     )

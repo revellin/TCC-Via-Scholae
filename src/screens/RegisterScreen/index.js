@@ -1,24 +1,21 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { CustomLogo, CustomTitleText, CustomLabelText, ButtonNext, CustomInput } from '../../components';
-//Importando o icon de return
+// Importando o ícone de retorno
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-
-export const RegisterScreen  = () => {
+export const RegisterScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.logoContainer}>
-        <View style={styles.return}>
-          <TouchableOpacity>
-            <AntDesign name="left" size={30} color="black" />
-          </TouchableOpacity>
-        </View>
-        <CustomLogo style={styles.img}></CustomLogo>
+        <TouchableOpacity style={styles.return} onPress={() => navigation.navigate('Splash')}>
+          <AntDesign name="left" size={40} color="black" />
+        </TouchableOpacity>
+        <CustomLogo style={styles.img} />
       </View>
 
       <View style={styles.form}>
-        <CustomTitleText></CustomTitleText>
+        <CustomTitleText style={styles.title}>Register</CustomTitleText>
         <View style={styles.line} />
 
         <CustomLabelText>Enter your full name</CustomLabelText>
@@ -26,26 +23,25 @@ export const RegisterScreen  = () => {
 
         <CustomLabelText>Insert your phone</CustomLabelText>
         <CustomInput 
-        placeholder="Insert your phone"
-        keyboardType="phone-pad"
+          placeholder="Insert your phone"
+          keyboardType="phone-pad"
         />
 
         <CustomLabelText>Enter your Email</CustomLabelText>
         <CustomInput 
-        placeholder="Enter your Email"
-        keyboardType="email-address"
+          placeholder="Enter your Email"
+          keyboardType="email-address"
         />
 
         <CustomLabelText>Enter a password</CustomLabelText>
         <CustomInput 
-        placeholder="Enter a password"
-        secureTextEntry
+          placeholder="Enter a password"
+          secureTextEntry
         />
-
         <CustomLabelText>Confirm your password</CustomLabelText>
         <CustomInput 
-        placeholder="Confirm your password"
-        secureTextEntry
+          placeholder="Confirm your password"
+          secureTextEntry
         />
         <ButtonNext></ButtonNext>
       </View>
@@ -61,15 +57,20 @@ const styles = StyleSheet.create({
   },
 
   return: {
-    marginTop: -215,
+    position: 'absolute', // Faz com que o ícone seja posicionado relativamente ao contêiner pai
+    top: 60, // Distância do topo
+    left: 5, // Distância da borda esquerda
+    zIndex: 1, // Garante que o ícone fique sobre a imagem
   },
 
   logoContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', // Isso garante que o ícone fique à esquerda e a imagem à direita
-    paddingHorizontal: 16, // Adiciona um pouco de espaço nas laterais
+    alignItems: 'flex-start', // Alinha itens ao topo do contêiner
+    justifyContent: 'center', // Centraliza a imagem no contêiner
+    paddingHorizontal: 26,
     width: '100%',
+    height: 250,
+    position: 'relative', // Necessário para posicionar o botão de retorno sobre a imagem
   },
 
   img: {
@@ -77,8 +78,13 @@ const styles = StyleSheet.create({
     height: 300,
   },
 
+  title:{
+    fontSize: 40,
+    paddingRight: 242,
+  },
+
   form: {
-    flex: 1,
+    paddingHorizontal: 10, // Adiciona um pouco de espaço nas laterais do formulário
   },
 
   line: {

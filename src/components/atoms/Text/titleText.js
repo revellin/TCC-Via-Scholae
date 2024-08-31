@@ -1,9 +1,9 @@
 import React from "react";
 import { Text, StyleSheet } from 'react-native'
 
-export const CustomTitleText = ( {children} ) => {
+export const CustomTitleText = ( {children, style} ) => {
     return(
-        <Text style={styles.title}> 
+        <Text style={[styles.title, style]}> 
             {children}
         </Text>
     );

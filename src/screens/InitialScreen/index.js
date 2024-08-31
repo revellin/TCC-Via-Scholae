@@ -12,7 +12,7 @@ import {
 } from "../../components";
 
 //Cria o componente principal do APP
-export const InitialScreen = () => {
+export const InitialScreen = ({ navigation }) => {
   //const router = useRouter();
   return (
     // Container principal que engloba a tela toda
@@ -36,7 +36,9 @@ export const InitialScreen = () => {
         <CustomInput placeholder="Digite sua senha" secureTextEntry={true} />
         {/* Define a rota do botão "Continue" */}
 
-        <ButtonContinue></ButtonContinue>
+        <ButtonContinue
+         onPress={() => navigation.navigate('Home')}>
+        </ButtonContinue>
 
         {/* Container da linha entre os botões */}
         <View style={styles.lineContainer}>
@@ -47,7 +49,9 @@ export const InitialScreen = () => {
         </View>
 
         {/* Define a rota do botão "Register" */}
-        <ButtonRegister></ButtonRegister>
+        <ButtonRegister
+        onPress={() => navigation.navigate('Register')}>
+        </ButtonRegister>
       </View>
     </View>
   );

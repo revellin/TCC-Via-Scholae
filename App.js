@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { RegisterScreen } from "./src/screens/RegisterScreen";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts, SourceSansPro_400Regular, SourceSansPro_700Bold } from "@expo-google-fonts/source-sans-pro";
+import { Routes } from './src/routes';
 
 // Mantenha o splash screen visível até que as fontes estejam carregadas
 SplashScreen.preventAutoHideAsync();
@@ -28,5 +28,8 @@ export default function App() {
     return null;
   }
 
-  return <RegisterScreen />;
+  return (
+    <Routes>
+    </Routes>
+  );
 }
