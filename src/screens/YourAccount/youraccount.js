@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { View, StyleSheet } from 'react-native'
+import { Ioniconss } from '@expo/vector-icons'
 import { CustomTitleText, ButtonPassword, ButtonAccountInfo, ButtonDelete } from '../../components'
 
 export const YourAccount = () => {
