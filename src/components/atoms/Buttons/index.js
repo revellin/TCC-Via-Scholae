@@ -4,3 +4,6 @@ export * from './buttonNext';
 export * from './buttonChildren';
 export * from './buttonEdit';
 export * from './buttonSettings';
+export * from './buttonChangePassword';
+export * from './buttonAccountInformation';
+export * from './buttonDeleteAccount';
