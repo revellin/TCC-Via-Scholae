@@ -17,6 +17,8 @@ export const Account = () => {
         </View>
         {/* Nome */}
         <Text style={styles.profileName}>Matheus Romano</Text>
+        <Text style={styles.subTitle}>matheusemailfake@gmail.com</Text>
+        <Text style={styles.subTitle}>+55 11 12345-6789</Text>
       </View>
 
       {/* Container dos botoes */}
@@ -65,11 +67,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontFamily: 'SourceSansPro_400Regular',
     marginTop: 25,
+    marginBottom: 3,
   },
 
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginVertical: 15,
+  },
+  subTitle: {
+    alignSelf: 'flex-start',
+    paddingLeft: 50,
+    color: '#ACACAC',
   },
 })

@@ -30,10 +30,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 24,
+    marginTop: 25,
+  },
+  title: {
+
   },
   headerText: {
     fontSize: 24,
-    fontFamily: 'SourceSansPro_700Bold',
+    fontWeight: 'bold',
     marginLeft: 16,
   },
 });
