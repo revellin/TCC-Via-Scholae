@@ -9,3 +9,4 @@ export * from './buttonAccountInformation';
 export * from './buttonDeleteAccount';
 export * from './buttonDarkMode';
 export * from './buttonLanguage';
+export * from './buttonProfileSelect';

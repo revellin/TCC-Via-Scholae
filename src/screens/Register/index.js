@@ -3,8 +3,10 @@ import { View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { CustomLogo, CustomTitleText, CustomLabelText, ButtonNext, CustomInput, Line } from '../../components';
 // Importando o ícone de retorno
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native'
 
-export const Register = ({ navigation }) => {
+export const Register = () => {
+  const navigation = useNavigation()
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.logoContainer}>
@@ -58,8 +60,8 @@ const styles = StyleSheet.create({
 
   return: {
     position: 'absolute', // Faz com que o ícone seja posicionado relativamente ao contêiner pai
-    top: 60, // Distância do topo
-    left: 5, // Distância da borda esquerda
+    top: 50, // Distância do topo
+    left: 2, // Distância da borda esquerda
     zIndex: 1, // Garante que o ícone fique sobre a imagem
   },
 

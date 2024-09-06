@@ -13,8 +13,7 @@ import {
 } from "../../components";
 
 //Cria o componente principal do APP
-export const Initial = ({ navigation }) => {
-  //const router = useRouter();
+export const Initial = () => {
   return (
     // Container principal que engloba a tela toda
     <View style={styles.container}>
@@ -37,22 +36,18 @@ export const Initial = ({ navigation }) => {
         <CustomInput placeholder="Digite sua senha" secureTextEntry={true} />
         {/* Define a rota do botão "Continue" */}
 
-        <ButtonContinue
-         onPress={() => navigation.navigate('Home')}>
-        </ButtonContinue>
+        <ButtonContinue></ButtonContinue>
 
         {/* Container da linha entre os botões */}
         <View style={styles.lineContainer}>
-          <Line></Line>
+          <Line style={styles.line}></Line>
           {/* Texto entre as duas linhas */}
           <Text style={styles.orText}>or</Text>
-          <Line></Line>
+          <Line style={styles.line}></Line>
         </View>
 
         {/* Define a rota do botão "Register" */}
-        <ButtonRegister
-        onPress={() => navigation.navigate('Register')}>
-        </ButtonRegister>
+        <ButtonRegister></ButtonRegister>
       </View>
     </View>
   );
@@ -67,15 +62,15 @@ const styles = StyleSheet.create({
 
   //Estilização do contêiner da logo
   containerLogo: {
-    flex: 3, //Faz com que o container ocupe 3/7 da tela
     backgroundColor: "#D2A236", //Define a cor de fundo como amarelo
     justifyContent: "center", //Centraliza verticalmente o conteúdo
     alignItems: "center", //Centraliza horizontalmente o conteúdo
+    width: 430,
+    height: 420,
   },
 
   //Estilização para o contêiner do formulário
   formContainer: {
-    flex: 4, //Faz com que o container ocupe 4/7 da tela
     paddingHorizontal: 20, //Espaçamento interno horinzontal
     paddingVertical: 30, //Espaçamento interno vertical
   },
@@ -85,6 +80,10 @@ const styles = StyleSheet.create({
     flexDirection: "row", //Organiza os elementos em linha
     alignItems: "center", //Alinha os elementos ao centro verticalmente
     paddingBottom: 15, //Espaçamento inferior
+  },
+
+  line: {
+    flex: 1,
   },
 
   //Estilização do texto entre as linhas

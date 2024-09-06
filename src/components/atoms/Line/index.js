@@ -1,15 +1,14 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
-export const Line = ({ styles }) => {
+export const Line = ({ style }) => {
     return (
-        <View style={(styles.line, styles)}></View>
+        <View style={[styles.line, style]}></View>
     );
 }
 
 const styles = StyleSheet.create({
     line: {
-        flex: 1, //Ocupa o espaço disponível na horizontal
         height: 2, //Espressura da linha
         backgroundColor: "#E9B224", //Cor da linha
     },

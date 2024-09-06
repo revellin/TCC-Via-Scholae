@@ -1,9 +1,11 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native'
 
 export const ButtonNext = () => {
+  const navigation = useNavigation()
   return(
-     <TouchableOpacity style={styles.buttonNext}>
+     <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('Home')}>
         <Text style={styles.nextButtonText}>Next</Text>
      </TouchableOpacity>
     )
@@ -16,6 +18,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
     borderRadius: 5,
+    width: 232,
+    alignSelf: 'center',
   },
 
   nextButtonText: {

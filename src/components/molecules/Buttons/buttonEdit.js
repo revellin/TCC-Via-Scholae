@@ -1,11 +1,11 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text } from 'react-native'
-//Importa a bibloteca de icones
-import { FontAwesome } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 export const ButtonEdit = () => {
+  const navigation = useNavigation()
   return (
-    <TouchableOpacity style={styles.buttonEdit}>
+    <TouchableOpacity style={styles.buttonEdit} onPress={() => navigation.navigate('EditProfile')}>
       <Text style={styles.editButtonText}>Edit</Text>
     </TouchableOpacity>
   )

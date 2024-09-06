@@ -3,11 +3,13 @@ import React from 'react';
 //Importa os componentes do react6 native
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { ProfilePic, CustomLabelText, CustomTitleText } from '../../components';
+import { useNavigation } from '@react-navigation/native'
 //Importa a biblioteca de icones
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 export const EditProfile = () => {
+  const navigation = useNavigation()
   return (
     //Container principal
     <View style={styles.container}>
@@ -16,14 +18,14 @@ export const EditProfile = () => {
 
         {/* Botão de retorno */}
         <View style={styles.return}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             {/* Ícone para voltar */}
             <AntDesign name="left" size={30} color="black" />
           </TouchableOpacity>
         </View>
 
         {/* Título */}
-        <CustomTitleText>Edit Profile</CustomTitleText>
+        <CustomTitleText style={styles.title}>Edit Profile</CustomTitleText>
       </View>
 
       {/* Profile Picture */}
@@ -38,13 +40,13 @@ export const EditProfile = () => {
       {/* Form */}
       <View style={styles.formContainer}>
         <CustomLabelText>Name</CustomLabelText>
-        <TextInput style={styles.input} value="Caio" />
+        <TextInput style={styles.input} placeholder="Caio" />
 
         <CustomLabelText>Phone</CustomLabelText>
-        <TextInput style={styles.input} value="+55 11 12345-6789" />
+        <TextInput style={styles.input} placeholder="+55 11 12345-6789" />
 
         <CustomLabelText>Email</CustomLabelText>
-        <TextInput style={styles.input} value="matheusemailfake@gmail.com" />
+        <TextInput style={styles.input} placeholder="matheusemailfake@gmail.com" />
       </View>
     </View>
   );
@@ -55,7 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
+    marginTop: 20,
   },
   header: {
     flexDirection: 'row', // Organiza os itens horizontalmente
@@ -67,11 +70,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    marginBottom: 20,
-    paddingLeft: 50,
+    position: 'absolute',
+    fontWeight: 'SourceSansPro_700Bold',
+    marginLeft: 50,
   },
   profilePicContainer: {
     alignItems: 'center',

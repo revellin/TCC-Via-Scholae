@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts, SourceSansPro_400Regular, SourceSansPro_700Bold } from "@expo-google-fonts/source-sans-pro";
+import { NavigationContainer } from '@react-navigation/native'; // Importar o NavigationContainer
 import { Routes } from './src/routes';
 
 // Mantenha o splash screen visível até que as fontes estejam carregadas
@@ -29,7 +30,8 @@ export default function App() {
   }
 
   return (
-    <Routes>
-    </Routes>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 }

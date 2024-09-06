@@ -26,7 +26,7 @@ export const Account = () => {
       </View>
 
       {/* linha */}
-      <Line styles={styles.line}></Line>
+      <Line></Line>
 
       {/* Container Settings */}
       <ButtonSettings></ButtonSettings>
@@ -37,21 +37,34 @@ export const Account = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    padding: 25,
+    backgroundColor: '#ffffff',
   },
 
   profileContainer: {
+    position: 'relative',
     alignItems: 'center',
-    backgroundColor: '#E0E0E0', // Cor de fundo atrás da foto
+    alignSelf: 'center',
+    backgroundColor: '#DADADA', // Cor de fundo atrás da foto
     padding: 20,
     borderRadius: 10,
     marginVertical: 20,
+    width: 358,
+    height: 185,
+    elevation: 4,
+    marginTop: 90,
+  },
+
+  profilePic: {
+    position: 'absolute',
+    zIndex: 1,
+    marginTop: -60,
   },
 
   profileName: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: 'SourceSansPro_400Regular',
+    marginTop: 25,
   },
 
   buttonsContainer: {
@@ -59,11 +72,4 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginVertical: 15,
   },
-
-  line: {
-    height: 2,
-    backgroundColor: '#D2A236',
-    marginVertical: 20,
-  },
-
 })

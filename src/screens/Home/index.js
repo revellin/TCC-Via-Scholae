@@ -1,19 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { CustomTitleText } from '../../components';
+import { CustomTitleText, CustomLabelText } from '../../components';
 
 export const Home = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <CustomTitleText>ROTA</CustomTitleText>
+        <CustomTitleText style={styles.title}>ROTA</CustomTitleText>
       </View>
 
       <View style={styles.apiContainer}>
-        <View style={styles.apiContent}>
-          <Text style={styles.arrivalText}>Chegada</Text>
+          <CustomLabelText style={styles.text}>Chegada</CustomLabelText>
           <Text style={styles.timeText}>00:00</Text>
-        </View>
       </View>
     </View>
   );
@@ -22,29 +20,28 @@ export const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
   },
   headerContainer: {
-    flex: 1,
+    width: 430,
+    height: 570,
+    backgroundColor: '#272727',
     justifyContent: 'center',
-    alignItems: 'center',
+    paddingRight: 25,
   },
+  title: {
+    color: '#ffffff',
+  }, 
   apiContainer: {
-    height: 100,
-    backgroundColor: 'white',
-    borderTopColor: '#d3d3d3',
-    borderTopWidth: 2,
+    paddingLeft: 25,
+    marginTop: 15,
   },
-  apiContent: {
-    padding: 10,
-  },
-  arrivalText: {
-    fontSize: 18,
-    color: 'black',
+  text: {
+    fontSize: 45,
+    color: '#272727',
   },
   timeText: {
-    fontSize: 14,
-    color: '#909090',
+    fontSize: 30,
+    color: 'rgb(172,172,172)',
   },
 });
 

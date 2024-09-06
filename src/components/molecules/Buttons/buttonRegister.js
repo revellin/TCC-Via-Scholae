@@ -1,9 +1,11 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native'
 
-export const ButtonRegister = ({ onPress }) => {
+export const ButtonRegister = () => {
+  const navigation = useNavigation()
   return(
-     <TouchableOpacity style={styles.registerButton} onPress={onPress} >
+     <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')} >
         <Text style={styles.registerButtonText}>Register</Text>
      </TouchableOpacity>
     )
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     borderWidth: 1, //Espressura da borda
     paddingVertical: 10, //Espaçamento interno vertical
     paddingHorizontal: 20, //Espacamento interno horizontal
-    width: 250, //Largura do botão
+    width: 210, //Largura do botão
     alignItems: "center", //Centraliza o texto do botão
     alignSelf: "center", //Centraliza o botão na tela
   },

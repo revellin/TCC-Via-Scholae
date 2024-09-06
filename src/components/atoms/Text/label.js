@@ -1,9 +1,9 @@
 import React from "react";
 import { Text, StyleSheet } from 'react-native';
 
-export const CustomLabelText = ( {children} ) => {
+export const CustomLabelText = ( {children, style} ) => {
     return(
-        <Text style={styles.label}>
+        <Text style={[styles.label, style]}>
             {children}
         </Text>
     );
