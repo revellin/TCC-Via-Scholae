@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
-import { CustomTitleText, ButtonPassword, ButtonAccountInfo, ButtonDelete } from '../../components'
+import { CustomTitleText, ButtonPassword, ButtonAccountInfo } from '../../components'
 import { styles } from './styles';
 
 export const YourAccount = () => {
@@ -19,8 +19,6 @@ export const YourAccount = () => {
       {/* Botão Change Password */}
       <ButtonPassword></ButtonPassword>
 
-      {/* Botão Delete Account */}
-      <ButtonDelete></ButtonDelete>
     </View>
   )
 };
