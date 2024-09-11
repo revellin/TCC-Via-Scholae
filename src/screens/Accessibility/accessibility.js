@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { CustomTitleText, ButtonTheme, ButtonLanguage } from '../../components';
+import { styles } from './style';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export const Accessibility = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-      <AntDesign name="left" size={30} color="black" />
+        <AntDesign name="left" size={30} color="black" />
         <CustomTitleText style={styles.title}>Accessibility</CustomTitleText>
       </View>
 
@@ -19,26 +20,3 @@ export const Accessibility = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    padding: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 24,
-    marginTop: 25,
-  },
-  title: {
-
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginLeft: 16,
-  },
-});
-
