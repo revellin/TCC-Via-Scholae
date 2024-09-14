@@ -1,8 +1,9 @@
 //Importa o react
 import React from 'react';
 //Importa os componentes do react6 native
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { ProfilePic, CustomLabelText, CustomTitleText } from '../../components';
+import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native'
 //Importa a biblioteca de icones
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -50,45 +51,4 @@ export const EditProfile = () => {
       </View>
     </View>
   );
-}
-
-//Estilização
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#ffffff',
-    marginTop: 20,
-  },
-  header: {
-    flexDirection: 'row', // Organiza os itens horizontalmente
-    alignItems: 'center', // Alinha os itens verticalmente no centro
-    justifyContent: 'space-between', // Distribui os itens com espaço entre eles
-    width: '100%', // Garante que o cabeçalho ocupe toda a largura disponível
-    marginTop: 20, // Espaço acima do cabeçalho
-    marginBottom: 25, // Espaço abaixo do cabeçalho
-  },
-
-  title: {
-    position: 'absolute',
-    fontWeight: 'SourceSansPro_700Bold',
-    marginLeft: 50,
-  },
-  profilePicContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  editPictureText: {
-    color: '#FFA500',
-  },
-  formContainer: {
-    marginTop: 20,
-  },
-
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#262626',
-    marginBottom: 20,
-    fontSize: 16,
-  },
-});
+};

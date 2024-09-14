@@ -9,3 +9,6 @@ export * from './buttonAccountInformation';
 export * from './buttonDarkMode';
 export * from './buttonLanguage';
 export * from './buttonProfileSelect';
+export * from './buttonYourAccount';
+export * from './buttonChildrenSettings';
+export * from './buttonAccessibility';
