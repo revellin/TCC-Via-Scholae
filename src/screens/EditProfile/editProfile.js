@@ -2,7 +2,7 @@
 import React from 'react';
 //Importa os componentes do react6 native
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { ProfilePic, CustomLabelText, CustomTitleText } from '../../components';
+import { ProfilePic, CustomLabelText, CustomTitleText, Return } from '../../components';
 import { styles } from './styles';
 import { useNavigation } from '@react-navigation/native'
 //Importa a biblioteca de icones
@@ -18,12 +18,7 @@ export const EditProfile = () => {
       <View style={styles.header}>
 
         {/* Botão de retorno */}
-        <View style={styles.return}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            {/* Ícone para voltar */}
-            <AntDesign name="left" size={30} color="black" />
-          </TouchableOpacity>
-        </View>
+        <Return onPress={() => navigation.navigate('Home')}></Return>
 
         {/* Título */}
         <CustomTitleText style={styles.title}>Edit Profile</CustomTitleText>

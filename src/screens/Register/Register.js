@@ -1,53 +1,108 @@
-import React from 'react';
-import { View, TouchableOpacity, ScrollView } from 'react-native';
-import { CustomLogo, CustomTitleText, CustomLabelText, ButtonNext, CustomInput, Line } from '../../components';
-import { styles } from './styles';
+import React, { useState } from 'react'
+import { View, TouchableOpacity, ScrollView } from 'react-native'
+import {
+  CustomLogo,
+  CustomTitleText,
+  CustomLabelText,
+  ButtonNext,
+  CustomInput,
+  Line,
+  Return
+} from '../../components'
+import { styles } from './styles'
 // Importando o ícone de retorno
-import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native'
 
 export const Register = () => {
   const navigation = useNavigation()
+
+  const [username, setUsername] = useState('')
+  const [telefone, setTelefone] = useState('')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [ConfSenha, setConfirmeSenha] = useState('')
+
+  function handleSingIn(){
+    if( username === ('') || telefone === ('') || email === ('') || senha === ('') || ConfSenha === ('')){
+      alert("Prencha todos os campos")
+      return;
+    }
+
+    if (senha !== ConfSenha){
+      alert("As senhas não coincidem ")
+    }
+
+    const data = {
+      username,
+      telefone,
+      email,
+      senha,
+      ConfSenha
+    }
+    console.log(data);
+
+    navigation.navigate('Home');
+  }
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.logoContainer}>
-        <TouchableOpacity style={styles.return} onPress={() => navigation.navigate('Splash')}>
-          <AntDesign name="left" size={40} color="black" />
+        <TouchableOpacity
+          style={styles.return}
+          onPress={() => navigation.navigate('Splash')}
+        >
+          <Return style={styles.return} onPress={() => navigation.navigate('Splash')}></Return>
         </TouchableOpacity>
         <CustomLogo style={styles.img} />
       </View>
 
       <View style={styles.form}>
-        <CustomTitleText style={styles.title}>Register</CustomTitleText>
+        <CustomTitleText style={styles.title}>Registro</CustomTitleText>
         <Line style={styles.line}></Line>
 
-        <CustomLabelText>Enter your full name</CustomLabelText>
-        <CustomInput placeholder="Enter your full Name" />
-
-        <CustomLabelText>Insert your phone</CustomLabelText>
+        <CustomLabelText>Digite seu nome completo</CustomLabelText>
         <CustomInput
-          placeholder="Insert your phone"
+          placeholder="Insira seu nome"
+          onChangeText={setUsername}
+          value={username}
+        />
+
+        <CustomLabelText>Digite seu telefone</CustomLabelText>
+        <CustomInput
+          placeholder="Insira seu número de telefone"
           keyboardType="phone-pad"
+          onChangeText={setTelefone}
+          value={telefone}
         />
 
-        <CustomLabelText>Enter your Email</CustomLabelText>
+        <CustomLabelText>Digite seu Email</CustomLabelText>
         <CustomInput
-          placeholder="Enter your Email"
+          placeholder="Insira seu Emsil"
           keyboardType="email-address"
+          onChangeText={setEmail}
+          value={email}
         />
 
-        <CustomLabelText>Enter a password</CustomLabelText>
+        <CustomLabelText>Digite uma senha</CustomLabelText>
         <CustomInput
-          placeholder="Enter a password"
+          placeholder="Digite uma senha"
           secureTextEntry
+          onChangeText={setSenha}
+          value={senha}
         />
-        <CustomLabelText>Confirm your password</CustomLabelText>
+        <CustomLabelText>Confirme sue senha</CustomLabelText>
         <CustomInput
-          placeholder="Confirm your password"
+          placeholder="Confirme sua senha"
           secureTextEntry
+          onChangeText={setConfirmeSenha}
+          value={ConfSenha}
         />
-        <ButtonNext></ButtonNext>
+        <ButtonNext onPress={handleSingIn}>Next</ButtonNext>
       </View>
     </ScrollView>
-  );
+  )
 }
+
+//onPress={() => navigation.navigate('Home')}
+//import { useNavigation } from '@react-navigation/native'

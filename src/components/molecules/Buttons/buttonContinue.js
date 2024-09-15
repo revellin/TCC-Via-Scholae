@@ -1,12 +1,13 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
-import { useNavigation } from '@react-navigation/native'
+//import { useNavigation } from '@react-navigation/native'
 
-export const ButtonContinue = () => {
-  const navigation = useNavigation()
+export const ButtonContinue = ({ onPress, children}) => {
+  //const navigation = useNavigation()
+  //onPress={() => navigation.navigate('Home')
   return(
-     <TouchableOpacity style={styles.buttonContinue} onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.buttonContinueText}>Continue</Text>
+     <TouchableOpacity style={styles.buttonContinue} onPress={onPress}>
+        <Text style={styles.buttonContinueText}>{children}</Text>
      </TouchableOpacity>
     )
 };

@@ -1,15 +1,24 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { CustomTitleText, ButtonProfile, ButtonYourAccount, ButtonChildrenSettings, ButtonAccessibility } from '../../components';
-import { styles } from './styles';
-
+import React from 'react'
+import { View, Text } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import {
+  CustomTitleText,
+  ButtonProfile,
+  ButtonYourAccount,
+  ButtonChildrenSettings,
+  ButtonAccessibility,
+  Return,
+} from '../../components'
+import { styles } from './styles'
 
 export const Settings = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <CustomTitleText style={styles.title}>Settings</CustomTitleText>
-
+      <View style={styles.header}>
+        <Return style={styles.return} onPress={() => navigation.navigate('Home')}></Return>
+        <CustomTitleText style={styles.title}>Settings</CustomTitleText>
+      </View>
       {/* Profile Section */}
       <ButtonProfile></ButtonProfile>
 
@@ -25,5 +34,5 @@ export const Settings = () => {
       {/* Accessibility */}
       <ButtonAccessibility></ButtonAccessibility>
     </View>
-  );
+  )
 }

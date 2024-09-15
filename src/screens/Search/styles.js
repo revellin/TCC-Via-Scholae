@@ -2,59 +2,87 @@ import { StyleSheet } from 'react-native'
 export const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'white',
-      padding: 16,
+      backgroundColor: '#ffffff',
+      padding: 15,
     },
-    header: {
-      fontSize: 24,
-      fontWeight: 'bold',
+
+    title: {
+      fontWeight: '600',
       marginBottom: 16,
+      marginTop: 30,
+      marginRight: 280,
     },
+
     searchContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#F0F0F0',
-      borderRadius: 8,
-      padding: 8,
       marginBottom: 16,
     },
-    searchInput: {
-      flex: 1,
-      marginLeft: 8,
-      fontSize: 16,
+
+    pic: {
+      width: 70,
+      height: 70,
     },
+
+    InputContainer: {
+      marginLeft: 30,
+      alignItems: 'center',
+    },
+
+    input: {
+      width: 250,
+      height: 35,
+      borderRadius: 7,
+    },
+
+    line: {
+      marginBottom: 15,
+      backgroundColor: '#262626',
+    },
+
     recentHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       marginBottom: 8,
     },
+
     recentText: {
-      fontSize: 18,
-      fontWeight: 'bold',
+      fontSize: 24,
     },
+
     cleanText: {
-      fontSize: 14,
-      color: 'blue',
+      fontSize: 16,
+      color: '#2997D6',
     },
+
     recentItem: {
-      paddingVertical: 12,
+      paddingVertical: 10,
       borderBottomWidth: 1,
-      borderBottomColor: '#E0E0E0',
+      borderBottomColor: '#ACACAC',
     },
+
     recentItemContent: {
       flexDirection: 'row',
       alignItems: 'center',
     },
-    recentItemText: {
-      marginLeft: 12,
+
+    Accountspic: {
+      width: 45,
+      height: 45,
     },
+
+    recentItemText: {
+      marginLeft: 10,
+    },
+
     recentItemName: {
       fontSize: 16,
     },
+
     recentItemInfo: {
       fontSize: 14,
-      color: 'gray',
+      color: '#ACACAC',
     },
   });
   

@@ -2,7 +2,7 @@ export * from './Account';
 export * from './EditProfile';
 export * from './Home';
 export * from './Initial';
-export * from './Message';
+export * from './Chat';
 export * from './Register';
 export * from './Search';
 export * from './Settings';

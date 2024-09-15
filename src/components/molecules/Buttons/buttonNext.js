@@ -1,12 +1,11 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
-import { useNavigation } from '@react-navigation/native'
 
-export const ButtonNext = () => {
-  const navigation = useNavigation()
+
+export const ButtonNext = ({ onPress, children }) => {
   return(
-     <TouchableOpacity style={styles.buttonNext} onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.nextButtonText}>Next</Text>
+     <TouchableOpacity style={styles.buttonNext} onPress={onPress}>
+        <Text style={styles.nextButtonText}>{children}</Text>
      </TouchableOpacity>
     )
 };

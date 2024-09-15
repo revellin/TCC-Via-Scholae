@@ -16,6 +16,7 @@ import {
   EditPhone,
   Home,
   Message,
+  Chat,
   Register,
   Search,
   Settings,
@@ -60,7 +61,7 @@ const BottomRoute = () => {
       />
       <Tab.Screen
         name="Message"
-        component={Message}
+        component={Chat}
         options={{ headerShown: false }}
       />
       <Tab.Screen
@@ -108,8 +109,13 @@ export const Routes = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Message"
+        name="Chat"
         component={BottomRoute}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Message"
+        component={Message}
         options={{ headerShown: false }}
       />
       <Stack.Screen

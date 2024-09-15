@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -7,7 +8,7 @@ export const styles = StyleSheet.create({
 
   return: {
     position: 'absolute', // Faz com que o ícone seja posicionado relativamente ao contêiner pai
-    top: 50, // Distância do topo
+    top: 20, // Distância do topo
     left: 2, // Distância da borda esquerda
     zIndex: 1, // Garante que o ícone fique sobre a imagem
   },
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
 
   title: {
     fontSize: 40,
-    paddingRight: 242,
+    paddingRight: 240,
   },
 
   form: {

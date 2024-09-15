@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet} from 'react-native'
-import { CustomTitleText } from '../../components';
+import { CustomTitleText } from '../../../components';
 
 
 export const Message = () => {

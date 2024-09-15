@@ -1,14 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CustomTitleText, ButtonTheme, ButtonLanguage } from '../../components';
+import { useNavigation } from '@react-navigation/native'
+import { CustomTitleText, ButtonTheme, ButtonLanguage, Return } from '../../components';
 import { styles } from './style';
-import AntDesign from '@expo/vector-icons/AntDesign';
+
 
 export const Accessibility = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <AntDesign name="left" size={30} color="black" />
+        <Return onPress={() => navigation.navigate('Settings')}></Return>
         <CustomTitleText style={styles.title}>Accessibility</CustomTitleText>
       </View>
 

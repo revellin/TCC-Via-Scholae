@@ -1,12 +1,14 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 //Importa a bibloteca de icones
 import { Ionicons } from '@expo/vector-icons';
 import { IconUser } from '../../../../assets/icons'
 
 export const ButtonYourAccount = () => {
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity style={styles.settingsOption}>
+        <TouchableOpacity style={styles.settingsOption} onPress={() => navigation.navigate('YourAccount')}>
             <View style={styles.iconTextContainer}>
                 <IconUser></IconUser>
                 <View style={styles.textContainer}>

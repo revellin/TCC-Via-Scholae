@@ -1,20 +1,18 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
-import { CustomTitleText, ButtonPassword, ButtonAccountInfo } from '../../components'
+import { useNavigation } from '@react-navigation/native'
+import { CustomTitleText, ButtonPassword, Return } from '../../components'
 import { styles } from './styles';
 
 export const YourAccount = () => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       {/* Cabeçalho da tela */}
       <View style={styles.header}>
-        <Ionicons name="arrow-back" size={24} color="black" />
+        <Return onPress={() => navigation.navigate('Settings')}></Return>
         <CustomTitleText style={styles.title}>Your Account</CustomTitleText>
       </View>
-
-      {/* Botão Account Information */}
-      <ButtonAccountInfo></ButtonAccountInfo>
 
       {/* Botão Change Password */}
       <ButtonPassword></ButtonPassword>

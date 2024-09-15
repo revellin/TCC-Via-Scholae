@@ -1,11 +1,13 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 //Importa a bibloteca de icones
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 export const ButtonTheme = () => {
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity style={styles.optionButton}>
+        <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('Theme')}>
             <View style={styles.optionContent}>
                 <MaterialIcons name="brightness-6" size={24} color="black" />
                 <Text style={styles.optionText}>Dark Mode</Text>

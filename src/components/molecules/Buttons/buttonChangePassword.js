@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, Text } from 'react-native'
+import { TouchableOpacity, StyleSheet, Text, View } from 'react-native'
 //Importa a bibloteca de icones
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 

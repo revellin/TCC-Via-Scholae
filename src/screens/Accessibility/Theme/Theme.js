@@ -1,10 +1,35 @@
-import React from "react";
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Return, CustomTitleText, CustomRadioButton } from '../../../components';
+import { styles } from './styles';
+import Check from '../../../../assets/check.png';
 
 export const Theme = () => {
-    return(
-        <View>
-            <Text>aaa</Text>
-        </View>
-    )
-}
+  const [checked, setChecked] = useState('off');
+  const navigation = useNavigation();
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Return style={styles.return} onPress={() => navigation.navigate('Accessibility')} />
+        <CustomTitleText style={styles.title}>Theme</CustomTitleText>
+      </View>
+      <View style={styles.optionsContainer}>
+        <CustomRadioButton
+          style={styles.radioButton}
+          value="On"
+          status={checked === 'on' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('on')}
+          imageSource={Check} // Passe a imagem para o CustomRadioButton
+        />
+        <CustomRadioButton
+          value="Off"
+          status={checked === 'off' ? 'checked' : 'unchecked'}
+          onPress={() => setChecked('off')}
+          imageSource={Check} // Passe a imagem para o CustomRadioButton
+        />
+      </View>
+    </View>
+  );
+};
