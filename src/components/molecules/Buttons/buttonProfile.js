@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text, View, Image } from 'react-native'
-import { ProfilePic } from '../../../components'
+import { ProfilePic } from '../..'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 

@@ -18,10 +18,10 @@ export const EditProfile = () => {
       <View style={styles.header}>
 
         {/* Botão de retorno */}
-        <Return onPress={() => navigation.navigate('Home')}></Return>
+        <Return style={styles.back} onPress={() => navigation.navigate('Home')}></Return>
 
         {/* Título */}
-        <CustomTitleText style={styles.title}>Edit Profile</CustomTitleText>
+        <CustomTitleText style={styles.title}>Edite suas Informações</CustomTitleText>
       </View>
 
       {/* Profile Picture */}

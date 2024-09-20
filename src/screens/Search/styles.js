@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
       fontWeight: '600',
       marginBottom: 16,
       marginTop: 30,
-      marginRight: 280,
+      marginRight: 260,
     },
 
     searchContainer: {

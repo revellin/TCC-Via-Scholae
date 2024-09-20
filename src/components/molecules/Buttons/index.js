@@ -1,14 +1,14 @@
 //btn Registro
-export * from './buttonRegister';
+export * from './buttonRegistro';
 
 //btn Continue
 export * from './buttonContinue';
 
 //btn Next
-export * from './buttonNext';
+export * from './buttonCadastro';
 
 //btn crianças
-export * from './buttonChildren';
+export * from './buttonCriancas';
 
 //btn Edit
 export * from './buttonEdit';
@@ -17,22 +17,25 @@ export * from './buttonEdit';
 export * from './buttonSettings';
 
 //btn Mudar senha
-export * from './buttonChangePassword';
+export * from './buttonSenha';
 
-
-//btn Te,a
+//btn Tema
 export * from './buttonTheme';
 
 //btn Idioma
-export * from './buttonLanguage';
+export * from './buttonIdioma';
 
 //btn Registro
-export * from './buttonProfileSelect';
-export * from './buttonYourAccount';
-export * from './buttonChildrenSettings';
+export * from './buttonProfile';
+
+//btn Sua conta
+export * from './buttonSuaConta';
+
+//btn crianças da tela config 
+export * from './buttonCriancas_da_Config';
 
 //btn Acessibilidade
-export * from './buttonAccessibility';
+export * from './buttonAcessibilidade';
 
 //btn Voltar
 export * from './buttonReturn';

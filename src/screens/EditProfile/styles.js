@@ -15,10 +15,14 @@ export const styles = StyleSheet.create({
     marginBottom: 25, // Espaço abaixo do cabeçalho
   },
 
+  back: {
+    marginTop: 3,
+  },
+
   title: {
     position: 'absolute',
-    fontWeight: 'SourceSansPro_700Bold',
-    marginLeft: 50,
+    fontWeight: '700',
+    marginLeft: 35,
   },
   profilePicContainer: {
     alignItems: 'center',

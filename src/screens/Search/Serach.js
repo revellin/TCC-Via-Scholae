@@ -7,7 +7,7 @@ import {
   Line,
 } from '../../components'
 import { styles } from './styles'
-import { Ionicons } from '@expo/vector-icons'
+//import { Ionicons } from '@expo/vector-icons'
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -28,18 +28,18 @@ export const Search = () => {
 
   return (
     <View style={styles.container}>
-      <CustomTitleText style={styles.title}>Search</CustomTitleText>
+      <CustomTitleText style={styles.title}>Pesquisa</CustomTitleText>
 
       {/* Barra de pesquisa */}
       <View style={styles.searchContainer}>
         <ProfilePic style={styles.pic}></ProfilePic>
         <View style={styles.InputContainer}>
-          <Ionicons
+          {/*<Ionicons
             style={styles.icon}
             name="search"
             size={24}
             color="#ACACAC"
-          />
+          />*/}
           <CustomInput
             style={styles.input}
             placeholder="Search"
@@ -53,9 +53,9 @@ export const Search = () => {
 
       {/* Seção Recentes */}
       <View style={styles.recentHeader}>
-        <Text style={styles.recentText}>Recent</Text>
+        <Text style={styles.recentText}>Recentes</Text>
         <TouchableOpacity onPress={handleCleanAll}>
-          <Text style={styles.cleanText}>Clean all</Text>
+          <Text style={styles.cleanText}>Limpar tudo</Text>
         </TouchableOpacity>
       </View>
 

@@ -24,7 +24,7 @@ export const EditPhone = () => {
                 </View>
 
                 {/* Título */}
-                <Text style={styles.title}>Phone</Text>
+                <Text style={styles.title}>Número</Text>
 
                 {/* Botão de confirmação */}
                 <View style={styles.check}>

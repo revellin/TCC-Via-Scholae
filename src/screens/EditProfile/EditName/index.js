@@ -25,7 +25,7 @@ export const EditName = () => {
         </View>
 
         {/* Título da tela */}
-        <Text style={styles.title}>Name</Text>
+        <Text style={styles.title}>Nome</Text>
 
         {/* Botão de confirmação */}
         <View style={styles.check}>

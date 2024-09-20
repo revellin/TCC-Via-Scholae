@@ -12,7 +12,7 @@ export const ButtonChildrenSettings = () => {
         <TouchableOpacity style={styles.settingsOption} onPress={() => navigation.navigate('')}>
         <View style={styles.iconTextContainer}>
           <Children></Children>
-          <Text style={styles.optionText}>Children</Text>
+          <Text style={styles.optionText}>Crianças</Text>
         </View>
         <Ionicons name="chevron-forward-outline" size={24} color="black" />
       </TouchableOpacity>

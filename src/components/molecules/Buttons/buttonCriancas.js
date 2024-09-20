@@ -7,7 +7,7 @@ export const ButtonChildren = () => {
   return (
     <TouchableOpacity style={styles.buttonChildren}>
       <FontAwesome name="users" size={25} color="black" />
-      <Text style={styles.childrenButtonText}>Children</Text>
+      <Text style={styles.childrenButtonText}>Crianças</Text>
     </TouchableOpacity>
   )
 }

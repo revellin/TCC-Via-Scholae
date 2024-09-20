@@ -11,7 +11,7 @@ export const YourAccount = () => {
       {/* Cabeçalho da tela */}
       <View style={styles.header}>
         <Return onPress={() => navigation.navigate('Settings')}></Return>
-        <CustomTitleText style={styles.title}>Your Account</CustomTitleText>
+        <CustomTitleText style={styles.title}>Conta</CustomTitleText>
       </View>
 
       {/* Botão Change Password */}

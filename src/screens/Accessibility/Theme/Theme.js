@@ -13,7 +13,7 @@ export const Theme = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Return style={styles.return} onPress={() => navigation.navigate('Accessibility')} />
-        <CustomTitleText style={styles.title}>Theme</CustomTitleText>
+        <CustomTitleText style={styles.title}>Tema</CustomTitleText>
       </View>
       <View style={styles.optionsContainer}>
         <CustomRadioButton

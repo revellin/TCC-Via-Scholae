@@ -47,7 +47,7 @@ export const Initial = () => {
       {/* Container do Formulário */}
       <View style={styles.formContainer}>
         {/* Título */}
-        <CustomTitleText>Get Started</CustomTitleText>
+        <CustomTitleText>Começe sua jornada</CustomTitleText>
         {/* Label */}
         <CustomLabelText>Digite seu telefone</CustomLabelText>
         {/* Cria um TextInput do tipo numerico (keyboardType="numeric") */}

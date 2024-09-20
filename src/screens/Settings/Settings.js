@@ -17,13 +17,13 @@ export const Settings = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Return style={styles.return} onPress={() => navigation.navigate('Home')}></Return>
-        <CustomTitleText style={styles.title}>Settings</CustomTitleText>
+        <CustomTitleText style={styles.title}>Configurações</CustomTitleText>
       </View>
       {/* Profile Section */}
       <ButtonProfile></ButtonProfile>
 
       {/* App Settings Section */}
-      <Text style={styles.appSet}>App Settings</Text>
+      <Text style={styles.appSet}>Configurações do App</Text>
 
       {/* Your Account */}
       <ButtonYourAccount></ButtonYourAccount>

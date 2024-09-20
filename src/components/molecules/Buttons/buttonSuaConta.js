@@ -12,8 +12,8 @@ export const ButtonYourAccount = () => {
             <View style={styles.iconTextContainer}>
                 <IconUser></IconUser>
                 <View style={styles.textContainer}>
-                    <Text style={styles.optionText}>Your Account</Text>
-                    <Text style={styles.subText}>Manage your information</Text>
+                    <Text style={styles.optionText}>Conta</Text>
+                    <Text style={styles.subText}>Gerencie suas informações</Text>
                 </View>
             </View>
             <Ionicons name="chevron-forward-outline" size={24} color="black" />

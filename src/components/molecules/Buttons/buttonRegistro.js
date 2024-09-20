@@ -6,7 +6,7 @@ export const ButtonRegister = () => {
   const navigation = useNavigation()
   return(
      <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')} >
-        <Text style={styles.registerButtonText}>Register</Text>
+        <Text style={styles.registerButtonText}>Registro</Text>
      </TouchableOpacity>
     )
 };

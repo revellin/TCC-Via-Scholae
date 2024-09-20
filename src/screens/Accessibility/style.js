@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
   title: {
     top: 8,
     marginLeft: 20,
+    fontWeight: '700',
   },
   headerText: {
     fontSize: 24,

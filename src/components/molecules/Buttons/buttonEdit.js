@@ -6,7 +6,7 @@ export const ButtonEdit = () => {
   const navigation = useNavigation()
   return (
     <TouchableOpacity style={styles.buttonEdit} onPress={() => navigation.navigate('EditProfile')}>
-      <Text style={styles.editButtonText}>Edit</Text>
+      <Text style={styles.editButtonText}>Edite</Text>
     </TouchableOpacity>
   )
 }

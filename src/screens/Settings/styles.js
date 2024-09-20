@@ -4,12 +4,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+    marginTop: 20,
   },
   header: {
     flexDirection: 'row',
   },
   return: {
-    marginTop: 22,
+    marginTop: 25,
 
   },
   title: {

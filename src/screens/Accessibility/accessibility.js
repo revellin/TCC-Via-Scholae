@@ -11,7 +11,7 @@ export const Accessibility = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Return onPress={() => navigation.navigate('Settings')}></Return>
-        <CustomTitleText style={styles.title}>Accessibility</CustomTitleText>
+        <CustomTitleText style={styles.title}>Acessibilidade</CustomTitleText>
       </View>
 
       {/* Botão Dark Mode */}

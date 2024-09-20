@@ -10,7 +10,7 @@ export const ButtonTheme = () => {
         <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate('Theme')}>
             <View style={styles.optionContent}>
                 <MaterialIcons name="brightness-6" size={24} color="black" />
-                <Text style={styles.optionText}>Dark Mode</Text>
+                <Text style={styles.optionText}>Modo Escuro</Text>
             </View>
             <View style={styles.optionRight}>
                 <Text style={styles.optionSubText}>Off</Text>

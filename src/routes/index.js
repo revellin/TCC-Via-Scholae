@@ -35,11 +35,11 @@ const BottomRoute = () => {
         tabBarIcon: ({ color, size }) => {
           if (route.name === 'Home') {
             return <IconHome width={size} height={size} color={color} />
-          } else if (route.name === 'Message') {
+          } else if (route.name === 'Mensagens') {
             return <IconMessage width={size} height={size} color={color} />
-          } else if (route.name === 'Search') {
+          } else if (route.name === 'Pesquisa') {
             return <IconSearch width={size} height={size} color={color} />
-          } else if (route.name === 'Account') {
+          } else if (route.name === 'Perfil') {
             return <IconUser width={size} height={size} color={color} />
           }
         },
@@ -60,17 +60,17 @@ const BottomRoute = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Message"
+        name="Mensagens"
         component={Chat}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Search"
+        name="Pesquisa"
         component={Search}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="Account"
+        name="Perfil"
         component={Account}
         options={{ headerShown: false }}
       />

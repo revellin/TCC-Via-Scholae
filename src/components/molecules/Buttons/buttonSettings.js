@@ -9,7 +9,7 @@ export const ButtonSettings = () => {
   return (
     <TouchableOpacity style={styles.buttonSettings} onPress={() => navigation.navigate('Settings')}>
         <FontAwesome name="cog" size={25} color="black" />
-        <Text style={styles.settingsText}>Settings</Text>
+        <Text style={styles.settingsText}>Configurações</Text>
     </TouchableOpacity>
   )
 }

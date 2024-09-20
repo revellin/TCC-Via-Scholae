@@ -91,14 +91,14 @@ export const Register = () => {
           onChangeText={setSenha}
           value={senha}
         />
-        <CustomLabelText>Confirme sue senha</CustomLabelText>
+        <CustomLabelText>Confirme sua senha</CustomLabelText>
         <CustomInput
           placeholder="Confirme sua senha"
           secureTextEntry
           onChangeText={setConfirmeSenha}
           value={ConfSenha}
         />
-        <ButtonNext onPress={handleSingIn}>Next</ButtonNext>
+        <ButtonNext onPress={handleSingIn}>Cadastre</ButtonNext>
       </View>
     </ScrollView>
   )
