@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
+import { View, TouchableOpacity, ScrollView, Alert } from 'react-native'
 import {
   CustomLogo,
   CustomTitleText,
@@ -9,7 +9,7 @@ import {
   Line,
   Return
 } from '../../components'
-import { styles } from './styles'
+import { styles, Container, LogoContainer, Form } from './styles'
 // Importando o ícone de retorno
 import { useNavigation } from '@react-navigation/native'
 
@@ -20,16 +20,16 @@ export const Register = () => {
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-  const [ConfSenha, setConfirmeSenha] = useState('')
+  const [confSenha, setConfirmeSenha] = useState('')
 
-  function handleSingIn(){
-    if( username === ('') || telefone === ('') || email === ('') || senha === ('') || ConfSenha === ('')){
-      alert("Prencha todos os campos")
+  function handleSingIn() {
+    if (username === ('') || telefone === ('') || email === ('') || senha === ('') || confSenha === ('')) {
+      Alert.alert('', 'Prencha todos os campos.')
       return;
     }
 
-    if (senha !== ConfSenha){
-      alert("As senhas não coincidem ")
+    if (senha !== confSenha) {
+      Alert.alert('', 'As senhas não coincidem.')
     }
 
     const data = {
@@ -37,7 +37,7 @@ export const Register = () => {
       telefone,
       email,
       senha,
-      ConfSenha
+      confSenha
     }
     console.log(data);
 
@@ -46,61 +46,62 @@ export const Register = () => {
 
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.logoContainer}>
-        <TouchableOpacity
-          style={styles.return}
-          onPress={() => navigation.navigate('Splash')}
-        >
-          <Return style={styles.return} onPress={() => navigation.navigate('Splash')}></Return>
-        </TouchableOpacity>
-        <CustomLogo style={styles.img} />
-      </View>
+    <ScrollView>
+      <Container>
+        <LogoContainer>
+          <TouchableOpacity
+            style={styles.return}
+            onPress={() => navigation.navigate('Splash')}>
+            <Return style={styles.return} onPress={() => navigation.navigate('Splash')} />
+          </TouchableOpacity>
+          <CustomLogo style={styles.img} />
+        </LogoContainer>
 
-      <View style={styles.form}>
-        <CustomTitleText style={styles.title}>Registro</CustomTitleText>
-        <Line style={styles.line}></Line>
+        <Form>
+          <CustomTitleText style={styles.title}>Registro</CustomTitleText>
+          <Line style={styles.line}></Line>
 
-        <CustomLabelText>Digite seu nome completo</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu nome"
-          onChangeText={setUsername}
-          value={username}
-        />
+          <CustomLabelText>Digite seu nome completo</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu nome"
+            onChangeText={setUsername}
+            value={username}
+          />
 
-        <CustomLabelText>Digite seu telefone</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu número de telefone"
-          keyboardType="phone-pad"
-          onChangeText={setTelefone}
-          value={telefone}
-        />
+          <CustomLabelText>Digite seu telefone</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu número de telefone"
+            keyboardType="phone-pad"
+            onChangeText={setTelefone}
+            value={telefone}
+          />
 
-        <CustomLabelText>Digite seu Email</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu Emsil"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          value={email}
-        />
+          <CustomLabelText>Digite seu Email</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu Emsil"
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            value={email}
+          />
 
-        <CustomLabelText>Digite uma senha</CustomLabelText>
-        <CustomInput
-          placeholder="Digite uma senha"
-          secureTextEntry
-          onChangeText={setSenha}
-          value={senha}
-        />
-        <CustomLabelText>Confirme sua senha</CustomLabelText>
-        <CustomInput
-          placeholder="Confirme sua senha"
-          secureTextEntry
-          onChangeText={setConfirmeSenha}
-          value={ConfSenha}
-        />
-        <ButtonNext onPress={handleSingIn}>Cadastre</ButtonNext>
-      </View>
-    </ScrollView>
+          <CustomLabelText>Digite uma senha</CustomLabelText>
+          <CustomInput
+            placeholder="Digite uma senha"
+            secureTextEntry
+            onChangeText={setSenha}
+            value={senha}
+          />
+          <CustomLabelText>Confirme sua senha</CustomLabelText>
+          <CustomInput
+            placeholder="Confirme sua senha"
+            secureTextEntry
+            onChangeText={setConfirmeSenha}
+            value={confSenha}
+          />
+          <ButtonNext onPress={handleSingIn}>Cadastre</ButtonNext>
+        </Form>
+      </Container>
+    </ScrollView >
   )
 }
 

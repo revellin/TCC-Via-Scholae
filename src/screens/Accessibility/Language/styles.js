@@ -1,45 +1,48 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
+
+export const Container = styled.View`
+  flex: 1;
+  padding: 16px;
+  background-color: #EEEEEE;
+  margin-top: 30px;
+`
+
+export const Header = styled.View`
+  flex-direction: row;
+`
+
+export const LanguageText = styled.Text`
+  font-size: 18px;
+  color: #262626;
+`
+export const CheckMark = styled.Text`
+  fontSize: 18px;
+  color: orange;
+`
+
 export const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 16,
-      backgroundColor: '#fff',
-      marginTop: 30,
-    },
 
-    header: {
-      flexDirection: 'row',
-    },
+  back: {
+    marginTop: 12,
+  },
 
-    back: {
-      marginTop: 7,
-    },
+  title: {
+    marginLeft: 20,
+  },
 
-    title: {
-      marginLeft: 20,
-    },
+  search: {
+    width: 340,
+    height: 35,
+    alignSelf: 'center',
+  },
 
-    search: {
-      width: 340,
-      height: 35,
-      alignSelf: 'center',
-    },
+  languageOption: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
 
-    languageOption: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      paddingVertical: 15,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ccc',
-    },
-
-    languageText: {
-      fontSize: 18,
-      color: '#000',
-    },
-    
-    checkMark: {
-      fontSize: 18,
-      color: 'orange',
-    },
-  });
+});

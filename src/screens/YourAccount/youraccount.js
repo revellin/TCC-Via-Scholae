@@ -1,22 +1,20 @@
 import React from 'react'
-import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { CustomTitleText, ButtonPassword, Return } from '../../components'
-import { styles } from './styles';
+import { styles, Container, Header } from './styles';
 
 export const YourAccount = () => {
   const navigation = useNavigation()
   return (
-    <View style={styles.container}>
+    <Container>
       {/* Cabeçalho da tela */}
-      <View style={styles.header}>
+      <Header>
         <Return onPress={() => navigation.navigate('Settings')}></Return>
         <CustomTitleText style={styles.title}>Conta</CustomTitleText>
-      </View>
+      </Header>
 
       {/* Botão Change Password */}
       <ButtonPassword></ButtonPassword>
-
-    </View>
+    </Container>
   )
 };

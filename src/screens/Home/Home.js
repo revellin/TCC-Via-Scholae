@@ -1,19 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 import { CustomTitleText, CustomLabelText } from '../../components';
-import { styles } from './styles';
+import { styles, Container, HeaderContainer, ApiContainer, TimeText } from './styles';
 
 export const Home = () => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <CustomTitleText style={styles.title}>ROTA</CustomTitleText>
-      </View>
 
-      <View style={styles.apiContainer}>
+  return (
+    <Container>
+      <HeaderContainer>
+        <CustomTitleText style={styles.title}>ROTA</CustomTitleText>
+      </HeaderContainer>
+
+      <ApiContainer>
         <CustomLabelText style={styles.text}>Chegada</CustomLabelText>
-        <Text style={styles.timeText}>00:00</Text>
-      </View>
-    </View>
+        <TimeText>00:00</TimeText>
+      </ApiContainer>
+    </Container>
   );
 };

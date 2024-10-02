@@ -1,28 +1,33 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
+
+export const Container = styled.View`
+  flex: 1;
+`
+export const HeaderContainer = styled.View`
+  width: 430px;
+  height: 570px;
+  background-color: #272727;
+  justify-content: center;
+  padding-right: 25px;
+`
+
+export const ApiContainer = styled.View`
+  padding-left: 25px;
+  margin-top: 15px;
+`
+
+export const TimeText = styled.Text`
+  font-size: 30px;
+  color: rgb(172,172,172);
+`
+
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  headerContainer: {
-    width: 430,
-    height: 570,
-    backgroundColor: '#272727',
-    justifyContent: 'center',
-    paddingRight: 25,
-  },
   title: {
     color: '#ffffff',
-  },
-  apiContainer: {
-    paddingLeft: 25,
-    marginTop: 15,
   },
   text: {
     fontSize: 45,
     color: '#272727',
-  },
-  timeText: {
-    fontSize: 30,
-    color: 'rgb(172,172,172)',
   },
 });

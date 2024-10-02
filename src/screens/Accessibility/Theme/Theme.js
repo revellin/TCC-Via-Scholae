@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Return, CustomTitleText, CustomRadioButton } from '../../../components';
-import { styles } from './styles';
+import { styles, Container, Header, OptionsContainer } from './styles';
 import Check from '../../../../assets/check.png';
 
 export const Theme = () => {
@@ -10,12 +10,12 @@ export const Theme = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Return style={styles.return} onPress={() => navigation.navigate('Accessibility')} />
+    <Container>
+      <Header>
+        <Return style={styles.back} onPress={() => navigation.navigate('Accessibility')} />
         <CustomTitleText style={styles.title}>Tema</CustomTitleText>
-      </View>
-      <View style={styles.optionsContainer}>
+      </Header>
+      <OptionsContainer>
         <CustomRadioButton
           style={styles.radioButton}
           value="On"
@@ -29,7 +29,7 @@ export const Theme = () => {
           onPress={() => setChecked('off')}
           imageSource={Check} // Passe a imagem para o CustomRadioButton
         />
-      </View>
-    </View>
+      </OptionsContainer>
+    </Container>
   );
 };

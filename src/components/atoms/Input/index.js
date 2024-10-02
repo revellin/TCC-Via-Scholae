@@ -1,7 +1,8 @@
 //import o react
 import React from 'react'
 //importa os componentes do react native
-import { TextInput, StyleSheet } from 'react-native'
+import { TextInput } from 'react-native'
+import { styles } from './styles'
 
 export const CustomInput = ({
   placeholder, // Placeholder que aparece como dica no campo de entrada
@@ -23,15 +24,3 @@ export const CustomInput = ({
     />
   )
 }
-
-const styles = StyleSheet.create({
-  // Estilização das inputs
-  input: {
-    height: 40, // Altura
-    borderColor: '#262626', // Cor da borda
-    borderWidth: 1, // Espessura da borda
-    marginBottom: 20, // Margem inferior
-    paddingHorizontal: 10, // Espaçamento interno horizontal
-    borderRadius: 10, // Define cantos arredondados com raio de 10
-  },
-})

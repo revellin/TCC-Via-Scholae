@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { ProfilePic, CustomInput, CustomTitleText } from '../../components';
-//import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from './styles'; 
+import { styles, Container, SearchContainer, ChatContent, ChatTextContainer, ChatName, ChatMessage } from './styles';
 
 export const Chat = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,7 +11,7 @@ export const Chat = () => {
     { id: '2', name: 'Lucas', message: 'Message', profilePic: 'LucasProfilePic' },
   ]);
 
-  const filteredChats = chatList.filter(chat => 
+  const filteredChats = chatList.filter(chat =>
     chat.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -24,17 +23,17 @@ export const Chat = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <Container>
       <CustomTitleText style={styles.title}>Chats</CustomTitleText>
 
       {/* Barra de Pesquisa */}
-      <View style={styles.searchContainer}>
+      <SearchContainer>
         {/*<Ionicons name="search" size={24} color="#ACACAC" style={styles.searchIcon} />*/}
         <CustomInput style={styles.searchInput}
           placeholder="Search"
           value={searchQuery}
-          onChangeText={(text) => setSearchQuery(text)}/>
-      </View>
+          onChangeText={(text) => setSearchQuery(text)} />
+      </SearchContainer>
 
       {/* Lista de Conversas */}
       <FlatList
@@ -42,16 +41,16 @@ export const Chat = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.chatItem} onPress={() => navigation.navigate('Message')}>
-            <View style={styles.chatContent}>
-                <ProfilePic style={styles.pic}></ProfilePic>
-              <View style={styles.chatTextContainer}>
-                <Text style={styles.chatName}>{item.name}</Text>
-                <Text style={styles.chatMessage}>{item.message}</Text>
-              </View>
-            </View>
+            <ChatContent>
+              <ProfilePic style={styles.pic}></ProfilePic>
+              <ChatTextContainer>
+                <ChatName>{item.name}</ChatName>
+                <ChatMessage>{item.message}</ChatMessage>
+              </ChatTextContainer>
+            </ChatContent>
           </TouchableOpacity>
         )}
       />
-    </View>
+    </Container>
   );
 };

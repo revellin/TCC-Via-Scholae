@@ -1,16 +1,37 @@
 import { StyleSheet } from 'react-native'
+import styled from 'styled-components';
+
+export const Container = styled.View`
+  flex: 1px;
+  padding: 16px;
+  background-color: #fffff;
+  margin-top: 40px
+`
+
+export const Header = styled.View`
+  flex-direction: row;
+`
+
+export const Form = styled.View`
+  margin-top: 30px;
+  align-items: center;
+`
+
+export const TextButton = styled.Text`
+  color: #EEEEEE;
+  font-size: 20px;
+`
+
 export const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 16,
-      backgroundColor: '#fffff',
-      marginTop: 40,
-    },
+  back: {
+    marginTop: 10,
+  },
 
-    header: {
-      flexDirection: 'row',
-    },
-
+  title: {
+    fontSize: 36,
+    marginBottom: 16,
+    marginLeft: 15,
+  },
     back: {
       marginTop: 4,
     },
@@ -20,33 +41,12 @@ export const styles = StyleSheet.create({
       marginLeft: 15,
     },
 
-    form: {
-      marginTop: 30,
-      alignItems: 'center',
-    },
+  input: {
+    height: 40,
+    width: 340,
+  },
 
     label: {
       marginRight: 180,
     },
-
-    input: {
-      height: 40,
-      width: 340,
-    },
-
-    atualizar: {
-      backgroundColor: '#E9B224',
-      width: 180,
-      height: 36,
-      paddingHorizontal: 20,
-      paddingVertical: 5,
-      alignItems: 'center',
-      alignSelf: 'center',
-      borderRadius: 10,
-    },
-
-    textButton: {
-      color: '#eeeeee',
-      fontSize: 20,
-    },
-  });
+});

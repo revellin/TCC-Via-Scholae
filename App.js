@@ -3,12 +3,13 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts, SourceSansPro_400Regular, SourceSansPro_700Bold } from "@expo-google-fonts/source-sans-pro";
 import { NavigationContainer } from '@react-navigation/native'; // Importar o NavigationContainer
 import { Routes } from './src/routes';
-import { ThemeProvider } from 'styled-components'
+
 
 // Mantenha o splash screen visível até que as fontes estejam carregadas
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+
   const [appIsReady, setAppIsReady] = useState(false);
 
   // Carregue as fontes
@@ -31,10 +32,8 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={{ background: '#262626' }}>
       <NavigationContainer>
         <Routes />
       </NavigationContainer>
-    </ThemeProvider>
   );
 }

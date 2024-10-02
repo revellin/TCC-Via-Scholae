@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native'
-import { View, Text, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { Return, ProfilePic } from '../../../components';
-import { styles } from './styles';
+import { styles, Container, Header, MessageContainer, InputContainer, Name, MessageText, SendButtonText } from './styles';
 
 export const Message = () => {
   const navigation = useNavigation()
@@ -17,26 +17,26 @@ export const Message = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <Container>
+      <Header>
         <Return style={styles.back} onPress={() => navigation.navigate('Mensagens')}></Return>
         <ProfilePic style={styles.pic}></ProfilePic>
-        <Text style={styles.name}>Caio</Text>
-        </View>
+        <Name>Caio</Name>
+      </Header>
       {/* FlatList para exibir as mensagens */}
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.messageContainer}>
-            <Text style={styles.messageText}>{item.text}</Text>
-          </View>
+          <MessageContainer>
+            <MessageText>{item.text}</MessageText>
+          </MessageContainer>
         )}
         inverted // Inverte a ordem das mensagens (mensagem mais recente no fim)
       />
-      
+
       {/* Campo de input para enviar nova mensagem */}
-      <View style={styles.inputContainer}>
+      <InputContainer>
         <TextInput
           style={styles.input}
           value={messageText}
@@ -44,9 +44,9 @@ export const Message = () => {
           placeholder="Type a message"
         />
         <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
-          <Text style={styles.sendButtonText}>Enviar</Text>
+          <SendButtonText>Enviar</SendButtonText>
         </TouchableOpacity>
-      </View>
-    </View>
+      </InputContainer>
+    </Container>
   );
 };

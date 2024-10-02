@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, FlatList} from 'react-native'
+import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { CustomTitleText, Return, CustomInput, Line } from '../../../components'
 //import { Ionicons } from '@expo/vector-icons';
-import { styles } from './styles'
+import { styles, Container, Header, LanguageText, CheckMark } from './styles'
 
 export const Language = () => {
   const navigation = useNavigation()
@@ -20,11 +20,11 @@ export const Language = () => {
   )
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Return style={styles.back} onPress={() => navigation.navigate('Accessibility')}/>
+    <Container>
+      <Header>
+        <Return style={styles.back} onPress={() => navigation.navigate('Accessibility')} />
         <CustomTitleText style={styles.title}>Idioma</CustomTitleText>
-      </View>
+      </Header>
       {/*<Ionicons name="search" size={24} color="gray" style={styles.icon} />*/}
       <CustomInput
         style={styles.search}
@@ -32,8 +32,8 @@ export const Language = () => {
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
       />
-      
-      <Line/>
+
+      <Line />
 
       <FlatList
         data={filteredLanguages}
@@ -43,13 +43,13 @@ export const Language = () => {
             style={styles.languageOption}
             onPress={() => setSelectedLanguage(item.name)}
           >
-            <Text style={styles.languageText}>{item.name}</Text>
+            <LanguageText>{item.name}</LanguageText>
             {selectedLanguage === item.name && (
-              <Text style={styles.checkMark}>✓</Text>
+              <CheckMark>✓</CheckMark>
             )}
           </TouchableOpacity>
         )}
       />
-    </View>
+    </Container>
   )
 }

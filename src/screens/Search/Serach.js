@@ -6,8 +6,7 @@ import {
   ProfilePic,
   Line,
 } from '../../components'
-import { styles } from './styles'
-//import { Ionicons } from '@expo/vector-icons'
+import { styles, Container, SearchContainer, InputContainer, RecentHeader, RecentItenContent, RecentItenContainer, RecentText, CleanText, RecentItemInfo, RecentItemName } from './styles'
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -27,13 +26,13 @@ export const Search = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <Container>
       <CustomTitleText style={styles.title}>Pesquisa</CustomTitleText>
 
       {/* Barra de pesquisa */}
-      <View style={styles.searchContainer}>
+      <SearchContainer>
         <ProfilePic style={styles.pic}></ProfilePic>
-        <View style={styles.InputContainer}>
+        <InputContainer>
           {/*<Ionicons
             style={styles.icon}
             name="search"
@@ -46,18 +45,18 @@ export const Search = () => {
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
           />
-        </View>
-      </View>
+        </InputContainer>
+      </SearchContainer>
 
       <Line style={styles.line}></Line>
 
       {/* Seção Recentes */}
-      <View style={styles.recentHeader}>
-        <Text style={styles.recentText}>Recentes</Text>
+      <RecentHeader>
+        <RecentText>Recentes</RecentText>
         <TouchableOpacity onPress={handleCleanAll}>
-          <Text style={styles.cleanText}>Limpar tudo</Text>
+          <CleanText>Limpar Tudo</CleanText>
         </TouchableOpacity>
-      </View>
+      </RecentHeader>
 
       {/* Lista de resultados recentes */}
       <FlatList
@@ -66,17 +65,17 @@ export const Search = () => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.recentItem}
-            onPress={() => {}}>
-            <View style={styles.recentItemContent}>
+            onPress={() => { }}>
+            <RecentItenContent>
               <ProfilePic style={styles.Accountspic} />
-              <View style={styles.recentItemText}>
-                <Text style={styles.recentItemName}>{item.name}</Text>
-                <Text style={styles.recentItemInfo}>{item.info}</Text>
-              </View>
-            </View>
+              <RecentItenContainer>
+                <RecentItemName>{item.name}</RecentItemName>
+                <RecentItemInfo>{item.info}</RecentItemInfo>
+              </RecentItenContainer>
+            </RecentItenContent>
           </TouchableOpacity>
         )}
       />
-    </View>
+    </Container>
   )
 }

@@ -1,14 +1,24 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components';
+
+export const Container = styled.View`
+  flex: 1px;
+  backgroundColor: #EEEEEE;
+  padding: 20px;
+  marginTop: 20px;
+`
+
+export const Header = styled.View`
+  flex-direction: row;
+`
+
+export const TextApp = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`
+
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: 20,
-    marginTop: 20,
-  },
-  header: {
-    flexDirection: 'row',
-  },
   return: {
     marginTop: 25,
 
@@ -19,10 +29,4 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 20,
   },
-  appSet: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-
 });

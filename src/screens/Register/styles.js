@@ -1,26 +1,34 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+
+export const Container = styled.View`
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+`
+
+export const LogoContainer = styled.View`
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding-horizontal: 26px;
+  width: 100%;
+  height: 250px;
+  position: relative;
+`
+export const Form = styled.View`
+  padding-horizontal: 10px;
+`
+
+
 export const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: '#ffffff',
-  },
 
   return: {
     position: 'absolute', // Faz com que o ícone seja posicionado relativamente ao contêiner pai
     top: 20, // Distância do topo
     left: 2, // Distância da borda esquerda
     zIndex: 1, // Garante que o ícone fique sobre a imagem
-  },
-
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start', // Alinha itens ao topo do contêiner
-    justifyContent: 'center', // Centraliza a imagem no contêiner
-    paddingHorizontal: 26,
-    width: '100%',
-    height: 250,
-    position: 'relative', // Necessário para posicionar o botão de retorno sobre a imagem
   },
 
   img: {
@@ -31,10 +39,6 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     paddingRight: 240,
-  },
-
-  form: {
-    paddingHorizontal: 10, // Adiciona um pouco de espaço nas laterais do formulário
   },
 
   line: {

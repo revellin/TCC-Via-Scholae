@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TouchableOpacity, Alert, Text } from 'react-native'
+import { TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import {
   CustomTitleText,
@@ -7,7 +7,7 @@ import {
   CustomInput,
   CustomLabelText,
 } from '../../../components'
-import { styles } from './styles'
+import { styles, Container, Header, Form, TextButton } from './styles'
 
 export const UpdatePassword = () => {
   const navigation = useNavigation()
@@ -16,6 +16,11 @@ export const UpdatePassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const handleUpdatePassword = () => {
+
+    if (senhaAtual === ('') || novaSenha === ('') || confSenha === ('')) {
+      Alert.alert('','Prencha todos os campos')
+      return;
+    }
     // Aqui você pode implementar a lógica de atualização de senha, como verificar as senhas e enviar uma solicitação para o servidor.
     if (newPassword !== confirmPassword) {
       Alert.alert('Erro', 'As novas senhas não coincidem')
@@ -26,15 +31,15 @@ export const UpdatePassword = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Return style={styles.back} onPress={() =>navigation.navigate('YourAccount')}/>
+    <Container>
+      <Header>
+        <Return style={styles.back} onPress={() => navigation.navigate('YourAccount')} />
         <CustomTitleText style={styles.title}>
           Atualize sua Senha
         </CustomTitleText>
-      </View>
+      </Header>
 
-      <View style={styles.form}>
+      <Form>
         <CustomLabelText style={styles.label}>Digite sua senha atual</CustomLabelText>
         <CustomInput
           style={styles.input}
@@ -67,9 +72,9 @@ export const UpdatePassword = () => {
           color="#FFB100"
           onPress={handleUpdatePassword}
         >
-          <Text style={styles.textButton}>Atualizar</Text>
+          <TextButton>Atualizar</TextButton>
         </TouchableOpacity>
-      </View>
-    </View>
+      </Form>
+    </Container>
   )
 }

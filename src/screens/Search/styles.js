@@ -1,88 +1,89 @@
 import { StyleSheet } from 'react-native'
+import styled from 'styled-components';
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: #ffffff;
+  padding: 15px;
+`
+
+export const SearchContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+`
+
+export const InputContainer = styled.View`
+  margin-left: 30;
+  align-items: center;
+`
+
+export const RecentHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+`
+
+export const RecentItenContent = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
+export const RecentItenContainer = styled.View`
+  margin-left: 10;
+`
+
+export const RecentText = styled.Text`
+  font-size: 24px;
+`
+
+export const CleanText = styled.Text`
+  font-size: 16px;
+  color: #2997D6;
+`
+
+export const RecentItemName = styled.Text`
+  font-size: 16px;
+`
+
+export const RecentItemInfo = styled.Text`
+  fontSize: 14px;
+  color: #ACACAC;
+`
+
 export const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#ffffff',
-      padding: 15,
-    },
+  title: {
+    fontWeight: '600',
+    marginBottom: 16,
+    marginTop: 30,
+    marginRight: 225,
+  },
 
-    title: {
-      fontWeight: '600',
-      marginBottom: 16,
-      marginTop: 30,
-      marginRight: 260,
-    },
+  pic: {
+    width: 70,
+    height: 70,
+  },
 
-    searchContainer: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: 16,
-    },
+  input: {
+    width: 250,
+    height: 35,
+    borderRadius: 7,
+  },
 
-    pic: {
-      width: 70,
-      height: 70,
-    },
+  line: {
+    marginBottom: 15,
+    backgroundColor: '#262626',
+  },
 
-    InputContainer: {
-      marginLeft: 30,
-      alignItems: 'center',
-    },
+  recentItem: {
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ACACAC',
+  },
 
-    input: {
-      width: 250,
-      height: 35,
-      borderRadius: 7,
-    },
-
-    line: {
-      marginBottom: 15,
-      backgroundColor: '#262626',
-    },
-
-    recentHeader: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 8,
-    },
-
-    recentText: {
-      fontSize: 24,
-    },
-
-    cleanText: {
-      fontSize: 16,
-      color: '#2997D6',
-    },
-
-    recentItem: {
-      paddingVertical: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ACACAC',
-    },
-
-    recentItemContent: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-
-    Accountspic: {
-      width: 45,
-      height: 45,
-    },
-
-    recentItemText: {
-      marginLeft: 10,
-    },
-
-    recentItemName: {
-      fontSize: 16,
-    },
-
-    recentItemInfo: {
-      fontSize: 14,
-      color: '#ACACAC',
-    },
-  });
-  
+  Accountspic: {
+    width: 45,
+    height: 45,
+  },
+});
