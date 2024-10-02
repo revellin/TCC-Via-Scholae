@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
+
+
+export const Container = styled.View`
+  flex: 1;
+  backgorund-color: ${props => props.theme.backgorund};
+`
+
+export const ContainerLogo = styled.View`
+  background-color: "#D2A236";
+  justify-content: "center";
+  align-items: "center";
+  width: 430;
+  height: 420;
+`
 export const styles = StyleSheet.create({
-  //Estilização do contêiner principal
-  container: {
-    flex: 1, //Faz o container ocupar a tela toda
-    backgroundColor: "#ffffff", //Define a cor de fundo
-  },
-
-  //Estilização do contêiner da logo
-  containerLogo: {
-    backgroundColor: "#D2A236", //Define a cor de fundo como amarelo
-    justifyContent: "center", //Centraliza verticalmente o conteúdo
-    alignItems: "center", //Centraliza horizontalmente o conteúdo
-    width: 430,
-    height: 420,
-  },
-
   //Estilização para o contêiner do formulário
   formContainer: {
     paddingHorizontal: 20, //Espaçamento interno horinzontal
