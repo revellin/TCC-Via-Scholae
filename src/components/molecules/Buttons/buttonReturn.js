@@ -5,7 +5,7 @@ import { View, TouchableOpacity } from 'react-native';
 //Importa a biblioteca de icones
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-export const Return = ({ style, onPress, size }) => {
+export const Return = ({ style, onPress }) => {
   return (
     <View style={style}>
       <TouchableOpacity onPress={onPress}>

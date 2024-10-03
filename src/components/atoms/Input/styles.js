@@ -1,14 +1,11 @@
-import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-    // Estilização das inputs
-    input: {
-      height: 40, // Altura
-      borderColor: '#262626', // Cor da borda
-      borderWidth: 1, // Espessura da borda
-      marginBottom: 20, // Margem inferior
-      paddingHorizontal: 10, // Espaçamento interno horizontal
-      borderRadius: 10, // Define cantos arredondados com raio de 10
-    },
-  })
-  
+export const Input = styled.TextInput`
+  height: 40px;
+  border-color: #000000;
+  border-width: 1px;
+  margin-bottom: 20px;
+  padding-horizontal: 10px;
+  border-radius: 10px;
+  background-color: #EEEEEE;
+`;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {
   CustomTitleText,
@@ -7,7 +7,7 @@ import {
   CustomLabelText,
   CustomInput,
   ButtonContinue,
-  ButtonRegister,
+  ButtonRegistro,
   Line,
 } from '../../components';
 import { styles, Container, ContainerLogo, FormContainer, LineContainer, OrText } from './styles';
@@ -66,7 +66,7 @@ export const Initial = () => {
           <Line style={styles.line}></Line>
         </LineContainer>
 
-        <ButtonRegister></ButtonRegister>
+        <ButtonRegistro>Registro</ButtonRegistro>
       </FormContainer>
     </Container>
   );

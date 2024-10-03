@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   flex-grow: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background: ${props => props.theme.background};
 `
 
 export const LogoContainer = styled.View`

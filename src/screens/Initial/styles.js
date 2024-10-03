@@ -4,9 +4,8 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  background: #FFFFFF;
+  background: ${props => props.theme.background};
 `
-
 export const ContainerLogo = styled.View`
   background-color: #D2A236;
   justify-content: center;
@@ -33,7 +32,6 @@ export const OrText = styled.Text`
 `
 
 export const styles = StyleSheet.create({
-
   line: {
     flex: 1,
   },

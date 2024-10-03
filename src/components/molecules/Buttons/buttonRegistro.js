@@ -1,32 +1,12 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useNavigation } from '@react-navigation/native'
+import { BtnRegistro, BtnRegistroText } from './styles';
 
-export const ButtonRegister = () => {
+export const ButtonRegistro = ({ children }) => {
   const navigation = useNavigation()
   return(
-     <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')} >
-        <Text style={styles.registerButtonText}>Registro</Text>
-     </TouchableOpacity>
+    <BtnRegistro onPress={() => navigation.navigate('Register')}>
+        <BtnRegistroText>{children}</BtnRegistroText>
+    </BtnRegistro>
     )
 };
-
-const styles = StyleSheet.create({
- //Estilização do botão Register
- registerButton: {
-    borderColor: "#262626", //Cor da borda
-    borderRadius: 20, //Borda arredondada
-    borderWidth: 1, //Espressura da borda
-    paddingVertical: 10, //Espaçamento interno vertical
-    paddingHorizontal: 20, //Espacamento interno horizontal
-    width: 210, //Largura do botão
-    alignItems: "center", //Centraliza o texto do botão
-    alignSelf: "center", //Centraliza o botão na tela
-  },
-
-  //Estilização para o texto dentro do botão Register
-  registerButtonText: {
-    color: "#262626", //Cor do textp
-    fontSize: 16, //Tamnho da fonte
-  },
-});

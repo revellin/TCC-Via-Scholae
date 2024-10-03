@@ -4,14 +4,15 @@ import {
   CustomLogo,
   CustomTitleText,
   CustomLabelText,
-  ButtonNext,
+  ButtonCadastro,
   CustomInput,
   Line,
-  Return
+  Return,
 } from '../../components'
 import { styles, Container, LogoContainer, Form } from './styles'
 // Importando o ícone de retorno
 import { useNavigation } from '@react-navigation/native'
+import { insertResponsavel } from '../../database';
 
 export const Register = () => {
   const navigation = useNavigation()
@@ -22,37 +23,45 @@ export const Register = () => {
   const [senha, setSenha] = useState('')
   const [confSenha, setConfirmeSenha] = useState('')
 
-  function handleSingIn() {
-    if (username === ('') || telefone === ('') || email === ('') || senha === ('') || confSenha === ('')) {
+  const handleSingIn = async () => {
+    if (
+      username === '' ||
+      telefone === '' ||
+      email === '' ||
+      senha === '' ||
+      confSenha === ''
+    ) {
       Alert.alert('', 'Prencha todos os campos.')
-      return;
+      return
     }
 
     if (senha !== confSenha) {
       Alert.alert('', 'As senhas não coincidem.')
     }
 
-    const data = {
-      username,
-      telefone,
-      email,
-      senha,
-      confSenha
+    try {
+      // Insira o responsável no banco de dados
+      await insertResponsavel(username, telefone, email, senha) // Ajuste os parâmetros conforme sua tabela
+      alert('Cadastro realizado com sucesso!')
+      navigation.navigate('Home')
+    } catch (error) {
+      console.error('Erro ao cadastrar:', error)
+      alert('Erro ao cadastrar. Tente novamente.')
     }
-    console.log(data);
-
-    navigation.navigate('Home');
   }
 
-
   return (
-    <ScrollView>
+
       <Container>
         <LogoContainer>
           <TouchableOpacity
             style={styles.return}
-            onPress={() => navigation.navigate('Splash')}>
-            <Return style={styles.return} onPress={() => navigation.navigate('Splash')} />
+            onPress={() => navigation.navigate('Splash')}
+          >
+            <Return
+              style={styles.return}
+              onPress={() => navigation.navigate('Splash')}
+            />
           </TouchableOpacity>
           <CustomLogo style={styles.img} />
         </LogoContainer>
@@ -98,12 +107,9 @@ export const Register = () => {
             onChangeText={setConfirmeSenha}
             value={confSenha}
           />
-          <ButtonNext onPress={handleSingIn}>Cadastre</ButtonNext>
+          <ButtonCadastro onPress={handleSingIn}>Cadastre-se</ButtonCadastro>
         </Form>
       </Container>
-    </ScrollView >
+
   )
 }
-
-//onPress={() => navigation.navigate('Home')}
-//import { useNavigation } from '@react-navigation/native'

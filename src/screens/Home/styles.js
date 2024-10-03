@@ -1,13 +1,13 @@
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
 
 export const Container = styled.View`
   flex: 1;
+  background: ${props => props.theme.background}
 `
 export const HeaderContainer = styled.View`
   width: 430px;
   height: 570px;
-  background-color: #272727;
+  background-color: #363636;
   justify-content: center;
   padding-right: 25px;
 `
@@ -17,17 +17,12 @@ export const ApiContainer = styled.View`
   margin-top: 15px;
 `
 
-export const TimeText = styled.Text`
-  font-size: 30px;
-  color: rgb(172,172,172);
+export const Chegada = styled.Text`
+  font-size: 60px;
+
 `
 
-export const styles = StyleSheet.create({
-  title: {
-    color: '#ffffff',
-  },
-  text: {
-    fontSize: 45,
-    color: '#272727',
-  },
-});
+export const TimeText = styled.Text`
+  font-size: 24px;
+  color: rgb(172,172,172);
+`

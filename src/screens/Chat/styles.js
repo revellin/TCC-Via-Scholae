@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.View`
   flex: 1;
   padding: 20px;
-  backgroundColor: #EEEEEE;
+  background: ${props => props.theme.background};
 `
 
 export const SearchContainer = styled.View`
@@ -34,12 +34,6 @@ export const ChatMessage = styled.Text`
 `
 
 export const styles = StyleSheet.create({
-  title: {
-    marginTop: 30,
-    marginBottom: 20,
-    marginRight: 294,
-  },
-
   searchInput: {
     flex: 1,
     fontSize: 16,

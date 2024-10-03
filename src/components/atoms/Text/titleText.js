@@ -1,21 +1,9 @@
 import React from "react";
-import { Text, StyleSheet } from 'react-native'
+import { Text } from 'react-native'
+import { TitleText } from './styles';
 
 export const CustomTitleText = ( {children, style} ) => {
     return(
-        <Text style={[styles.title, style]}> 
-            {children}
-        </Text>
+      <TitleText>{children}</TitleText>
     );
 }
-
-const styles = StyleSheet.create({
-   //Estilização para o título
-   title: {
-     fontSize: 40, //Tamnho da fonte
-     textAlign: 'center', //Centraliza o texto
-     marginBottom: 20, //Margem inferior
-     fontFamily: 'SourceSansPro_400Regular', //Fonte do texto
-     color: '262626', //Cor do texto
-   },
- });
