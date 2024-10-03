@@ -1,1 +1,1 @@
-# TCC-Via-Scholae
+# Via Scholae
