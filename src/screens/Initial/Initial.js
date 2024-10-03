@@ -19,7 +19,7 @@ export const Initial = () => {
 
   function handleSingIn() {
     if (telefone === '' || senha === '') {
-      Alert.alert('', 'Preencha todos os campos');
+      Alert.alert('', 'Preencha todos os camposssss');
       return;
     }
 
