@@ -21,7 +21,6 @@ export const Form = styled.View`
   padding-horizontal: 10px;
 `
 
-
 export const styles = StyleSheet.create({
 
   return: {

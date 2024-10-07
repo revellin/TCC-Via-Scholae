@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   buttonSettings: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 20,
   },
 
   settingsText: {

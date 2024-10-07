@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
-
 export const Container = styled.View`
   flex: 1;
   background: ${props => props.theme.background};
 `
 export const ContainerLogo = styled.View`
-  background-color: #D2A236;
+  background: ${props =>props.theme.yellow};
   justify-content: center;
   align-items: center;
   width: 430px;
@@ -28,7 +27,7 @@ export const LineContainer = styled.View`
 export const OrText = styled.Text`
   margin-horizontal: 10px;
   font-size: 15px;
-  color: #E9B224;
+  color: ${props => props.theme.yellow};
 `
 
 export const styles = StyleSheet.create({

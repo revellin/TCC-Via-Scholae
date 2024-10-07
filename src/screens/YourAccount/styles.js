@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.View`
   flex: 1px;
-  background-color: #ffffff;
+  background: ${(props) => props.theme.background};
   padding: 16px;
 `
 
@@ -14,11 +13,9 @@ export const Header = styled.View`
   margin-top: 30px;
 `
 
-export const styles = StyleSheet.create({
-  title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    marginLeft: 16,
-    top: 10,
-  },
-})
+export const TitleText = styled.Text`
+  font-size: 36px;
+  font-weight: bold;
+  margin-left: 16px;
+  color: ${(props) => props.theme.text};
+`

@@ -1,25 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
-import { Return, ProfilePic } from '../../../components';
-import { styles, Container, Header, MessageContainer, InputContainer, Name, MessageText, SendButtonText } from './styles';
+import { FlatList } from 'react-native'
+import { Return, ProfilePic } from '../../../components'
+import {
+  styles,
+  Container,
+  Header,
+  MessageContainer,
+  InputContainer,
+  Name,
+  MessageText,
+  SendButtonText,
+  SendButton,
+  Input,
+} from './styles'
 
 export const Message = () => {
   const navigation = useNavigation()
-  const [messages, setMessages] = useState([]);
-  const [messageText, setMessageText] = useState('');
+  const [messages, setMessages] = useState([])
+  const [messageText, setMessageText] = useState('')
 
   const sendMessage = () => {
     if (messageText.trim()) {
-      setMessages([...messages, { id: Date.now().toString(), text: messageText }]);
-      setMessageText(''); // Limpa o campo após enviar a mensagem
+      setMessages([
+        ...messages,
+        { id: Date.now().toString(), text: messageText },
+      ])
+      setMessageText('') // Limpa o campo após enviar a mensagem
     }
-  };
+  }
 
   return (
     <Container>
       <Header>
-        <Return style={styles.back} onPress={() => navigation.navigate('Mensagens')}></Return>
+        <Return
+          style={styles.back}
+          onPress={() => navigation.navigate('Mensagens')}
+        ></Return>
         <ProfilePic style={styles.pic}></ProfilePic>
         <Name>Caio</Name>
       </Header>
@@ -37,16 +54,15 @@ export const Message = () => {
 
       {/* Campo de input para enviar nova mensagem */}
       <InputContainer>
-        <TextInput
-          style={styles.input}
+        <Input
           value={messageText}
           onChangeText={setMessageText}
           placeholder="Type a message"
         />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+        <SendButton onPress={sendMessage}>
           <SendButtonText>Enviar</SendButtonText>
-        </TouchableOpacity>
+        </SendButton>
       </InputContainer>
     </Container>
-  );
-};
+  )
+}

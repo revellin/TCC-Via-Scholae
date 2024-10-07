@@ -1,8 +1,7 @@
 import React from "react";
-import { Text } from 'react-native'
 import { TitleText } from './styles';
 
-export const CustomTitleText = ( {children, style} ) => {
+export const CustomTitleText = ( {children} ) => {
     return(
       <TitleText>{children}</TitleText>
     );

@@ -1,14 +1,13 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import {
-  CustomTitleText,
   ButtonProfile,
   ButtonYourAccount,
   ButtonChildrenSettings,
   ButtonAccessibility,
   Return,
 } from '../../components'
-import { styles, Container, Header, TextApp } from './styles'
+import { styles, Container, Header, TitleText, TextApp } from './styles'
 
 export const Settings = () => {
   const navigation = useNavigation()
@@ -16,7 +15,7 @@ export const Settings = () => {
     <Container>
       <Header>
         <Return style={styles.return} onPress={() => navigation.navigate('Home')} />
-        <CustomTitleText style={styles.title}>Configurações</CustomTitleText>
+          <TitleText>Configurações</TitleText>
       </Header>
       {/* Profile Section */}
       <ButtonProfile></ButtonProfile>

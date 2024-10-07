@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useColorScheme } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import {
   useFonts,
@@ -9,12 +10,18 @@ import { NavigationContainer } from '@react-navigation/native' // Importar o Nav
 import { Routes } from './src/routes'
 import { init } from './src/database'
 import { ThemeProvider } from 'styled-components'
+import { theme } from './src/styles'
 
 // Mantenha o splash screen visível até que as fontes estejam carregadas
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false)
+
+  const  deviceTheme = useColorScheme();
+
+  const themes =  theme[deviceTheme] || theme.dark
+
+  const [appIsReady, setAppIsReady] = useState(false)            
 
   // Carregue as fontes
   let [fontsLoaded] = useFonts({
@@ -44,7 +51,7 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={{background: '#262626', color: '#EEEEEE'}}>
+    <ThemeProvider theme={themes}>
       <NavigationContainer>
         <Routes />
       </NavigationContainer>

@@ -1,15 +1,14 @@
-import { StyleSheet } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background: ${(props) => props.theme.background};
   padding: 15px;
 `
 
 export const Header = styled.View`
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 35px;
 `
 
 export const OptionsContainer = styled.View`
@@ -17,13 +16,9 @@ export const OptionsContainer = styled.View`
   padding-horizontal: 20px;
 `
 
-export const styles = StyleSheet.create({
-
-  back: {
-    marginTop: 12,
-  },
-
-  title: {
-    marginLeft: 20,
-  },
-});
+export const TitleText = styled.Text`
+  font-size: 35px;
+  margin-left: 20px;
+  margin-top: -6px;
+  color: ${(props) => props.theme.text};
+`

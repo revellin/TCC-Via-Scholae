@@ -1,49 +1,57 @@
 //Importa o react
-import React from 'react';
+import React from 'react'
 //Importa os componentes do react6 native
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
-import { ProfilePic, CustomLabelText, CustomTitleText, Return } from '../../components';
-import { styles } from './styles';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { ProfilePic, CustomLabelText, Return } from '../../components'
+import {
+  styles,
+  Container,
+  Header,
+  TitleText,
+  ProfileContainer,
+  FormContainer,
+  EditPictureText,
+  Input,
+} from './styles'
 import { useNavigation } from '@react-navigation/native'
-//Importa a biblioteca de icones
-import AntDesign from '@expo/vector-icons/AntDesign';
-
 
 export const EditProfile = () => {
   const navigation = useNavigation()
   return (
     //Container principal
-    <View style={styles.container}>
+    <Container>
       {/* Header */}
-      <View style={styles.header}>
-
+      <Header>
         {/* Botão de retorno */}
-        <Return style={styles.back} onPress={() => navigation.navigate('Home')}></Return>
+        <Return
+          style={styles.back}
+          onPress={() => navigation.navigate('Home')}
+        ></Return>
 
         {/* Título */}
-        <CustomTitleText style={styles.title}>Edite suas Informações</CustomTitleText>
-      </View>
+        <TitleText>Edite suas Informações</TitleText>
+      </Header>
 
       {/* Profile Picture */}
-      <View style={styles.profilePicContainer}>
+      <ProfileContainer>
         {/* Adiciona a imagem */}
         <ProfilePic></ProfilePic>
         <TouchableOpacity>
-          <Text style={styles.editPictureText}>Edit Picture</Text>
+          <EditPictureText>Edit Picture</EditPictureText>
         </TouchableOpacity>
-      </View>
+      </ProfileContainer>
 
       {/* Form */}
-      <View style={styles.formContainer}>
-        <CustomLabelText>Name</CustomLabelText>
-        <TextInput style={styles.input} placeholder="Caio" />
+      <FormContainer>
+          <CustomLabelText>Name</CustomLabelText>
+          <Input placeholder="Caio" />
 
-        <CustomLabelText>Phone</CustomLabelText>
-        <TextInput style={styles.input} placeholder="+55 11 12345-6789" />
+          <CustomLabelText>Phone</CustomLabelText>
+          <Input placeholder="+55 11 12345-6789" />
 
-        <CustomLabelText>Email</CustomLabelText>
-        <TextInput style={styles.input} placeholder="matheusemailfake@gmail.com" />
-      </View>
-    </View>
-  );
-};
+          <CustomLabelText>Email</CustomLabelText>
+          <Input placeholder="matheusemailfake@gmail.com" />
+      </FormContainer>
+    </Container>
+  )
+}

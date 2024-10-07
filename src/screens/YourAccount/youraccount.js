@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { CustomTitleText, ButtonPassword, Return } from '../../components'
-import { styles, Container, Header } from './styles';
+import { ButtonPassword, Return } from '../../components'
+import { styles, Container, Header, TitleText } from './styles';
 
 export const YourAccount = () => {
   const navigation = useNavigation()
@@ -10,7 +10,7 @@ export const YourAccount = () => {
       {/* Cabeçalho da tela */}
       <Header>
         <Return onPress={() => navigation.navigate('Settings')}></Return>
-        <CustomTitleText style={styles.title}>Conta</CustomTitleText>
+        <TitleText>Conta</TitleText>
       </Header>
 
       {/* Botão Change Password */}

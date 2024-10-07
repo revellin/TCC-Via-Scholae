@@ -1,6 +1,6 @@
 import React from 'react';
 import { CustomTitleText, CustomLabelText } from '../../components';
-import { Container, HeaderContainer, ApiContainer, TimeText } from './styles';
+import { Container, HeaderContainer, ApiContainer, TimeText, Chegada } from './styles';
 
 export const Home = () => {
 
@@ -11,7 +11,7 @@ export const Home = () => {
       </HeaderContainer>
 
       <ApiContainer>
-        <CustomLabelText style={{ fontSize: 80 }}>Chegada</CustomLabelText>
+        <Chegada>Chegada</Chegada>
         <TimeText>00:00</TimeText>
       </ApiContainer>
     </Container>

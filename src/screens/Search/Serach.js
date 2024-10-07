@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { TouchableOpacity, FlatList } from 'react-native'
+import { ProfilePic, Line } from '../../components'
 import {
-  CustomTitleText,
-  CustomInput,
-  ProfilePic,
-  Line,
-} from '../../components'
-import { styles, Container, SearchContainer, InputContainer, RecentHeader, RecentItenContent, RecentItenContainer, RecentText, CleanText, RecentItemInfo, RecentItemName } from './styles'
+  styles,
+  Container,
+  SearchContainer,
+  InputContainer,
+  RecentHeader,
+  RecentItenContent,
+  RecentItenContainer,
+  RecentText,
+  CleanText,
+  RecentItemInfo,
+  RecentItemName,
+  TitleText,
+  Input,
+  RecentItem,
+} from './styles'
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState('')
@@ -27,7 +37,7 @@ export const Search = () => {
 
   return (
     <Container>
-      <CustomTitleText style={styles.title}>Pesquisa</CustomTitleText>
+      <TitleText>Pesquisa</TitleText>
 
       {/* Barra de pesquisa */}
       <SearchContainer>
@@ -39,8 +49,7 @@ export const Search = () => {
             size={24}
             color="#ACACAC"
           />*/}
-          <CustomInput
-            style={styles.input}
+          <Input
             placeholder="Search"
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
@@ -63,9 +72,7 @@ export const Search = () => {
         data={filteredList}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.recentItem}
-            onPress={() => { }}>
+          <RecentItem onPress={() => {}}>
             <RecentItenContent>
               <ProfilePic style={styles.Accountspic} />
               <RecentItenContainer>
@@ -73,7 +80,7 @@ export const Search = () => {
                 <RecentItemInfo>{item.info}</RecentItemInfo>
               </RecentItenContainer>
             </RecentItenContent>
-          </TouchableOpacity>
+          </RecentItem>
         )}
       />
     </Container>

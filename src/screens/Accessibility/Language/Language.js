@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import { CustomTitleText, Return, CustomInput, Line } from '../../../components'
+import { FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { Return, Line } from '../../../components'
 //import { Ionicons } from '@expo/vector-icons';
-import { styles, Container, Header, LanguageText, CheckMark } from './styles'
+import {
+  Container,
+  Header,
+  LanguageText,
+  CheckMark,
+  TitleText,
+  Input,
+  LanguageOption,
+} from './styles'
 
 export const Language = () => {
   const navigation = useNavigation()
@@ -22,12 +30,11 @@ export const Language = () => {
   return (
     <Container>
       <Header>
-        <Return style={styles.back} onPress={() => navigation.navigate('Accessibility')} />
-        <CustomTitleText style={styles.title}>Idioma</CustomTitleText>
+        <Return onPress={() => navigation.navigate('Accessibility')} />
+        <TitleText>Idioma</TitleText>
       </Header>
       {/*<Ionicons name="search" size={24} color="gray" style={styles.icon} />*/}
-      <CustomInput
-        style={styles.search}
+      <Input
         placeholder="Procurar Idioma"
         value={searchText}
         onChangeText={(text) => setSearchText(text)}
@@ -39,15 +46,10 @@ export const Language = () => {
         data={filteredLanguages}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.languageOption}
-            onPress={() => setSelectedLanguage(item.name)}
-          >
+          <LanguageOption onPress={() => setSelectedLanguage(item.name)}>
             <LanguageText>{item.name}</LanguageText>
-            {selectedLanguage === item.name && (
-              <CheckMark>✓</CheckMark>
-            )}
-          </TouchableOpacity>
+            {selectedLanguage === item.name && <CheckMark>✓</CheckMark>}
+          </LanguageOption>
         )}
       />
     </Container>

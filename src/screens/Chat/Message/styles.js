@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background: ${props => props.theme.background} ;
 `
 
 export const Header = styled.View`
@@ -14,7 +14,7 @@ export const Header = styled.View`
   height: 84px;
 `
 export const MessageContainer = styled.View`
-  background-color: #E6E6E6;
+  background: ${props => props.theme.secondary};
   border-radius: 10px;
   padding: 10px;
   margin-vertical: 7px;
@@ -32,15 +32,32 @@ export const InputContainer = styled.View`
 `
 
 export const Name = styled.Text`
-  font-size: 16px;
-  color: #262626;
-  margin-left: 10px;
-  margin-top: 18px;
+  font-size: 20px;
+  color: ${props => props.theme.text};
+  margin-left: 12px;
+  margin-top: 2px;
 `
 
 export const MessageText = styled.Text`
   font-size: 16px;
-  color: #262626;
+  color: ${props => props.theme.text};
+`
+
+export const Input = styled.TextInput`
+  flex: 1;
+  height: 40px;
+  border-color: ${props => props.theme.border};
+  border-width: 1px;
+  border-radius: 20px;
+  padding-horizontal: 10px;
+  margin-right: 10px;
+`
+
+export const SendButton = styled.TouchableOpacity`
+  background: ${props => props.theme.yellow};
+  padding-vertical: 10px;
+  padding-horizontal: 15px;
+  border-radius: 20px;
 `
 
 export const SendButtonText = styled.Text`
@@ -59,22 +76,4 @@ export const styles = StyleSheet.create({
     height: 55,
     marginLeft: 20,
   },
-
-  input: {
-    flex: 1,
-    height: 40,
-    borderColor: '#262626',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    marginRight: 10,
-  },
-
-  sendButton: {
-    backgroundColor: '#E9B224',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-  },
-
 });

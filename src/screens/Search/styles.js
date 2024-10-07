@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background: ${(props) => props.theme.background};
   padding: 15px;
 `
 
@@ -16,6 +16,15 @@ export const SearchContainer = styled.View`
 export const InputContainer = styled.View`
   margin-left: 30;
   align-items: center;
+`
+
+export const Input = styled.TextInput`
+  width: 250px;
+  height: 35px;
+  border-radius: 7px;
+  border-width: 1px;
+  border-color: ${(props) => props.theme.yellow};
+  color: ${props => props.theme.text};
 `
 
 export const RecentHeader = styled.View`
@@ -34,56 +43,52 @@ export const RecentItenContainer = styled.View`
   margin-left: 10;
 `
 
+export const TitleText = styled.Text`
+  color: ${(props) => props.theme.text};
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 30px;
+`
+
 export const RecentText = styled.Text`
   font-size: 24px;
+  color: ${(props) => props.theme.text};
 `
 
 export const CleanText = styled.Text`
   font-size: 16px;
-  color: #2997D6;
+  color: ${(props) => props.theme.blue};
 `
 
 export const RecentItemName = styled.Text`
   font-size: 16px;
+  color: ${(props) => props.theme.text};
 `
 
 export const RecentItemInfo = styled.Text`
-  fontSize: 14px;
-  color: #ACACAC;
+  fontsize: 14px;
+  color: ${(props) => props.theme.textsecondary};
+`
+
+export const RecentItem = styled.TouchableOpacity`
+  padding-vertical: 10px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${(props) => props.theme.yellow};
 `
 
 export const styles = StyleSheet.create({
-  title: {
-    fontWeight: '600',
-    marginBottom: 16,
-    marginTop: 30,
-    marginRight: 225,
-  },
-
   pic: {
     width: 70,
     height: 70,
   },
 
-  input: {
-    width: 250,
-    height: 35,
-    borderRadius: 7,
-  },
-
   line: {
     marginBottom: 15,
-    backgroundColor: '#262626',
-  },
-
-  recentItem: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ACACAC',
   },
 
   Accountspic: {
     width: 45,
     height: 45,
   },
-});
+})

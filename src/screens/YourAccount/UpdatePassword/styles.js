@@ -1,15 +1,15 @@
 import { StyleSheet } from 'react-native'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.View`
   flex: 1px;
   padding: 16px;
-  background-color: #fffff;
-  margin-top: 40px
+  background: ${(props) => props.theme.background};
 `
 
 export const Header = styled.View`
   flex-direction: row;
+  margin-top: 30px;
 `
 
 export const Form = styled.View`
@@ -17,36 +17,30 @@ export const Form = styled.View`
   align-items: center;
 `
 
-export const TextButton = styled.Text`
-  color: #EEEEEE;
-  font-size: 20px;
+export const Input = styled.TextInput`
+  height: 40px;
+  width: 340px;
+  border-color: ${(props) => props.theme.yellow};
+  border-width: 1px;
+  margin-bottom: 20px;
+  padding-horizontal: 10px;
+  border-radius: 10px;
+  background: ${(props) => props.theme.background};
+`
+export const TitleText = styled.Text`
+  font-size: 36px;
+  margin-bottom: 16px;
+  margin-left: 15px;
+  color: ${props => props.theme.text};
+`
+export const Label = styled.Text`
+  color: ${props => props.theme.text};
+  font-size: 24px;
+  margin-right: 140px;
 `
 
 export const styles = StyleSheet.create({
   back: {
-    marginTop: 10,
+    marginTop: 5,
   },
-
-  title: {
-    fontSize: 36,
-    marginBottom: 16,
-    marginLeft: 15,
-  },
-    back: {
-      marginTop: 4,
-    },
-    title: {
-      fontSize: 36,
-      marginBottom: 16,
-      marginLeft: 15,
-    },
-
-  input: {
-    height: 40,
-    width: 340,
-  },
-
-    label: {
-      marginRight: 180,
-    },
-});
+})
