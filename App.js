@@ -6,44 +6,36 @@ import {
   SourceSansPro_400Regular,
   SourceSansPro_700Bold,
 } from '@expo-google-fonts/source-sans-pro'
-import { NavigationContainer } from '@react-navigation/native' // Importar o NavigationContainer
+import { NavigationContainer } from '@react-navigation/native'
 import { Routes } from './src/routes'
-import { init } from './src/database'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './src/styles'
+import { DatabaseProvider, UserProvider } from './src/database'
 
-// Mantenha o splash screen visível até que as fontes estejam carregadas
+// Mantém o splash screen visível até que as fontes estejam carregadas
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
+  // Obtém o esquema de cores do dispositivo (claro ou escuro)
+  const deviceTheme = useColorScheme()
+  // Define o tema a ser usado com base no esquema de cores
+  const themes = theme[deviceTheme] || theme.dark
+  const [appIsReady, setAppIsReady] = useState(false) // Estado para controlar se o app está pronto
 
-  const  deviceTheme = useColorScheme();
-
-  const themes =  theme[deviceTheme] || theme.dark
-
-  const [appIsReady, setAppIsReady] = useState(false)            
-
-  // Carregue as fontes
+  // Carrega as fontes
   let [fontsLoaded] = useFonts({
     SourceSansPro_400Regular,
     SourceSansPro_700Bold,
   })
 
   useEffect(() => {
-    const setupDatabase = async () => {
-      await init()
-      console.log('Banco de Dadis criado e inicializado')
-    }
-    setupDatabase()
-  }, [])
-
-  useEffect(() => {
+    // Efeito que é acionado quando as fontes estão carregadas
     if (fontsLoaded) {
-      // Quando as fontes estiverem carregadas, esconda o splash screen
+      // Quando as fontes estiverem carregadas, esconde a tela de splash
       SplashScreen.hideAsync()
-      setAppIsReady(true) // Atualize o estado para indicar que o app está pronto
+      setAppIsReady(true) // Atualiza o estado para indicar que o app está pronto
     }
-  }, [fontsLoaded])
+  }, [fontsLoaded]) // Dependência: executa o efeito quando as fontes são carregadas
 
   if (!appIsReady) {
     // Exibe uma tela em branco enquanto as fontes estão carregando
@@ -51,10 +43,15 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={themes}>
-      <NavigationContainer>
-        <Routes />
-      </NavigationContainer>
-    </ThemeProvider>
+    // Provedor do banco de dados que permite acessar a instância do banco em toda a aplicação
+    <DatabaseProvider>
+      <UserProvider>
+        <ThemeProvider theme={themes}>
+          <NavigationContainer>
+            <Routes />
+          </NavigationContainer>
+        </ThemeProvider>
+      </UserProvider>
+    </DatabaseProvider>
   )
 }

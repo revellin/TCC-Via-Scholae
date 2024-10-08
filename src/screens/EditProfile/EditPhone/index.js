@@ -1,52 +1,83 @@
-//Importa o react
-import React from 'react';
-//importa os componentes da biblioteca react-native
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
-//Importando os icones
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Alert } from 'react-native';
+import {
+  Container,
+  Header,
+  Check,
+  Form,
+  TitleText,
+  Label,
+  Input,
+} from './styles';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import { useDatabase, useUser } from '../../../database';
 
-// Função principal que define a tela de edição de telefone
 export const EditPhone = () => {
-    return (
-        //Container principal
-        <View style={styles.container}>
+  const navigation = useNavigation();
+  const { user, setUser } = useUser(); // Acesse os dados e a função para atualizar o usuário no contexto
+  const db = useDatabase(); // Acesse a instância do banco de dados
+  const [newPhone, setNewPhone] = useState(user ? user.phone : ''); // Estado para o novo número de telefone
 
-            {/* Container para o cabeçalho da tela */}
-            <View style={styles.header}>
+  // Função para atualizar o número de telefone no banco de dados
+  const handleUpdatePhone = async () => {
+    if (!newPhone) {
+      Alert.alert('Erro', 'O número de telefone não pode estar vazio.');
+      return;
+    }
 
-                {/* Botão de retorno */}
-                <View style={styles.return}>
-                    <TouchableOpacity>
-                        {/* Ícone para voltar */}
-                        <AntDesign name="left" size={30} color="black" />
-                    </TouchableOpacity>
-                </View>
+    try {
+      // Atualize o número de telefone no banco de dados
+      await db.execAsync(
+        'UPDATE Responsavel SET phone = ? WHERE phone = ?',
+        [newPhone, user.phone]
+      );
 
-                {/* Título */}
-                <Text style={styles.title}>Número</Text>
+      // Atualize os dados do usuário no contexto
+      setUser({ ...user, phone: newPhone });
 
-                {/* Botão de confirmação */}
-                <View style={styles.check}>
-                    <TouchableOpacity>
-                        {/* Ícone de comfirmação */}
-                        <AntDesign name="check" size={30} color="#D2A236" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+      Alert.alert('Sucesso', 'Número de telefone atualizado com sucesso!');
 
-            {/* Container para o formulário de edição de telefone */}
-            <View style={styles.miniform}>
+      // Navegue de volta para a tela de perfil
+      navigation.navigate('EditProfile');
+    } catch (error) {
+      console.error('Erro ao atualizar o número de telefone: ', error);
+      Alert.alert('Erro', 'Houve um erro ao atualizar o número de telefone.');
+    }
+  };
 
-                {/* Rótulo para o campo de telefone */}
-                <Text style={styles.label}>
-                    Phone
-                </Text>
-
-                {/* Campo de entrada para o telefone, com teclado tipo numerico */}
-                <TextInput
-                    style={styles.input} placeholder='+55 11 1234567890' keyboardType="numeric" />
-            </View>
+  return (
+    <Container>
+      {/* Header da tela */}
+      <Header>
+        {/* Botão de retorno */}
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+            <AntDesign name="left" size={30} color="black" />
+          </TouchableOpacity>
         </View>
-    );
-}
+
+        {/* Título da tela */}
+        <TitleText>Telefone</TitleText>
+
+        {/* Botão de confirmação */}
+        <Check>
+          <TouchableOpacity onPress={handleUpdatePhone}>
+            <AntDesign name="check" size={30} color="#D2A236" />
+          </TouchableOpacity>
+        </Check>
+      </Header>
+
+      {/* Formulário de edição de telefone */}
+      <Form>
+        <Label>Telefone</Label>
+        <Input
+          value={newPhone}
+          onChangeText={setNewPhone} // Atualize o estado ao digitar
+          placeholder="Digite seu novo número de telefone"
+          keyboardType="phone-pad"
+        />
+      </Form>
+    </Container>
+  );
+};

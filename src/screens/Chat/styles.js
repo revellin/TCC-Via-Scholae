@@ -22,7 +22,9 @@ export const ChatTextContainer = styled.View`
   margin-left: 10px;
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.gray,
+}))`
   height: 35px;
   width: 340px;
   border-color: ${(props) => props.theme.yellow};
@@ -33,7 +35,7 @@ export const Input = styled.TextInput`
   border-radius: 10px;
   background: ${(props) => props.theme.background};
   color: ${props => props.theme.text};
-`
+`;
 
 export const TitleText = styled.Text`
   font-size: 50px;

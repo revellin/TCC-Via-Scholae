@@ -17,7 +17,9 @@ export const Form = styled.View`
   align-items: center;
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.gray,
+}))`
   height: 40px;
   width: 340px;
   border-color: ${(props) => props.theme.yellow};

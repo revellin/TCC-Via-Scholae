@@ -1,36 +1,43 @@
-//Importa o React
 import React from 'react'
-//Importa os componentes do React-Native
-import { ProfilePic, ButtonChildren, ButtonEdit, ButtonSettings, Line } from '../../components'
-import { Container, ProfileContainer, ConProfilePic, ButtonsContainer, ProfileName, SubTitles } from './styles';
+import {
+  ProfilePic,
+  ButtonChildren,
+  ButtonEdit,
+  ButtonSettings,
+  Line,
+} from '../../components'
+import {
+  Container,
+  ProfileContainer,
+  ConProfilePic,
+  ButtonsContainer,
+  ProfileName,
+  SubTitles,
+} from './styles'
+import { useUser } from '../../database'
 
 export const Account = () => {
+  const { user } = useUser() // Acesse os dados do usuário logado
+
   return (
-    //Container princiapl
     <Container>
-      {/* Conteiner do profile*/}
       <ProfileContainer>
-        {/* Foto */}
         <ConProfilePic>
-          {/* Adiciona a foto*/}
           <ProfilePic />
         </ConProfilePic>
-        {/* Nome */}
-        <ProfileName>Matheus Romano</ProfileName>
-        <SubTitles>matheusemailfake@gmail.com</SubTitles>
-        <SubTitles>+55 11 12345-6789</SubTitles>
+        {/* Substitua os valores fixos pelos dados do usuário */}
+        <ProfileName>{user ? user.name : 'Usuário não logado'}</ProfileName>
+        <SubTitles>{user ? user.email : 'Email não disponível'}</SubTitles>
+        <SubTitles>{user ? user.phone : 'Número não disponível'}</SubTitles>
       </ProfileContainer>
 
-      {/* Container dos botoes */}
       <ButtonsContainer>
-          <ButtonChildren />
-          <ButtonEdit />
+        <ButtonChildren />
+        <ButtonEdit />
       </ButtonsContainer>
 
-      {/* linha */}
       <Line />
 
-      {/* Container Settings */}
       <ButtonSettings />
     </Container>
   )

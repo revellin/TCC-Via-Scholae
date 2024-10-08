@@ -26,16 +26,19 @@ export const CheckMark = styled.Text`
   fontSize: 18px;
   color: ${props => props.theme.yellow};
 `
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.gray,
+}))`
   width: 340px;
   height: 35px;
   align-self: center;
   background: ${props => props.theme.background};
-  border-width: 2px;
+  border-width: 1px;
   border-color: ${props => props.theme.yellow};
   border-radius: 10px;
   color: ${props => props.theme.text};
   margin-bottom: 25px;
+  padding-left: 10px;
 `
 export const LanguageOption = styled.TouchableOpacity`
   flex-direction: row;

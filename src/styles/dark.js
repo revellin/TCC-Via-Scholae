@@ -8,4 +8,5 @@ export const dark = {
   blue: '#2997D6', // Azul
   black: '#262626', // Preto
   border: '#565656', // Cinza
+  gray: '#8C8C8C',
 }

@@ -21,29 +21,35 @@ export const Form = styled.View`
   padding-horizontal: 10px;
 `
 
+export const TitleText = styled.Text`
+  font-size: 40px;
+  text-align: center;
+  color: ${props => props.theme.text};
+`;
+
+export const Motorista = styled.Text`
+  font-size: 18px;
+  color: ${props => props.theme.yellow};
+  text-decoration: underline;
+  text-align: center;
+  margin-top: 10px;
+`;
+
 export const styles = StyleSheet.create({
-
   return: {
-    position: 'absolute', // Faz com que o ícone seja posicionado relativamente ao contêiner pai
-    top: 20, // Distância do topo
-    left: 2, // Distância da borda esquerda
-    zIndex: 1, // Garante que o ícone fique sobre a imagem
+    position: 'absolute',
+    top: 20,
+    left: 2,
+    zIndex: 1,
   },
-
   img: {
     width: 300,
     height: 300,
   },
-
-  title: {
-    fontSize: 40,
-    paddingRight: 240,
-  },
-
   line: {
     height: 1,
-    backgroundColor: '#D2A236',
+    backgroundColor: '#E1B415',
     marginVertical: 3,
-    marginBottom: 10,
+    marginBottom: 25,
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomTitleText, CustomLabelText } from '../../components';
+import { CustomTitleText} from '../../components';
 import { Container, HeaderContainer, ApiContainer, TimeText, Chegada } from './styles';
 
 export const Home = () => {

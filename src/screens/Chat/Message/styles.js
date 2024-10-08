@@ -43,7 +43,9 @@ export const MessageText = styled.Text`
   color: ${props => props.theme.text};
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.gray,
+}))`
   flex: 1;
   height: 40px;
   border-color: ${props => props.theme.border};

@@ -14,17 +14,20 @@ export const SearchContainer = styled.View`
 `
 
 export const InputContainer = styled.View`
-  margin-left: 30;
+  margin-left: 30px;
   align-items: center;
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+  placeholderTextColor: props.theme.gray,
+}))`
   width: 250px;
   height: 35px;
   border-radius: 7px;
   border-width: 1px;
   border-color: ${(props) => props.theme.yellow};
   color: ${props => props.theme.text};
+  padding-left: 10px;
 `
 
 export const RecentHeader = styled.View`

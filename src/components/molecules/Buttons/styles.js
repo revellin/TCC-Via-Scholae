@@ -323,4 +323,15 @@ export const OptionTextRadio = styled.Text`
   color: ${props => props.theme.text};
   text-align: left;
 `
-
+//---------------------
+//Radio Button
+export const BtnSettings = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+`
+export const TextBtnSettings = styled.Text`
+  margin-left: 15px;
+  font-size: 20px;
+  color: ${props => props.theme.text};
+`

@@ -1,51 +1,83 @@
-//importa o react
-import React from 'react';
-//importa os componentes do react-native
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
-//Importa a biblioteca de icon
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Alert } from 'react-native';
+import {
+  Container,
+  Header,
+  Check,
+  Form,
+  TitleText,
+  Label,
+  Input,
+} from './styles';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
+import { useDatabase, useUser } from '../../../database'; // Verifique se o caminho está correto
 
-
-// Função principal que define a tela de edição de e-mail
 export const EditEmail = () => {
-    return (
-        //Container principal
-        <View style={styles.container}>
+  const navigation = useNavigation();
+  const { user, setUser } = useUser(); // Acesse os dados do usuário e a função para atualizar o contexto
+  const db = useDatabase(); // Acesse a instância do banco de dados
+  const [newEmail, setNewEmail] = useState(user ? user.email : ''); // Estado local para o e-mail
 
-            {/* Container para o cabeçalho da tela */}
-            <View style={styles.header}>
+  // Função para atualizar o e-mail no banco de dados
+  const handleUpdateEmail = async () => {
+    if (!newEmail) {
+      Alert.alert('Erro', 'O e-mail não pode estar vazio.');
+      return;
+    }
 
-                {/* Botão de retorno */}
-                <View style={styles.return}>
-                    <TouchableOpacity>
-                        {/* Ícone para voltar */}
-                        <AntDesign name="left" size={30} color="black" />
-                    </TouchableOpacity>
-                </View>
+    try {
+      // Atualize o e-mail no banco de dados
+      await db.execAsync(
+        'UPDATE Responsavel SET email = ? WHERE email = ?',
+        [newEmail, user.email]
+      );
 
-                {/* Título da tela */}
-                <Text style={styles.title}>Email</Text>
+      // Atualize os dados do usuário no contexto
+      setUser({ ...user, email: newEmail });
 
-                {/* Botão de confirmação no cabeçalho */}
-                <View style={styles.check}>
-                    <TouchableOpacity>
-                        {/* Ícone para comfirmar */}
-                        <AntDesign name="check" size={30} color="#D2A236" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+      Alert.alert('Sucesso', 'E-mail atualizado com sucesso!');
 
-            {/* Container para o formulário de edição de e-mail */}
-            <View style={styles.miniform}>
-                {/* Label */}
-                <Text style={styles.label}>
-                    Email
-                </Text>
-                {/* Campo de entrada com o tipo de teclado especifico para email*/}
-                <TextInput
-                    style={styles.input} placeholder='Edit your Email' keyboardType="email-address" />
-            </View>
+      // Navegue de volta para a tela de perfil
+      navigation.navigate('EditProfile');
+    } catch (error) {
+      console.error('Erro ao atualizar o e-mail: ', error);
+      Alert.alert('Erro', 'Houve um erro ao atualizar o e-mail.');
+    }
+  };
+
+  return (
+    <Container>
+      {/* Header da tela */}
+      <Header>
+        {/* Botão de retorno */}
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
+            <AntDesign name="left" size={30} color="black" />
+          </TouchableOpacity>
         </View>
-    );
+
+        {/* Título da tela */}
+        <TitleText>E-mail</TitleText>
+
+        {/* Botão de confirmação */}
+        <Check>
+          <TouchableOpacity onPress={handleUpdateEmail}>
+            <AntDesign name="check" size={30} color="#D2A236" />
+          </TouchableOpacity>
+        </Check>
+      </Header>
+
+      {/* Formulário de edição de e-mail */}
+      <Form>
+        <Label>E-mail</Label>
+        <Input
+          value={newEmail}
+          onChangeText={setNewEmail} // Atualiza o estado com o novo e-mail
+          placeholder="Digite seu novo e-mail"
+          keyboardType="email-address"
+        />
+      </Form>
+    </Container>
+  );
 };

@@ -1,8 +1,8 @@
-//Importa o react
+// Importa o react
 import React from 'react'
-//Importa os componentes do react6 native
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
-import { ProfilePic, CustomLabelText, Return } from '../../components'
+// Importa os componentes do react-native
+import { TouchableOpacity } from 'react-native'
+import { ProfilePic, Return } from '../../components'
 import {
   styles,
   Container,
@@ -11,12 +11,18 @@ import {
   ProfileContainer,
   FormContainer,
   EditPictureText,
-  Input,
+  Content,
+  ContentText,
+  Label,
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
+import { useUser } from '../../database'
 
 export const EditProfile = () => {
   const navigation = useNavigation()
+   // Acesse os dados do usuário logado
+  const { user } = useUser()
+
   return (
     //Container principal
     <Container>
@@ -35,7 +41,7 @@ export const EditProfile = () => {
       {/* Profile Picture */}
       <ProfileContainer>
         {/* Adiciona a imagem */}
-        <ProfilePic></ProfilePic>
+        <ProfilePic />
         <TouchableOpacity>
           <EditPictureText>Edit Picture</EditPictureText>
         </TouchableOpacity>
@@ -43,14 +49,20 @@ export const EditProfile = () => {
 
       {/* Form */}
       <FormContainer>
-          <CustomLabelText>Name</CustomLabelText>
-          <Input placeholder="Caio" />
+        <Content onPress={() => navigation.navigate('EditName')}>
+          <Label>Nome</Label>
+          <ContentText>{user ? user.name : 'Nome não disponível'}</ContentText>
+        </Content>
 
-          <CustomLabelText>Phone</CustomLabelText>
-          <Input placeholder="+55 11 12345-6789" />
+        <Content onPress={() => navigation.navigate('EditPhone')}>
+          <Label>Número</Label>
+          <ContentText>{user ? user.phone : 'Número não disponível'}</ContentText>
+        </Content>
 
-          <CustomLabelText>Email</CustomLabelText>
-          <Input placeholder="matheusemailfake@gmail.com" />
+        <Content onPress={() => navigation.navigate('EditEmail')}>
+          <Label>Email</Label>
+          <ContentText>{user ? user.email : 'Email não disponível'}</ContentText>
+        </Content>
       </FormContainer>
     </Container>
   )

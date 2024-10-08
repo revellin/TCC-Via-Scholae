@@ -7,30 +7,60 @@ import {
   ButtonAccessibility,
   Return,
 } from '../../components'
-import { styles, Container, Header, TitleText, TextApp } from './styles'
+import {
+  styles,
+  Container,
+  Header,
+  TitleText,
+  TextApp,
+  LogoutButton,
+  LogoutButtonText,
+} from './styles'
+import { useUser } from '../../database'
 
 export const Settings = () => {
   const navigation = useNavigation()
+  const { setUser } = useUser() // Função para limpar o estado do usuário
+
+  const handleLogout = () => {
+    // Limpa os dados do usuário no contexto (faz logout)
+    setUser(null)
+    // Redireciona para a tela de login
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Splash' }],
+    })
+  }
+
   return (
     <Container>
       <Header>
-        <Return style={styles.return} onPress={() => navigation.navigate('Home')} />
-          <TitleText>Configurações</TitleText>
+        <Return
+          style={styles.return}
+          onPress={() => navigation.navigate('Home')}
+        />
+        <TitleText>Configurações</TitleText>
       </Header>
+
       {/* Profile Section */}
-      <ButtonProfile></ButtonProfile>
+      <ButtonProfile />
 
       {/* App Settings Section */}
       <TextApp>Configurações do App</TextApp>
 
       {/* Your Account */}
-      <ButtonYourAccount></ButtonYourAccount>
+      <ButtonYourAccount />
 
       {/* Children */}
-      <ButtonChildrenSettings></ButtonChildrenSettings>
+      <ButtonChildrenSettings />
 
       {/* Accessibility */}
       <ButtonAccessibility />
+
+      {/* Logout Button */}
+      <LogoutButton onPress={handleLogout}>
+        <LogoutButtonText>Logout</LogoutButtonText>
+      </LogoutButton>
     </Container>
   )
 }

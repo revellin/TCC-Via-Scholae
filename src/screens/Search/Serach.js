@@ -50,7 +50,7 @@ export const Search = () => {
             color="#ACACAC"
           />*/}
           <Input
-            placeholder="Search"
+            placeholder="Pesquisa"
             value={searchQuery}
             onChangeText={(text) => setSearchQuery(text)}
           />

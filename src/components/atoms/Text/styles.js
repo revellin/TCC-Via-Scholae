@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TitleText = styled.Text`
-    font-size: ${({ theme }) => theme.metrics.px(24)}px;
+    font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
     color: ${props => props.theme.text} ;
