@@ -1,22 +1,22 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
-import * as SQLite from 'expo-sqlite'
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import * as SQLite from 'expo-sqlite';
 
-// Cria um contexto para o banco de dados, permitindo que outros componentes acessem a instância do banco
-const DatabaseContext = createContext(null)
+// Cria um contexto para o banco de dados
+const DatabaseContext = createContext(null);
 
-// Provedor de contexto que inicializa o banco de dados e fornece a instância para outros componentes
+// Provedor de contexto que inicializa o banco de dados
 export const DatabaseProvider = ({ children }) => {
-  // Estado para armazenar a instância do banco de dados
-  const [db, setDb] = useState(null)
+  const [db, setDb] = useState(null);
 
   useEffect(() => {
-    // Função assíncrona para inicializar o banco de dados
     const initializeDatabase = async () => {
       // Abre ou cria o banco de dados chamado 'viascholae.db'
-      const database = await SQLite.openDatabaseAsync('viascholae.db')
+      const database = await SQLite.openDatabaseAsync('viascholae.db');
 
-      // Executa comandos SQL para criar a tabela 'Responsavel' se ela não existir
+      // Executa comandos SQL para deletar a tabela 'Responsavel' se existir e criá-la novamente
       await database.execAsync(`
+        DROP TABLE IF EXISTS Responsavel;
+
         CREATE TABLE IF NOT EXISTS Responsavel (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
@@ -24,24 +24,22 @@ export const DatabaseProvider = ({ children }) => {
           email TEXT NOT NULL UNIQUE,
           password TEXT NOT NULL
         );
-      `)
+      `);
 
       // Atualiza o estado com a instância do banco de dados
-      setDb(database)
-    }
+      setDb(database);
+    };
 
     // Chama a função para inicializar o banco de dados
-    initializeDatabase()
-  }, []) // O array vazio [] significa que esse efeito será executado apenas uma vez, ao montar o componente
+    initializeDatabase();
+  }, []);
 
   return (
-    // Provedor de contexto que fornece a instância do banco de dados para seus filhos
     <DatabaseContext.Provider value={db}>{children}</DatabaseContext.Provider>
-  )
-}
+  );
+};
 
 // Hook customizado para acessar a instância do banco de dados em outros componentes
 export const useDatabase = () => {
-  return useContext(DatabaseContext)
-}
-
+  return useContext(DatabaseContext);
+};

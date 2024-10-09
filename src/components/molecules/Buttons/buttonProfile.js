@@ -4,16 +4,18 @@ import { useNavigation } from '@react-navigation/native'
 import { BtnProfile, ProfileInfo, ProfileName, ProfilePhone, ProfileEmail } from './styles'
 import { ProfilePic } from '../../../components'
 import { Ionicons } from '@expo/vector-icons'
+import { useUser } from '../../../database';
 
 export const ButtonProfile = () => {
   const navigation = useNavigation()
+  const { user } = useUser()
   return (
     <BtnProfile onPress={() => navigation.navigate('EditProfile')}>
       <ProfilePic style={styles.profileImagePlaceholder} />
       <ProfileInfo>
-        <ProfileName>Matheus Romano</ProfileName>
-        <ProfilePhone>+55 11 12345-6789</ProfilePhone>
-        <ProfileEmail>matheusemailfake@gmail.com</ProfileEmail>
+        <ProfileName>{user ? user.name : 'Nome não disponível'}</ProfileName>
+        <ProfilePhone>{user ? user.phone : 'Número não disponível'}</ProfilePhone>
+        <ProfileEmail>{user ? user.email : 'Email não disponível'}</ProfileEmail>
       </ProfileInfo>
       <Ionicons name="chevron-forward-outline" size={24} color="black" />
     </BtnProfile>

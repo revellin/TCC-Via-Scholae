@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, Alert, Pressable, Text } from 'react-native'
+import { TouchableOpacity, Alert } from 'react-native'
 import {
   CustomLogo,
-  CustomTitleText,
   CustomLabelText,
   ButtonCadastro,
   CustomInput,
@@ -57,7 +56,7 @@ export const Register = () => {
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
-      navigation.navigate('Home', { user: username })
+      navigation.navigate('Splash', { user: username })
     } catch (error) {
       console.error('Erro ao cadastrar: ', error)
       Alert.alert('Erro', 'Erro ao cadastrar. Tente novamente.')

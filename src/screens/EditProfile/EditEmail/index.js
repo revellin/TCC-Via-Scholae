@@ -11,7 +11,7 @@ import {
 } from './styles';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-import { useDatabase, useUser } from '../../../database'; // Verifique se o caminho está correto
+import { useDatabase, useUser } from '../../../database';
 
 export const EditEmail = () => {
   const navigation = useNavigation();

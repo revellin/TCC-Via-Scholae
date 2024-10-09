@@ -11,8 +11,7 @@ import {
   Line,
 } from '../../components';
 import { styles, Container, ContainerLogo, FormContainer, LineContainer, OrText } from './styles';
-import { useDatabase } from '../../database'; // Certifique-se de que o caminho está correto
-import { useUser } from '../../database'; // Importe o contexto do usuário
+import { useDatabase, useUser } from '../../database'; // Certifique-se de que o caminho está correto
 
 export const Initial = () => {
   const navigation = useNavigation();
