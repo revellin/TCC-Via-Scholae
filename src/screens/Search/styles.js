@@ -43,7 +43,7 @@ export const RecentItenContent = styled.View`
 `
 
 export const RecentItenContainer = styled.View`
-  margin-left: 10;
+  margin-left: 10px;
 `
 
 export const TitleText = styled.Text`

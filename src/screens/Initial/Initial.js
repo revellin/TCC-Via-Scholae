@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { Alert } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import {
   CustomTitleText,
   CustomLogo,
@@ -9,51 +9,80 @@ import {
   ButtonContinue,
   ButtonRegistro,
   Line,
-} from '../../components';
-import { styles, Container, ContainerLogo, FormContainer, LineContainer, OrText } from './styles';
-import { useDatabase, useUser } from '../../database'; // Certifique-se de que o caminho está correto
+} from '../../components'
+import {
+  styles,
+  Container,
+  ContainerLogo,
+  FormContainer,
+  LineContainer,
+  OrText,
+} from './styles'
+import { useDatabase, useUser } from '../../database'
 
 export const Initial = () => {
-  const navigation = useNavigation();
-  const db = useDatabase(); // Obtenha a instância do banco de dados
-  const { login } = useUser(); // Acesse a função de login do contexto
-  const [telefone, setTelefone] = useState('');
-  const [senha, setSenha] = useState('');
+  const navigation = useNavigation()
+  // Obtenha a instância do banco de dados
+  const db = useDatabase()
+  // Acesse a função de login do contexto
+  const { login } = useUser()
+  const [telefone, setTelefone] = useState('')
+  const [senha, setSenha] = useState('')
 
   const handleSingIn = async () => {
     if (telefone === '' || senha === '') {
-      Alert.alert('Atenção!', 'Preencha todos os campos.');
-      return;
+      Alert.alert('Atenção!', 'Preencha todos os campos.')
+      return
     }
 
     try {
-      // Verifica se o usuário existe no banco de dados
+      // Verifica se o usuário existe no banco de dados (incluindo tipo)
       const user = await db.getFirstAsync(
         'SELECT * FROM Responsavel WHERE phone = ? AND password = ?',
         [telefone, senha]
-      );
+      )
+
+      const motorista = await db.getFirstAsync(
+        'SELECT * FROM Motorista WHERE phone = ? AND password = ?',
+        [telefone, senha]
+      )
 
       if (user) {
-        // Se o usuário existir, armazene os dados no contexto e navegue para a tela inicial
+        // Se o responsável existir, armazene os dados no contexto
         const userData = {
+          id: user.id,
           name: user.name,
           email: user.email,
           phone: user.phone,
-        };
-        login(userData); // Define os dados do usuário logado
-
+          type: user.type, // Inclui o tipo do usuário
+        }
+        login(userData)
         navigation.reset({
           index: 0,
           routes: [{ name: 'Home', params: { user: user.name } }],
-        });
+        })
+      } else if (motorista) {
+        // Se o motorista existir, armazene os dados no contexto
+        const userData = {
+          id: motorista.id,
+          name: motorista.name,
+          email: motorista.email,
+          phone: motorista.phone,
+          type: motorista.type, // Inclui o tipo do usuário
+        }
+        login(userData)
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Home', params: { user: motorista.name } }],
+        })
       } else {
-        Alert.alert('Erro', 'Número de telefone ou senha incorretos.');
+        Alert.alert('Erro', 'Número de telefone ou senha incorretos.')
       }
     } catch (error) {
-      console.error('Erro ao logar: ', error);
-      Alert.alert('Erro', 'Erro ao logar. Tente novamente.');
+      console.error('Erro ao logar: ', error)
+      Alert.alert('Erro', 'Erro ao logar. Tente novamente.')
     }
-  };
+  }
 
   return (
     <Container>
@@ -69,6 +98,7 @@ export const Initial = () => {
           value={telefone}
           placeholder="Insira seu Telefone"
           keyboardType="numeric"
+          maxLength={11}
         />
         <CustomLabelText>Digite sua senha</CustomLabelText>
         <CustomInput
@@ -76,6 +106,7 @@ export const Initial = () => {
           value={senha}
           placeholder="Digite sua senha"
           secureTextEntry={true}
+          maxLength={16}
         />
         <ButtonContinue onPress={handleSingIn}>Continue</ButtonContinue>
 
@@ -85,8 +116,10 @@ export const Initial = () => {
           <Line style={styles.line}></Line>
         </LineContainer>
 
-        <ButtonRegistro onPress={() => navigation.navigate('Register')}>Registro</ButtonRegistro>
+        <ButtonRegistro onPress={() => navigation.navigate('Register')}>
+          Registro
+        </ButtonRegistro>
       </FormContainer>
     </Container>
-  );
-};
+  )
+}

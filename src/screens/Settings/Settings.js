@@ -59,7 +59,7 @@ export const Settings = () => {
 
       {/* Logout Button */}
       <LogoutButton onPress={handleLogout}>
-        <LogoutButtonText>Logout</LogoutButtonText>
+        <LogoutButtonText>Sair da conta</LogoutButtonText>
       </LogoutButton>
     </Container>
   )

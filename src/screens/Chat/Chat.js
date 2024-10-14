@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { FlatList, TouchableOpacity } from 'react-native'
-import { ProfilePic, CustomInput, CustomTitleText } from '../../components'
+import { FlatList } from 'react-native'
+import { ProfilePic } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import {
   styles,

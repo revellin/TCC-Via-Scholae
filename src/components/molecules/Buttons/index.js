@@ -45,3 +45,6 @@ export * from './RadioButton';
 
 //btn Atualizar
 export * from './buttonAtualizar';
+
+//Btn Rotas
+export * from './buttonManegeRoutes';

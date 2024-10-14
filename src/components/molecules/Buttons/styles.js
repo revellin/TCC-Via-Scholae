@@ -312,15 +312,15 @@ export const RadioButton = styled.View`
   height: 30px;
   border-radius: 15px;
   border-width: 2px;
-  border-color: ${props => props.theme.border};
+  border-color: ${(props) => props.theme.border};
   justify-content: center;
   align-items: center;
   margin-left: 10px;
-  background: ${props => props.theme.background};
+  background: ${(props) => props.theme.background};
 `
 export const OptionTextRadio = styled.Text`
-  fontSize: 32px;
-  color: ${props => props.theme.text};
+  fontsize: 32px;
+  color: ${(props) => props.theme.text};
   text-align: left;
 `
 //---------------------
@@ -333,5 +333,23 @@ export const BtnSettings = styled.TouchableOpacity`
 export const TextBtnSettings = styled.Text`
   margin-left: 15px;
   font-size: 20px;
-  color: ${props => props.theme.text};
+  color: ${(props) => props.theme.text};
+`
+//---------
+
+//Btn Manege Routes
+export const BtnManageRoutes = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  background: ${(props) => props.theme.primary};
+  padding: 11px;
+  border-radius: 10px;
+  min-width: 40%;
+  justify-content: center;
+`
+export const BtnManegeRoutesText = styled.Text`
+  margin-left: 10px;
+  font-size: 20px;
+  justify-content: center;
+  color: ${(props) => props.theme.text};
 `

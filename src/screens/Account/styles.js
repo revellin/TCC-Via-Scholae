@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyleSheet } from 'react-native'
 
 export const Container = styled.View`
   flex: 1px;
@@ -42,3 +43,10 @@ export const SubTitles = styled.Text`
   padding-left: 50px;
   color: ${props => props.theme.textsecondary};
 `
+
+export const styles = StyleSheet.create({
+  img: {
+    width: 100,
+    height: 100,
+  },
+})

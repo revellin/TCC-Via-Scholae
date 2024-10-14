@@ -5,6 +5,7 @@ import {
   ButtonEdit,
   ButtonSettings,
   Line,
+  BtnRotas,
 } from '../../components'
 import {
   Container,
@@ -13,6 +14,7 @@ import {
   ButtonsContainer,
   ProfileName,
   SubTitles,
+  styles,
 } from './styles'
 import { useUser } from '../../database'
 
@@ -23,16 +25,18 @@ export const Account = () => {
     <Container>
       <ProfileContainer>
         <ConProfilePic>
-          <ProfilePic />
+          <ProfilePic style={styles.img} />
         </ConProfilePic>
-        {/* Substitua os valores fixos pelos dados do usuário */}
         <ProfileName>{user ? user.name : 'Usuário não logado'}</ProfileName>
         <SubTitles>{user ? user.email : 'Email não disponível'}</SubTitles>
         <SubTitles>{user ? user.phone : 'Número não disponível'}</SubTitles>
       </ProfileContainer>
 
       <ButtonsContainer>
-        <ButtonChildren />
+        {/* Exibir o botão "ButtonChildren" apenas se o usuário for um responsável */}
+        {user && user.type === 'responsavel' && <ButtonChildren />}
+        {/* Exibir o botão "BtnRotas" apenas se o usuário for um motorista */}
+        {user && user.type === 'motorista' && <BtnRotas />}
         <ButtonEdit />
       </ButtonsContainer>
 

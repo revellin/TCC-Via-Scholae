@@ -7,12 +7,14 @@ export const CustomInput = ({
   secureTextEntry,
   onChangeText,
   value,
+  maxLength,
 }) => {
   return (
     <Input placeholder={placeholder}
     keyboardType={keyboardType}
     secureTextEntry={secureTextEntry}
     onChangeText={onChangeText} 
-    value={value} />
+    value={value} 
+    maxLength={maxLength}/>
   )
 }

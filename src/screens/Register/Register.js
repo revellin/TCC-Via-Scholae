@@ -52,7 +52,8 @@ export const Register = () => {
 
       await db.runAsync(
         'INSERT INTO Responsavel (name, phone, email, password) VALUES (?, ?, ?, ?)',
-        [username, telefone, email, senha]
+        [username, telefone, email, senha],
+        
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -74,7 +75,7 @@ export const Register = () => {
       </LogoContainer>
 
       <Form>
-        <TitleText>Registro</TitleText>
+        <TitleText>Registro Responsável</TitleText>
         <Line style={styles.line}></Line>
 
         <CustomLabelText>Digite seu nome completo</CustomLabelText>
@@ -82,6 +83,7 @@ export const Register = () => {
           placeholder="Insira seu nome"
           onChangeText={setUsername}
           value={username}
+          maxLength={30}
         />
 
         <CustomLabelText>Digite seu telefone</CustomLabelText>
@@ -90,6 +92,7 @@ export const Register = () => {
           keyboardType="phone-pad"
           onChangeText={setTelefone}
           value={telefone}
+          maxLength={11}
         />
 
         <CustomLabelText>Digite seu Email</CustomLabelText>
@@ -98,6 +101,7 @@ export const Register = () => {
           keyboardType="email-address"
           onChangeText={setEmail}
           value={email}
+          maxLength={100}
         />
 
         <CustomLabelText>Digite uma senha</CustomLabelText>
@@ -106,6 +110,7 @@ export const Register = () => {
           secureTextEntry
           onChangeText={setSenha}
           value={senha}
+          maxLength={16}
         />
 
         <CustomLabelText>Confirme sua senha</CustomLabelText>
@@ -114,10 +119,11 @@ export const Register = () => {
           secureTextEntry
           onChangeText={setConfirmeSenha}
           value={confSenha}
+          maxLength={16}
         />
 
         <ButtonCadastro onPress={handleRegister}>Cadastre-se</ButtonCadastro>
-        <Motorista>Sou Motorista</Motorista>
+        <Motorista onPress={() => navigation.navigate('RegisterMotorista')}>Sou Motorista</Motorista>
       </Form>
     </Container>
   )

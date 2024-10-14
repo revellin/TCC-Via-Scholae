@@ -25,6 +25,7 @@ import {
   Theme,
   YourAccount,
   UpdatePassword,
+  RegisterMotorista,
 } from '../screens'
 
 const BottomRoute = () => {
@@ -96,6 +97,11 @@ export const Routes = () => {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="RegisterMotorista"
+        component={RegisterMotorista}
         options={{ headerShown: false }}
       />
       <Stack.Screen
