@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { StyleSheet } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
@@ -28,3 +29,9 @@ export const TimeText = styled.Text`
   font-size: 24px;
   color: rgb(172, 172, 172);
 `
+
+export const styles = StyleSheet.create({
+  map: {
+    flex: 1
+  }
+});
