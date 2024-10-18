@@ -1,16 +1,17 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components'
+import { theme } from '../../styles'
 
 export const Container = styled.View`
   flex: 1;
-  padding: 20px;
+  padding: ${theme.metrics.px(20)}px;
   background: ${(props) => props.theme.background};
 `
 
 export const SearchContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: ${theme.metrics.px(20)}px;
 `
 
 export const ChatContent = styled.View`
@@ -19,50 +20,50 @@ export const ChatContent = styled.View`
 `
 
 export const ChatTextContainer = styled.View`
-  margin-left: 10px;
+  margin-left: ${theme.metrics.px(10)}px;
 `
 
 export const Input = styled.TextInput.attrs(props => ({
   placeholderTextColor: props.theme.gray,
 }))`
-  height: 35px;
-  width: 340px;
+  height: ${theme.metrics.px(35)}px;
+  width: ${theme.metrics.px(340)}px;
   border-color: ${(props) => props.theme.yellow};
-  border-width: 1px;
-  margin-bottom: 20px;
-  padding-horizontal: 10px;
-  margin-left: 15px;
-  border-radius: 10px;
+  border-width: ${theme.metrics.px(1)}px;
+  margin-bottom: ${theme.metrics.px(20)}px;
+  padding-horizontal: ${theme.metrics.px(10)}px;
+  margin-left: ${theme.metrics.px(15)}px;
+  border-radius: ${theme.metrics.px(10)}px;
   background: ${(props) => props.theme.background};
   color: ${props => props.theme.text};
 `;
 
 export const TitleText = styled.Text`
-  font-size: 50px;
+  font-size: ${theme.metrics.px(50)}px;
   text-align: left;
-  margin-bottom: 20px;
-  margin-top: 30px;
+  margin-bottom: ${theme.metrics.px(20)}px;
+  margin-top: ${theme.metrics.px(30)}px;
   color: ${(props) => props.theme.text};
 `
 
 export const ChatName = styled.Text`
-  font-size: 20px;
-  margin-top: -5px;
+  font-size: ${theme.metrics.px(20)}px;
+  margin-top: ${theme.metrics.px(-5)}px;
   font-weight: 700;
   color: ${(props) => props.theme.text};
 `
 
 export const ChatMessage = styled.Text`
-  font-size: 14px;
+  font-size: ${theme.metrics.px(14)}px;
   color: ${(props) => props.theme.textsecondary};
 `
 
 export const ChatItem = styled.TouchableOpacity`
-  padding: 15px;
+  padding: ${theme.metrics.px(15)}px;
   background: ${props => props.theme.primary};
-  border-radius: 10px;
-  margin-bottom: 10px;
-  height: 76px;
+  border-radius: ${theme.metrics.px(10)}px;
+  margin-bottom: ${theme.metrics.px(10)}px;
+  height: ${theme.metrics.px(76)}px;
 `
 
 export const styles = StyleSheet.create({

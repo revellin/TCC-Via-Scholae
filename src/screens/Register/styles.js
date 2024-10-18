@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
+import { theme } from '../../styles'
 
 
 export const Container = styled.View`
   flex-grow: 1;
-  padding: 20px;
+  padding: ${theme.metrics.px(20)}px;
   background: ${props => props.theme.background};
 `
 
@@ -12,27 +13,27 @@ export const LogoContainer = styled.View`
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  padding-horizontal: 26px;
+  padding-horizontal: ${theme.metrics.px(26)}px;
   width: 100%;
-  height: 250px;
+  height: ${theme.metrics.px(250)}px;
   position: relative;
 `
 export const Form = styled.View`
-  padding-horizontal: 10px;
+  padding-horizontal: ${theme.metrics.px(10)}px;
 `
 
 export const TitleText = styled.Text`
-  font-size: 40px;
+  font-size: ${theme.metrics.px(40)}px;
   text-align: center;
   color: ${props => props.theme.text};
 `;
 
 export const Motorista = styled.Text`
-  font-size: 18px;
+  font-size: ${theme.metrics.px(18)}px;
   color: ${props => props.theme.yellow};
   text-decoration: underline;
   text-align: center;
-  margin-top: 10px;
+  margin-top: ${theme.metrics.px(10)}px;
 `;
 
 export const styles = StyleSheet.create({

@@ -1,32 +1,31 @@
 import styled from 'styled-components'
 import { StyleSheet } from 'react-native';
+import { theme } from '../../styles'
 
 export const Container = styled.View`
   flex: 1;
   background: ${(props) => props.theme.background};
 `
 export const HeaderContainer = styled.View`
-  width: 430px;
-  height: 570px;
+  width: ${theme.metrics.px(430)}px;
+  height: ${theme.metrics.px(570)}px;
   background-color: #363636;
   justify-content: center;
-  padding-right: 25px;
 `
 
 export const ApiContainer = styled.View`
-  padding-left: 25px;
-  margin-top: 15px;
+  padding-left: ${theme.metrics.px(25)}px;
+  margin-top: ${theme.metrics.px(15)}px;
 `
 
 export const Chegada = styled.Text`
-  font-size: ${(props) => props.fontSize || '20px'};
+  font-size: ${theme.metrics.px(50)}px;
   color: ${(props) => props.theme.text};
-  margin-bottom: 2px;
-  font-size: 50px;
+  margin-bottom: ${theme.metrics.px(2)}px;
 `
 
 export const TimeText = styled.Text`
-  font-size: 24px;
+  font-size: ${theme.metrics.px(30)}px;
   color: rgb(172, 172, 172);
 `
 

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components';
+import { theme } from '../../../styles'
 
 export const Container = styled.View`
   flex: 1;
@@ -7,39 +8,39 @@ export const Container = styled.View`
 `
 
 export const Header = styled.View`
-  margin-top: 30px;
-  padding: 15px;
+  margin-top: ${theme.metrics.px(30)}px;
+  padding: ${theme.metrics.px(15)}px;
   flex-direction: row;
-  width: 411px;
-  height: 84px;
+  width: ${theme.metrics.px(411)}px;
+  height: ${theme.metrics.px(84)}px;
 `
 export const MessageContainer = styled.View`
   background: ${props => props.theme.secondary};
-  border-radius: 10px;
-  padding: 10px;
-  margin-vertical: 7px;
+  border-radius: ${theme.metrics.px(10)}px;
+  padding: ${theme.metrics.px(10)}px;
+  margin-vertical: ${theme.metrics.px(7)}px;
   align-self: flex-end;
-  margin-right: 20px;
+  margin-right: ${theme.metrics.px(20)}px;
   max-width: 65%; 
 `
 
 export const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 10px;
-  border-top-width: 1px;
+  padding: ${theme.metrics.px(10)}px;
+  border-top-width: ${theme.metrics.px(1)}px;
   border-color: #E9B224;
 `
 
 export const Name = styled.Text`
-  font-size: 20px;
+  font-size: ${theme.metrics.px(20)}px;
   color: ${props => props.theme.text};
-  margin-left: 12px;
-  margin-top: 2px;
+  margin-left: ${theme.metrics.px(12)}px;
+  margin-top: ${theme.metrics.px(2)}px;
 `
 
 export const MessageText = styled.Text`
-  font-size: 16px;
+  font-size: ${theme.metrics.px(16)}px;
   color: ${props => props.theme.text};
 `
 
@@ -47,24 +48,24 @@ export const Input = styled.TextInput.attrs(props => ({
   placeholderTextColor: props.theme.gray,
 }))`
   flex: 1;
-  height: 40px;
+  height: ${theme.metrics.px(40)}px;
   border-color: ${props => props.theme.border};
-  border-width: 1px;
-  border-radius: 20px;
-  padding-horizontal: 10px;
-  margin-right: 10px;
+  border-width: ${theme.metrics.px(1)}px;
+  border-radius: ${theme.metrics.px(20)}px;
+  padding-horizontal: ${theme.metrics.px(10)}px;
+  margin-right: ${theme.metrics.px(10)}px;
 `
 
 export const SendButton = styled.TouchableOpacity`
   background: ${props => props.theme.yellow};
-  padding-vertical: 10px;
-  padding-horizontal: 15px;
-  border-radius: 20px;
+  padding-vertical: ${theme.metrics.px(10)}px;
+  padding-horizontal: ${theme.metrics.px(15)}px;
+  border-radius: ${theme.metrics.px(20)}px;
 `
 
 export const SendButtonText = styled.Text`
-  color: #ffffff;
-  font-size: 15px;
+  color: #FFFFFF;
+  font-size: ${theme.metrics.px(15)}px;
 `
 
 

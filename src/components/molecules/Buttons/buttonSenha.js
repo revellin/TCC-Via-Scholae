@@ -1,7 +1,6 @@
 import React from 'react'
 import { BtnSenha, ContentSenha, TextButtonSenha } from './styles'
 import { useNavigation } from '@react-navigation/native'
-//Importa a bibloteca de icones
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 
 export const ButtonPassword = () => {
@@ -10,7 +9,7 @@ export const ButtonPassword = () => {
     <BtnSenha onPress={() => navigation.navigate('UpdatePassword')}>
       <ContentSenha>
         <MaterialIcons name="lock" size={24} color="black" />
-        <TextButtonSenha>Troque sua</TextButtonSenha>
+        <TextButtonSenha>Troque sua senha</TextButtonSenha>
       </ContentSenha>
       <Ionicons name="chevron-forward" size={24} color="black" />
     </BtnSenha>

@@ -1,61 +1,61 @@
 import styled from 'styled-components'
+import { theme } from '../../../styles'
 
 //Botao Continue
 export const BtnContinue = styled.TouchableOpacity`
   background: ${(props) => props.theme.black};
-  padding-vertical: 10px;
-  padding-horizontal: 20px;
-  width: 210px;
+  padding-vertical: ${theme.metrics.px(10)}px;
+  padding-horizontal: ${theme.metrics.px(20)}px;
+  width: ${theme.metrics.px(210)}px;
   align-items: center;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  border-width: 1px;
+  margin-bottom: ${theme.metrics.px(20)}px;
+  border-radius: ${theme.metrics.px(20)}px;
+  border-width: ${theme.metrics.px(1)}px;
   border-color: ${(props) => props.theme.yellow};
   align-self: center;
 `
 
 export const BtnContinueText = styled.Text`
-  color: #eeeeee;
-  font-size: 16px;
+  color: #EEEEEE;
+  font-size: ${theme.metrics.px(16)}px;
 `
 
 //----------------
 
 //Botao Registro
 export const BtnRegistro = styled.TouchableOpacity`
-  border-color: #262626;
-  background: #363636;
-  border-radius: 20px;
-  border-width: 2px;
-  border-color: #565656;
-  padding-vertical: 10px;
-  padding-horizontal: 20px;
-  width: 210px;
+  background: ${props => props.theme.background};
+  border-radius: ${theme.metrics.px(20)}px;
+  border-width: ${theme.metrics.px(2)}px;
+  border-color: ${props => props.theme.yellow};
+  padding-vertical: ${theme.metrics.px(10)}px;
+  padding-horizontal: ${theme.metrics.px(20)}px;
+  width: ${theme.metrics.px(210)}px;
   align-items: center;
   align-self: center;
 `
 
 export const BtnRegistroText = styled.Text`
   color: ${(props) => props.theme.text};
-  font-size: 16px;
+  font-size: ${theme.metrics.px(16)}px;
 `
 
 //---------------------
 
 //Botao Cadastro
 export const BtnCadastro = styled.TouchableOpacity`
-  background: ${(props) => props.theme.primary};
-  padding-vertical: 10px;
+  background: ${(props) => props.theme.background};
+  padding-vertical: ${theme.metrics.px(10)}px;
   align-items: center;
-  border-radius: 15px;
-  border-width: 2px;
-  border-color: ${(props) => props.theme.border};
-  width: 232px;
+  border-radius: ${theme.metrics.px(15)}px;
+  border-width: ${theme.metrics.px(2)}px;
+  border-color: ${(props) => props.theme.yellow};
+  width: ${theme.metrics.px(232)}px;
   align-self: center;
 `
 
 export const BtnCadastroText = styled.Text`
-  font-size: 18px;
+  font-size: ${theme.metrics.px(18)}px;
   color: ${(props) => props.theme.text};
 `
 //----------------
@@ -65,15 +65,15 @@ export const BtnCrianças = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background: ${(props) => props.theme.primary};
-  padding: 11px;
-  border-radius: 10px;
+  padding: ${theme.metrics.px(11)}px;
+  border-radius: ${theme.metrics.px(10)}px;
   min-width: 40%;
   justify-content: center;
 `
 
 export const BtnCriançasText = styled.Text`
-  margin-left: 10px;
-  font-size: 20px;
+  margin-left: ${theme.metrics.px(10)}px;
+  font-size: ${theme.metrics.px(20)}px;
   justify-content: center;
   color: ${(props) => props.theme.text};
 `
@@ -84,15 +84,15 @@ export const BtnEdit = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background: ${(props) => props.theme.primary};
-  padding: 11px;
-  border-radius: 10px;
+  padding: ${theme.metrics.px(11)}px;
+  border-radius: ${theme.metrics.px(10)}px;
   min-width: 40%;
   justify-content: center;
 `
 
 export const BtnEditeText = styled.Text`
-  margin-left: 10px;
-  font-size: 20px;
+  margin-left: ${theme.metrics.px(10)}px;
+  font-size: ${theme.metrics.px(20)}px;
   justify-content: center;
   color: ${(props) => props.theme.text};
 `
@@ -104,32 +104,32 @@ export const BtnProfile = styled.TouchableOpacity`
   align-items: center;
   align-self: center;
   background: ${(props) => props.theme.primary};
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  width: 381px;
-  height: 133px;
+  padding: ${theme.metrics.px(15)}px;
+  border-radius: ${theme.metrics.px(10)}px;
+  margin-bottom: ${theme.metrics.px(30)}px;
+  width: ${theme.metrics.px(381)}px;
+  height: ${theme.metrics.px(133)}px;
 `
 export const ProfileImage = styled.View`
-  width: 80,
-  height: 80,
-  borderRadius: 40,
-  marginRight: 15,
+  width: ${theme.metrics.px(80)}px,
+  height: ${theme.metrics.px(80)}px,
+  borderRadius: ${theme.metrics.px(40)}px,
+  marginRight: ${theme.metrics.px(15)}px,
 `
 export const ProfileInfo = styled.View`
   flex: 1;
 `
 export const ProfileName = styled.Text`
-  font-size: 20px;
+  font-size: ${theme.metrics.px(20)}px;
   font-weight: bold;
   color: ${(props) => props.theme.text};
 `
 export const ProfilePhone = styled.Text`
-  font-size: 15px;
+  font-size: ${theme.metrics.px(15)}px;
   color: ${(props) => props.theme.textsecondary};
 `
 export const ProfileEmail = styled.Text`
-  font-size: 15px;
+  font-size: ${theme.metrics.px(15)}px;
   color: ${(props) => props.theme.textsecondary};
 `
 //--------------
@@ -139,8 +139,8 @@ export const BtnYourAccount = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 15px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(15)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const IconAcContainer = styled.View`
@@ -148,14 +148,14 @@ export const IconAcContainer = styled.View`
   align-items: center;
 `
 export const TextAcContainer = styled.View`
-  margin-left: 10px;
+  margin-left: ${theme.metrics.px(10)}px;
 `
 export const OptionTextAc = styled.Text`
-  font-size: 16px;
+  font-size: ${theme.metrics.px(16)}px;
   color: ${(props) => props.theme.text};
 `
 export const SubTextAc = styled.Text`
-  font-size: 12px;
+  font-size: ${theme.metrics.px(12)}px;
   color: ${(props) => props.theme.textsecondary};
 `
 //---------------------
@@ -165,8 +165,8 @@ export const BtnCriançaOption = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 15px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(15)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const IconCrContainer = styled.View`
@@ -174,8 +174,8 @@ export const IconCrContainer = styled.View`
   align-items: center;
 `
 export const OptionTextCr = styled.Text`
-  font-size: 16px;
-  margin-left: 12px;
+  font-size: ${theme.metrics.px(16)}px;
+  margin-left: ${theme.metrics.px(12)}px;
   color: ${(props) => props.theme.text};
 `
 //---------------------
@@ -185,8 +185,8 @@ export const BtnAcessibilidadeOption = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 15px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(15)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const IconAcesContainer = styled.View`
@@ -194,11 +194,11 @@ export const IconAcesContainer = styled.View`
   align-items: center;
 `
 export const TextAcesContainer = styled.View`
-  margin-left: 10px;
+  margin-left: ${theme.metrics.px(10)}px;
 `
 export const OptionTextAces = styled.Text`
-  font-size: 16px;
-  margin-left: 12px;
+  font-size: ${theme.metrics.px(16)}px;
+  margin-left: ${theme.metrics.px(12)}px;
   color: ${(props) => props.theme.text};
 `
 //---------------------
@@ -208,8 +208,8 @@ export const BtnSenha = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 16px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(16)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const ContentSenha = styled.View`
@@ -217,8 +217,8 @@ export const ContentSenha = styled.View`
   align-items: center;
 `
 export const TextButtonSenha = styled.Text`
-  font-size: 18px;
-  margin-left: 16px;
+  font-size: ${theme.metrics.px(18)}px;
+  margin-left: ${theme.metrics.px(16)}px;
   color: ${(props) => props.theme.text};
 `
 //---------------
@@ -227,13 +227,13 @@ export const TextButtonSenha = styled.Text`
 export const BtnAtualizar = styled.TouchableOpacity`
   background: ${(props) => props.theme.yellow};
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: ${theme.metrics.px(20)}px;
   align-items: center;
 `
 
 export const TextButtonAtual = styled.Text`
-  font-size: 20px;
-  color: #eeeeee;
+  font-size: ${theme.metrics.px(20)}px;
+  color: #EEEEEE;
 `
 //---------------
 
@@ -242,8 +242,8 @@ export const BtnTema = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 16px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(16)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const ContentTema = styled.View`
@@ -251,8 +251,8 @@ export const ContentTema = styled.View`
   align-items: center;
 `
 export const TextButtonTema = styled.Text`
-  font-size: 16px;
-  margin-left: 16px;
+  font-size: ${theme.metrics.px(16)}px;
+  margin-left: ${theme.metrics.px(16)}px;
   color: ${(props) => props.theme.text};
 `
 export const OptionRightTema = styled.Text`
@@ -260,9 +260,9 @@ export const OptionRightTema = styled.Text`
   align-items: center;
 `
 export const OptionSubTextTema = styled.Text`
-  font-size: 14px;
+  font-size: ${theme.metrics.px(14)}px;
   color: ${(props) => props.theme.textsecondary};
-  margin-right: 8px;
+  margin-right: ${theme.metrics.px(8)}px;
 `
 //-------------------
 
@@ -271,8 +271,8 @@ export const BtnIdioma = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding-vertical: 16px;
-  border-bottom-width: 1px;
+  padding-vertical: ${theme.metrics.px(16)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
   border-bottom-color: ${(props) => props.theme.yellow};
 `
 export const ContentIdioma = styled.View`
@@ -280,8 +280,8 @@ export const ContentIdioma = styled.View`
   align-items: center;
 `
 export const TextButtonIdoma = styled.Text`
-  font-size: 16px;
-  margin-left: 16px;
+  font-size: ${theme.metrics.px(16)}px;
+  margin-left: ${theme.metrics.px(16)}px;
   color: ${(props) => props.theme.text};
 `
 export const OptionRightIdioma = styled.Text`
@@ -289,9 +289,9 @@ export const OptionRightIdioma = styled.Text`
   align-items: center;
 `
 export const OptionSubTextIdioma = styled.Text`
-  font-size: 14px;
+  font-size: ${theme.metrics.px(14)}px;
   color: ${(props) => props.theme.textsecondary};
-  margin-right: 8px;
+  margin-right: ${theme.metrics.px(8)}px;
 `
 //-----------------
 
@@ -301,25 +301,25 @@ export const BtnRadioContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding-vertical: 5px;
+  padding-vertical: ${theme.metrics.px(5)}px;
 `
 export const TextContainer = styled.View`
   flex: 1;
   justify-content: center;
 `
 export const RadioButton = styled.View`
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  border-width: 2px;
+  width: ${theme.metrics.px(30)}px;
+  height: ${theme.metrics.px(30)}px;
+  border-radius: ${theme.metrics.px(15)}px;
+  border-width: ${theme.metrics.px(2)}px;
   border-color: ${(props) => props.theme.border};
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+  margin-left: ${theme.metrics.px(10)}px;
   background: ${(props) => props.theme.background};
 `
 export const OptionTextRadio = styled.Text`
-  fontsize: 32px;
+  fontsize: ${theme.metrics.px(32)}px;
   color: ${(props) => props.theme.text};
   text-align: left;
 `
@@ -328,11 +328,11 @@ export const OptionTextRadio = styled.Text`
 export const BtnSettings = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  margin-top: 20px;
+  margin-top: ${theme.metrics.px(20)}px;
 `
 export const TextBtnSettings = styled.Text`
-  margin-left: 15px;
-  font-size: 20px;
+  margin-left: ${theme.metrics.px(15)}px;
+  font-size: ${theme.metrics.px(20)}px;
   color: ${(props) => props.theme.text};
 `
 //---------
@@ -342,14 +342,14 @@ export const BtnManageRoutes = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background: ${(props) => props.theme.primary};
-  padding: 11px;
-  border-radius: 10px;
+  padding: ${theme.metrics.px(11)}px;
+  border-radius: ${theme.metrics.px(10)}px;
   min-width: 40%;
   justify-content: center;
 `
 export const BtnManegeRoutesText = styled.Text`
-  margin-left: 10px;
-  font-size: 20px;
+  margin-left: ${theme.metrics.px(10)}px;
+  font-size: ${theme.metrics.px(20)}px;
   justify-content: center;
   color: ${(props) => props.theme.text};
 `
