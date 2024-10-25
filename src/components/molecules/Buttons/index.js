@@ -48,3 +48,6 @@ export * from './buttonAtualizar';
 
 //Btn Rotas
 export * from './buttonManegeRoutes';
+
+//Btn Rotas Config
+export * from './buttonRotasConfig';

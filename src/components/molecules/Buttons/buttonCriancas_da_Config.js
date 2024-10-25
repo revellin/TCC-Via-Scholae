@@ -12,7 +12,7 @@ import { Children } from '../../../../assets/icons'
 export const ButtonChildrenSettings = () => {
   const navigation = useNavigation()
   return (
-    <BtnCriançaOption onPress={() => navigation.navigate('')}>
+    <BtnCriançaOption onPress={() => navigation.navigate('RegisterCrianca')}>
       <IconCrContainer>
         <Children />
         <OptionTextCr>Crianças</OptionTextCr>

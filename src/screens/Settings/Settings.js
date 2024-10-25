@@ -4,6 +4,7 @@ import {
   ButtonProfile,
   ButtonYourAccount,
   ButtonChildrenSettings,
+  ButtonRotasSettings,
   ButtonAccessibility,
   Return,
 } from '../../components'
@@ -20,7 +21,8 @@ import { useUser } from '../../database'
 
 export const Settings = () => {
   const navigation = useNavigation()
-  const { setUser } = useUser() // Função para limpar o estado do usuário
+  // Acesse o estado do usuário
+  const { setUser, user } = useUser()
 
   const handleLogout = () => {
     // Limpa os dados do usuário no contexto (faz logout)
@@ -51,8 +53,9 @@ export const Settings = () => {
       {/* Your Account */}
       <ButtonYourAccount />
 
-      {/* Children */}
-      <ButtonChildrenSettings />
+      {/* Renderizar o botão correto com base no tipo de usuário */}
+      {user?.type === 'motorista' && <ButtonRotasSettings />}
+      {user && user.type === 'responsavel' && <ButtonChildrenSettings />}
 
       {/* Accessibility */}
       <ButtonAccessibility />

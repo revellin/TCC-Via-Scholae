@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react'
+import { View, TouchableOpacity, Alert } from 'react-native'
 import {
   Container,
   Header,
@@ -8,43 +8,46 @@ import {
   TitleText,
   Label,
   Input,
-} from './styles';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
-import { useDatabase, useUser } from '../../../database';
+} from './styles'
+import AntDesign from '@expo/vector-icons/AntDesign'
+import { useNavigation } from '@react-navigation/native'
+import { useDatabase, useUser } from '../../../database'
 
 export const EditPhone = () => {
-  const navigation = useNavigation();
-  const { user, setUser } = useUser(); // Acesse os dados e a função para atualizar o usuário no contexto
-  const db = useDatabase(); // Acesse a instância do banco de dados
-  const [newPhone, setNewPhone] = useState(user ? user.phone : ''); // Estado para o novo número de telefone
+  const navigation = useNavigation()
+  const { user, setUser } = useUser() // Acesse os dados e a função para atualizar o usuário no contexto
+  const db = useDatabase() // Acesse a instância do banco de dados
+  const [newPhone, setNewPhone] = useState(user ? user.phone : '') // Estado para o novo número de telefone
 
   // Função para atualizar o número de telefone no banco de dados
   const handleUpdatePhone = async () => {
     if (!newPhone) {
-      Alert.alert('Erro', 'O número de telefone não pode estar vazio.');
-      return;
+      Alert.alert('Erro', 'O número de telefone não pode estar vazio.')
+      return
     }
 
     try {
-      // Atualize o número de telefone no banco de dados
-      await db.execAsync(
-        'UPDATE Responsavel SET phone = ? WHERE phone = ?',
-        [newPhone, user.phone]
-      );
+      // Verifica se o usuário é um responsável ou motorista
+      const table = user.type === 'motorista' ? 'Motorista' : 'Responsavel'
+
+      // Atualize o número de telefone na tabela correta (Responsavel ou Motorista)
+      await db.runAsync(`UPDATE ${table} SET phone = ? WHERE phone = ?`, [
+        newPhone,
+        user.phone,
+      ])
 
       // Atualize os dados do usuário no contexto
-      setUser({ ...user, phone: newPhone });
+      setUser({ ...user, phone: newPhone })
 
-      Alert.alert('Sucesso', 'Número de telefone atualizado com sucesso!');
+      Alert.alert('Sucesso', 'Número de telefone atualizado com sucesso!')
 
       // Navegue de volta para a tela de perfil
-      navigation.navigate('EditProfile');
+      navigation.navigate('EditProfile')
     } catch (error) {
-      console.error('Erro ao atualizar o número de telefone: ', error);
-      Alert.alert('Erro', 'Houve um erro ao atualizar o número de telefone.');
+      console.error('Erro ao atualizar o número de telefone: ', error)
+      Alert.alert('Erro', 'Houve um erro ao atualizar o número de telefone.')
     }
-  };
+  }
 
   return (
     <Container>
@@ -79,5 +82,5 @@ export const EditPhone = () => {
         />
       </Form>
     </Container>
-  );
-};
+  )
+}

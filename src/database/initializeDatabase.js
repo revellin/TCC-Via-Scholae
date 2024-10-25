@@ -20,6 +20,7 @@ export const DatabaseProvider = ({ children }) => {
           phone TEXT NOT NULL UNIQUE,
           email TEXT NOT NULL UNIQUE,
           password TEXT NOT NULL,
+          profilePic TEXT,
           type TEXT NOT NULL DEFAULT 'responsavel'
         );
 
@@ -29,9 +30,19 @@ export const DatabaseProvider = ({ children }) => {
           phone TEXT NOT NULL UNIQUE,
           email TEXT NOT NULL UNIQUE,
           password TEXT NOT NULL,
+          profilePic TEXT,
           cnhFrente TEXT,
           cnhVerso TEXT,
           type TEXT NOT NULL DEFAULT 'motorista'
+        );
+
+        CREATE TABLE IF NOT EXISTS Ciranca (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          idade TEXT NOT NULL,
+          parentesco TEXT NOT NULL,
+          profilePic TEXT,
+          type TEXT NOT NULL DEFAULT 'crianca'
         );
       `)
 

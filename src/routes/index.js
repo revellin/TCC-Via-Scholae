@@ -26,6 +26,7 @@ import {
   YourAccount,
   UpdatePassword,
   RegisterMotorista,
+  RegisterCrianca,
 } from '../screens'
 
 const BottomRoute = () => {
@@ -102,6 +103,11 @@ export const Routes = () => {
       <Stack.Screen
         name="RegisterMotorista"
         component={RegisterMotorista}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="RegisterCrianca"
+        component={RegisterCrianca}
         options={{ headerShown: false }}
       />
       <Stack.Screen

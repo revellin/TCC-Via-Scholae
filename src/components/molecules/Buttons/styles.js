@@ -180,6 +180,26 @@ export const OptionTextCr = styled.Text`
 `
 //---------------------
 
+//Btn Rotas das Configurações
+export const BtnRotasOption = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-vertical: ${theme.metrics.px(15)}px;
+  border-bottom-width: ${theme.metrics.px(1)}px;
+  border-bottom-color: ${(props) => props.theme.yellow};
+`
+export const IconRotasContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+export const OptionTextRotas = styled.Text`
+  font-size: ${theme.metrics.px(16)}px;
+  margin-left: ${theme.metrics.px(12)}px;
+  color: ${(props) => props.theme.text};
+`
+//--------------------
+
 //Btn Acessibilidade
 export const BtnAcessibilidadeOption = styled.TouchableOpacity`
   flex-direction: row;

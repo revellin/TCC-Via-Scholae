@@ -29,6 +29,7 @@ export const Input = styled.TextInput.attrs(props => ({
   padding-horizontal: ${theme.metrics.px(10)}px;
   border-radius: ${theme.metrics.px(10)}px;
   background: ${(props) => props.theme.background};
+  color: ${props => props.theme.text};
 `
 export const TitleText = styled.Text`
   font-size: ${theme.metrics.px(36)}px;

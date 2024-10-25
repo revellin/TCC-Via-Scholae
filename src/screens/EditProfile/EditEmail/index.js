@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react'
+import { View, TouchableOpacity, Alert } from 'react-native'
 import {
   Container,
   Header,
@@ -8,43 +8,46 @@ import {
   TitleText,
   Label,
   Input,
-} from './styles';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
-import { useDatabase, useUser } from '../../../database';
+} from './styles'
+import AntDesign from '@expo/vector-icons/AntDesign'
+import { useNavigation } from '@react-navigation/native'
+import { useDatabase, useUser } from '../../../database'
 
 export const EditEmail = () => {
-  const navigation = useNavigation();
-  const { user, setUser } = useUser(); // Acesse os dados do usuário e a função para atualizar o contexto
-  const db = useDatabase(); // Acesse a instância do banco de dados
-  const [newEmail, setNewEmail] = useState(user ? user.email : ''); // Estado local para o e-mail
+  const navigation = useNavigation()
+  const { user, setUser } = useUser() // Acesse os dados do usuário e a função para atualizar o contexto
+  const db = useDatabase() // Acesse a instância do banco de dados
+  const [newEmail, setNewEmail] = useState(user ? user.email : '') // Estado local para o e-mail
 
   // Função para atualizar o e-mail no banco de dados
   const handleUpdateEmail = async () => {
     if (!newEmail) {
-      Alert.alert('Erro', 'O e-mail não pode estar vazio.');
-      return;
+      Alert.alert('Erro', 'O e-mail não pode estar vazio.')
+      return
     }
 
     try {
-      // Atualize o e-mail no banco de dados
-      await db.execAsync(
-        'UPDATE Responsavel SET email = ? WHERE email = ?',
-        [newEmail, user.email]
-      );
+      // Verifica se o usuário é um responsável ou motorista
+      const table = user.type === 'motorista' ? 'Motorista' : 'Responsavel'
+
+      // Atualize o e-mail na tabela correta (Responsavel ou Motorista)
+      await db.runAsync(`UPDATE ${table} SET email = ? WHERE email = ?`, [
+        newEmail,
+        user.email,
+      ])
 
       // Atualize os dados do usuário no contexto
-      setUser({ ...user, email: newEmail });
+      setUser({ ...user, email: newEmail })
 
-      Alert.alert('Sucesso', 'E-mail atualizado com sucesso!');
+      Alert.alert('Sucesso', 'E-mail atualizado com sucesso!')
 
       // Navegue de volta para a tela de perfil
-      navigation.navigate('EditProfile');
+      navigation.navigate('EditProfile')
     } catch (error) {
-      console.error('Erro ao atualizar o e-mail: ', error);
-      Alert.alert('Erro', 'Houve um erro ao atualizar o e-mail.');
+      console.error('Erro ao atualizar o e-mail: ', error)
+      Alert.alert('Erro', 'Houve um erro ao atualizar o e-mail.')
     }
-  };
+  }
 
   return (
     <Container>
@@ -79,5 +82,5 @@ export const EditEmail = () => {
         />
       </Form>
     </Container>
-  );
-};
+  )
+}
