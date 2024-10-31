@@ -59,7 +59,12 @@ export const Initial = () => {
         login(userData)
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Home', params: { user: user.name } }],
+          routes: [
+            {
+              name: 'MainHome', 
+              params: { screen: 'Home', user: user.name },
+            },
+          ],
         })
       } else if (motorista) {
         // Se o motorista existir, armazene os dados no contexto
@@ -68,12 +73,17 @@ export const Initial = () => {
           name: motorista.name,
           email: motorista.email,
           phone: motorista.phone,
-          type: motorista.type, // Inclui o tipo do usuário
+          type: motorista.type,
         }
         login(userData)
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Home', params: { user: motorista.name } }],
+          routes: [
+            {
+              name: 'MainHome',
+              params: { screen: 'Home', user: motorista.name },
+            },
+          ],
         })
       } else {
         Alert.alert('Erro', 'Número de telefone ou senha incorretos.')

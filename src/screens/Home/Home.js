@@ -9,6 +9,7 @@ import {
 import * as Location from 'expo-location'
 import MapboxGL from '@rnmapbox/maps'
 import { Text } from 'react-native'
+import axios from 'axios'
 
 MapboxGL.setAccessToken(
   'sk.eyJ1IjoiY29vaW5nbXRjZG9hIiwiYSI6ImNtMmM4ejl3NDBxbW4ycm9uN3JlamtqbncifQ.hpltrhlR36OOJoDENW2YyQ'
@@ -17,6 +18,14 @@ MapboxGL.setAccessToken(
 export const Home = () => {
   const [location, setLocation] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
+  const [route, setRoute] = useState(null) // Armazena a rota
+  const [eta, setEta] = useState('00:00') // Armazena o tempo estimado de chegada
+
+  // Localização de destino (exemplo, a casa do responsável)
+  const destination = {
+    latitude: -23.55052, // Substitua pela localização do responsável
+    longitude: -46.6333,
+  }
 
   useEffect(() => {
     const getLocation = async () => {
@@ -28,10 +37,38 @@ export const Home = () => {
 
       let loc = await Location.getCurrentPositionAsync({})
       setLocation(loc.coords)
+
+      // Após obter a localização, calcular a rota e ETA
+      if (loc.coords) {
+        getRoute(loc.coords, destination)
+      }
     }
 
     getLocation()
   }, [])
+
+  const getRoute = async (origin, destination) => {
+    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${origin.longitude},${origin.latitude};${destination.longitude},${destination.latitude}?geometries=geojson&access_token=sk.eyJ1IjoiY29vaW5nbXRjZG9hIiwiYSI6ImNtMmM4ejl3NDBxbW4ycm9uN3JlamtqbncifQ.hpltrhlR36OOJoDENW2YyQ`
+
+    try {
+      const response = await axios.get(url)
+      const data = response.data
+
+      if (data.routes && data.routes.length > 0) {
+        const routeData = data.routes[0]
+        setRoute(routeData.geometry.coordinates) // Armazenar a rota
+        setEta(convertSecondsToTime(routeData.duration)) // ETA (em segundos)
+      }
+    } catch (error) {
+      console.error('Erro ao buscar rota: ', error)
+    }
+  }
+
+  const convertSecondsToTime = (durationInSeconds) => {
+    const minutes = Math.floor(durationInSeconds / 60)
+    const seconds = Math.floor(durationInSeconds % 60)
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+  }
 
   if (errorMsg) {
     return <Text>{errorMsg}</Text>
@@ -59,12 +96,35 @@ export const Home = () => {
             minZoomLevel={15.5}
             maxZoomLevel={17}
           />
+
+          {route && (
+            <MapboxGL.ShapeSource
+              id="routeSource"
+              shape={{
+                type: 'Feature',
+                geometry: {
+                  type: 'LineString',
+                  coordinates: route,
+                },
+              }}
+            >
+              <MapboxGL.LineLayer
+                id="routeLayer"
+                style={{
+                  lineWidth: 5,
+                  lineJoin: 'round',
+                  lineCap: 'round',
+                  lineColor: '#1DB954',
+                }}
+              />
+            </MapboxGL.ShapeSource>
+          )}
         </MapboxGL.MapView>
       </HeaderContainer>
 
       <ApiContainer>
         <Chegada>Chegada</Chegada>
-        <TimeText>00:00</TimeText>
+        <TimeText>{eta}</TimeText>
       </ApiContainer>
     </Container>
   )

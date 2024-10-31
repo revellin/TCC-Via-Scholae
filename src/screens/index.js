@@ -8,3 +8,5 @@ export * from './Search';
 export * from './Settings';
 export * from './Accessibility';
 export * from './YourAccount';
+export * from './Rota';
+export * from './vagas';

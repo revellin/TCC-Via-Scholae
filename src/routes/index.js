@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  IconUser,
-  IconHome,
-  IconMessage,
-  IconSearch,
-} from '../../assets/icons'
+import { IconUser, IconHome, IconMessage, IconSearch } from '../../assets/icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import {
@@ -27,9 +22,16 @@ import {
   UpdatePassword,
   RegisterMotorista,
   RegisterCrianca,
+  ExibirCriancas,
+  PerfilSearch,
+  RegistroRota,
+  ExibirRotas,
+  RotaMap,
+  Vagas,
 } from '../screens'
 
-const BottomRoute = () => {
+// BottomRoute.js
+export const BottomRoute = () => {
   const Tab = createBottomTabNavigator()
   return (
     <Tab.Navigator
@@ -45,12 +47,12 @@ const BottomRoute = () => {
             return <IconUser width={size} height={size} color={color} />
           }
         },
-        tabBarActiveTintColor: '#272727', // Cor quando selecionado
-        tabBarInactiveTintColor: '#838383', // Cor quando não selecionado
+        tabBarActiveTintColor: '#272727',
+        tabBarInactiveTintColor: '#838383',
         tabBarStyle: {
           paddingBottom: 5,
           paddingTop: 5,
-          height: 55, // Altura da barra de navegação
+          height: 55,
           borderTopWidth: 2,
           borderTopColor: '#E9B224',
         },
@@ -80,6 +82,7 @@ const BottomRoute = () => {
   )
 }
 
+// Routes.js
 export const Routes = () => {
   const Stack = createNativeStackNavigator()
   return (
@@ -91,19 +94,19 @@ export const Routes = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Home"
+        name="MainHome"
         component={BottomRoute}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ headerShown: false }}
+        options={{ title: 'Cadastrar_Criancas', headerShown: false }}
       />
       <Stack.Screen
         name="RegisterMotorista"
         component={RegisterMotorista}
-        options={{ headerShown: false }}
+        options={{ title: 'Criancas', headerShown: false }}
       />
       <Stack.Screen
         name="RegisterCrianca"
@@ -111,17 +114,27 @@ export const Routes = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Account"
+        name="ExibirCrianca"
+        component={ExibirCriancas}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MainAccount"
         component={BottomRoute}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Search"
+        name="MainSearch"
         component={BottomRoute}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Chat"
+        name="PerfilSearch"
+        component={PerfilSearch}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MainChat"
         component={BottomRoute}
         options={{ headerShown: false }}
       />
@@ -178,6 +191,26 @@ export const Routes = () => {
       <Stack.Screen
         name="EditPhone"
         component={EditPhone}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="RegistroRota"
+        component={RegistroRota}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ExibirRota"
+        component={ExibirRotas}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="RotaMap"
+        component={RotaMap}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Vagas"
+        component={Vagas}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

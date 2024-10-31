@@ -28,14 +28,15 @@ export const RegisterMotorista = () => {
   const [username, setUsername] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
+  const [vagas, setVagas] = useState('')
   const [senha, setSenha] = useState('')
   const [confSenha, setConfirmeSenha] = useState('')
   const [cnhFrente, setCnhFrente] = useState(null)
   const [cnhVerso, setCnhVerso] = useState(null)
 
   if (!db) {
-    Alert.alert('Erro', 'Banco de dados não está disponível.');
-    return;
+    Alert.alert('Erro', 'Banco de dados não está disponível.')
+    return
   }
 
   const pickImage = async (setImage) => {
@@ -64,6 +65,7 @@ export const RegisterMotorista = () => {
       username === '' ||
       telefone === '' ||
       email === '' ||
+      vagas === '' ||
       senha === '' ||
       confSenha === '' ||
       !cnhFrente ||
@@ -93,8 +95,8 @@ export const RegisterMotorista = () => {
       }
 
       await db.runAsync(
-        'INSERT INTO Motorista (name, phone, email, password) VALUES (?, ?, ?, ?)',
-        [username, telefone, email, senha]
+        'INSERT INTO Motorista (name, phone, email, vagas, password) VALUES (?, ?, ?, ?, ?)',
+        [username, telefone, email, vagas, senha]
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -148,6 +150,15 @@ export const RegisterMotorista = () => {
             maxLength={100}
           />
 
+          <CustomLabelText>Insira q quantidade de vagas da vã</CustomLabelText>
+          <CustomInput
+            placeholder="Insira a quantidades de assento que a vã possui"
+            keyboardType="phone-pad"
+            onChangeText={setVagas}
+            value={vagas}
+            maxLength={2}
+          />
+
           <CustomLabelText>Digite uma senha</CustomLabelText>
           <CustomInput
             placeholder="Digite uma senha"
@@ -171,9 +182,7 @@ export const RegisterMotorista = () => {
           <TouchableOpacity onPress={() => pickImage(setCnhFrente)}>
             <ImgContainer>
               <CustomLabelText>Selecionar Imagem</CustomLabelText>
-              { cnhFrente && (
-                <ImagePreview 
-                source={{ uri: cnhFrente }}/>)}
+              {cnhFrente && <ImagePreview source={{ uri: cnhFrente }} />}
             </ImgContainer>
           </TouchableOpacity>
 
@@ -182,9 +191,7 @@ export const RegisterMotorista = () => {
           <TouchableOpacity onPress={() => pickImage(setCnhVerso)}>
             <ImgContainer>
               <CustomLabelText>Selecionar Imagem</CustomLabelText>
-              { cnhVerso && (
-                <ImagePreview 
-                source={{ uri: cnhVerso }}/>)}
+              {cnhVerso && <ImagePreview source={{ uri: cnhVerso }} />}
             </ImgContainer>
           </TouchableOpacity>
 

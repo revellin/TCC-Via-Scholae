@@ -58,7 +58,7 @@ export const EditProfile = () => {
       <Header>
         <Return
           style={styles.back}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Perfil')}
         />
         <TitleText>Edite suas Informações</TitleText>
       </Header>

@@ -12,12 +12,14 @@ import {
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase, useUser } from '../../../database'
+import { useTheme } from 'styled-components/native';
 
 export const EditPhone = () => {
   const navigation = useNavigation()
   const { user, setUser } = useUser() // Acesse os dados e a função para atualizar o usuário no contexto
   const db = useDatabase() // Acesse a instância do banco de dados
   const [newPhone, setNewPhone] = useState(user ? user.phone : '') // Estado para o novo número de telefone
+  const theme = useTheme();
 
   // Função para atualizar o número de telefone no banco de dados
   const handleUpdatePhone = async () => {
@@ -56,7 +58,7 @@ export const EditPhone = () => {
         {/* Botão de retorno */}
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-            <AntDesign name="left" size={30} color="black" />
+            <AntDesign name="left" size={30} color={theme.text} />
           </TouchableOpacity>
         </View>
 

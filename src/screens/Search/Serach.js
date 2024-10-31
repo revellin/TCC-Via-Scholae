@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { TouchableOpacity, FlatList, Alert, Text } from 'react-native'
+import { TouchableOpacity, FlatList, Alert, Text, View } from 'react-native'
 import { ProfilePic, Line } from '../../components'
 import {
   styles,
@@ -18,23 +18,23 @@ import {
   RecentItem,
 } from './styles'
 import { useDatabase } from '../../database'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 export const Search = () => {
   const [searchQuery, setSearchQuery] = useState('')
-  // Estado para armazenar resultados da pesquisa
   const [results, setResults] = useState([])
-  // Acesse a instância do banco de dados
+  const [selectedProfile, setSelectedProfile] = useState(null)
   const db = useDatabase()
+  const navigation = useNavigation()
 
   useEffect(() => {
     const fetchResults = async () => {
       if (searchQuery.length > 0) {
         try {
-          // Consulta para buscar tanto responsáveis quanto motoristas
           const allUsers = await db.getAllAsync(
-            `SELECT id, name, 'Responsavel' AS type FROM Responsavel WHERE name LIKE ? 
+            `SELECT id, name, phone, email, 'Responsavel' AS type FROM Responsavel WHERE name LIKE ? 
              UNION 
-             SELECT id, name, 'Motorista' AS type FROM Motorista WHERE name LIKE ?`,
+             SELECT id, name, phone, email, 'Motorista' AS type FROM Motorista WHERE name LIKE ?`,
             [`%${searchQuery}%`, `%${searchQuery}%`]
           )
           setResults(allUsers)
@@ -43,27 +43,51 @@ export const Search = () => {
           Alert.alert('Erro', 'Houve um erro ao buscar usuários.')
         }
       } else {
-        // Limpa os resultados se a barra de pesquisa estiver vazia
         setResults([])
       }
     }
 
     fetchResults()
-    // Chama a função sempre que o searchQuery muda
   }, [searchQuery])
 
   const handleCleanAll = () => {
-    // Limpa os resultados da pesquisa
     setResults([])
-    // Limpa a barra de pesquisa
     setSearchQuery('')
+    setSelectedProfile(null)
   }
+
+  const handleSelectProfile = (profile) => {
+    setSelectedProfile(profile)
+    setSearchQuery('')
+    navigation.navigate('PerfilSearch', { profile })
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setResults([])
+      }
+    }, [])
+  )
+
+  const renderProfileItem = (item) => (
+    <RecentItem onPress={() => handleSelectProfile(item)}>
+      <RecentItenContent>
+        <ProfilePic style={styles.Accountspic} />
+        <RecentItenContainer>
+          <RecentItemName>{item.name}</RecentItemName>
+          <RecentItemInfo>
+            <Text>{item.type}</Text>
+          </RecentItemInfo>
+        </RecentItenContainer>
+      </RecentItenContent>
+    </RecentItem>
+  )
 
   return (
     <Container>
       <TitleText>Pesquisa</TitleText>
 
-      {/* Barra de pesquisa */}
       <SearchContainer>
         <ProfilePic style={styles.pic}></ProfilePic>
         <InputContainer>
@@ -77,36 +101,20 @@ export const Search = () => {
 
       <Line style={styles.line}></Line>
 
-      {/* Seção Resultados */}
       <RecentHeader>
         <RecentText>Resultados</RecentText>
         <TouchableOpacity onPress={handleCleanAll}>
           <CleanText>Limpar Tudo</CleanText>
         </TouchableOpacity>
       </RecentHeader>
+      {/* Exibe o perfil selecionado da mesma forma que na FlatList, abaixo da lista de resultados */}
+      {selectedProfile && <View>{renderProfileItem(selectedProfile)}</View>}
 
-      {/* Lista de resultados da pesquisa */}
+      {/* Exibe a lista de resultados */}
       <FlatList
         data={results}
-        // Chave única combinando id e type
         keyExtractor={(item) => `${item.id}-${item.type}`}
-        renderItem={({ item }) => (
-          <RecentItem
-            onPress={() => {
-              /* Navegar ou realizar ação ao selecionar um usuário */
-            }}
-          >
-            <RecentItenContent>
-              <ProfilePic style={styles.Accountspic} />
-              <RecentItenContainer>
-                <RecentItemName>{item.name}</RecentItemName>
-                <RecentItemInfo>
-                  <Text>{item.type}</Text>
-                </RecentItemInfo>
-              </RecentItenContainer>
-            </RecentItenContent>
-          </RecentItem>
-        )}
+        renderItem={({ item }) => renderProfileItem(item)}
       />
     </Container>
   )

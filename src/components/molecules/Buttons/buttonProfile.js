@@ -5,10 +5,12 @@ import { BtnProfile, ProfileInfo, ProfileName, ProfilePhone, ProfileEmail } from
 import { ProfilePic } from '../../../components'
 import { Ionicons } from '@expo/vector-icons'
 import { useUser } from '../../../database';
+import { useTheme } from 'styled-components/native';
 
 export const ButtonProfile = () => {
   const navigation = useNavigation()
   const { user } = useUser()
+  const theme = useTheme();
   return (
     <BtnProfile onPress={() => navigation.navigate('EditProfile')}>
       <ProfilePic style={styles.profileImagePlaceholder} />
@@ -17,7 +19,7 @@ export const ButtonProfile = () => {
         <ProfilePhone>{user ? user.phone : 'Número não disponível'}</ProfilePhone>
         <ProfileEmail>{user ? user.email : 'Email não disponível'}</ProfileEmail>
       </ProfileInfo>
-      <Ionicons name="chevron-forward-outline" size={24} color="black" />
+      <Ionicons name="chevron-forward-outline" size={24} color={theme.gray} />
     </BtnProfile>
   )
 };

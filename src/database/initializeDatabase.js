@@ -12,41 +12,86 @@ export const DatabaseProvider = ({ children }) => {
     const initializeDatabase = async () => {
       const database = await SQLite.openDatabaseAsync('viascholae.db')
 
-      // Criação das tabelas 'Responsavel' e 'Motorista'
-      await database.execAsync(`
-        CREATE TABLE IF NOT EXISTS Responsavel (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          phone TEXT NOT NULL UNIQUE,
-          email TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL,
-          profilePic TEXT,
-          type TEXT NOT NULL DEFAULT 'responsavel'
-        );
+      try {
+        // Removendo tabelas se existirem
+        //await database.execAsync(`DROP TABLE IF EXISTS Vagas;`)
+        //await database.execAsync(`DROP TABLE IF EXISTS Responsavel;`)
+        //await database.execAsync(`DROP TABLE IF EXISTS Motorista;`)
+        //await database.execAsync(`DROP TABLE IF EXISTS Rota;`)
+        //await database.execAsync(`DROP TABLE IF EXISTS Crianca;`)
 
-        CREATE TABLE IF NOT EXISTS Motorista (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          phone TEXT NOT NULL UNIQUE,
-          email TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL,
-          profilePic TEXT,
-          cnhFrente TEXT,
-          cnhVerso TEXT,
-          type TEXT NOT NULL DEFAULT 'motorista'
-        );
+        // Criando tabelas
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS Responsavel (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            phone TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            profilePic TEXT,
+            type TEXT NOT NULL DEFAULT 'responsavel'
+          );
+        `)
 
-        CREATE TABLE IF NOT EXISTS Ciranca (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          idade TEXT NOT NULL,
-          parentesco TEXT NOT NULL,
-          profilePic TEXT,
-          type TEXT NOT NULL DEFAULT 'crianca'
-        );
-      `)
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS Motorista (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            phone TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL,
+            profilePic TEXT,
+            cnhFrente TEXT,
+            cnhVerso TEXT,
+            vagas TEXT NOT NULL,
+            type TEXT NOT NULL DEFAULT 'motorista'
+          );
+        `)
 
-      setDb(database)
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS Rota (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            startpoint TEXT NOT NULL,
+            cep_start TEXT NOT NULL,
+            endpoint TEXT NOT NULL,
+            cep_end TEXT NOT NULL,
+            regiao TEXT NOT NULL,
+            nome_escola TEXT NOT NULL,
+            numero_escola TEXT NOT NULL,
+            motoristaId INTEGER,
+            FOREIGN KEY (motoristaId) REFERENCES Motorista(id) ON DELETE CASCADE
+          );
+        `)
+
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS Crianca (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            idade TEXT NOT NULL,
+            parentesco TEXT NOT NULL,
+            imagem TEXT,
+            type TEXT NOT NULL DEFAULT 'crianca',
+            responsavelId INTEGER,
+            FOREIGN KEY (responsavelId) REFERENCES Responsavel(id) ON DELETE CASCADE
+          );
+        `)
+
+        await database.execAsync(`
+          CREATE TABLE IF NOT EXISTS Vagas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            type TEXT NOT NULL DEFAULT 'vaga',
+            status TEXT NOT NULL DEFAULT 'disponível',
+            responsavelId INTEGER,
+            motoristaId INTEGER,
+            FOREIGN KEY (responsavelId) REFERENCES Responsavel(id) ON DELETE CASCADE,
+            FOREIGN KEY (motoristaId) REFERENCES Motorista(id) ON DELETE SET NULL
+          );
+        `)
+
+        setDb(database)
+      } catch (error) {
+        console.error('Erro ao inicializar o banco de dados:', error)
+      }
     }
 
     initializeDatabase()
@@ -57,7 +102,6 @@ export const DatabaseProvider = ({ children }) => {
   )
 }
 
-// Hook customizado para acessar a instância do banco de dados em outros componentes
 export const useDatabase = () => {
   return useContext(DatabaseContext)
 }

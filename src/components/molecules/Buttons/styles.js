@@ -24,9 +24,9 @@ export const BtnContinueText = styled.Text`
 
 //Botao Registro
 export const BtnRegistro = styled.TouchableOpacity`
-  background: ${props => props.theme.background};
+  background: ${props => props.theme.primary};
   border-radius: ${theme.metrics.px(20)}px;
-  border-width: ${theme.metrics.px(2)}px;
+  border-width: ${theme.metrics.px(1)}px;
   border-color: ${props => props.theme.yellow};
   padding-vertical: ${theme.metrics.px(10)}px;
   padding-horizontal: ${theme.metrics.px(20)}px;
@@ -65,6 +65,8 @@ export const BtnCrianças = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background: ${(props) => props.theme.primary};
+    width: ${theme.metrics.px(155)}px;
+  height: ${theme.metrics.px(50)}px;
   padding: ${theme.metrics.px(11)}px;
   border-radius: ${theme.metrics.px(10)}px;
   min-width: 40%;
@@ -361,6 +363,8 @@ export const TextBtnSettings = styled.Text`
 export const BtnManageRoutes = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
+  width: ${theme.metrics.px(155)}px;
+  height: ${theme.metrics.px(50)}px;
   background: ${(props) => props.theme.primary};
   padding: ${theme.metrics.px(11)}px;
   border-radius: ${theme.metrics.px(10)}px;
@@ -372,4 +376,25 @@ export const BtnManegeRoutesText = styled.Text`
   font-size: ${theme.metrics.px(20)}px;
   justify-content: center;
   color: ${(props) => props.theme.text};
+`
+//---------------
+
+//Botao Continue
+export const BtnMessage = styled.TouchableOpacity`
+  background: ${(props) => props.theme.primary};
+  padding-vertical: ${theme.metrics.px(10)}px;
+  padding-horizontal: ${theme.metrics.px(20)}px;
+  width: ${theme.metrics.px(275)}px;
+  height: ${theme.metrics.px(40)}px;
+  align-items: center;
+  margin-bottom: ${theme.metrics.px(20)}px;
+  border-radius: ${theme.metrics.px(20)}px;
+  border-width: ${theme.metrics.px(1)}px;
+  border-color: ${(props) => props.theme.yellow};
+  align-self: center;
+`
+
+export const BtnMessageText = styled.Text`
+  color: #EEEEEE;
+  font-size: ${theme.metrics.px(16)}px;
 `

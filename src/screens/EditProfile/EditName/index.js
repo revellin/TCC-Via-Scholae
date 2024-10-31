@@ -11,13 +11,15 @@ import {
 } from './styles'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
-import { useDatabase, useUser } from '../../../database' // Atualize o caminho se necessário
+import { useDatabase, useUser } from '../../../database'
+import { useTheme } from 'styled-components/native';
 
 export const EditName = () => {
   const navigation = useNavigation()
   const { user, setUser } = useUser() // Acesse os dados e a função para atualizar o usuário no contexto
   const db = useDatabase() // Acesse a instância do banco de dados
   const [newName, setNewName] = useState(user ? user.name : '') // Estado para o novo nome
+  const theme = useTheme();
 
   // Função para atualizar o nome no banco de dados
   const handleUpdateName = async () => {
@@ -56,7 +58,7 @@ export const EditName = () => {
         {/* Botão de retorno */}
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-            <AntDesign name="left" size={30} color="black" />
+            <AntDesign name="left" size={30} color={theme.text} />
           </TouchableOpacity>
         </View>
 

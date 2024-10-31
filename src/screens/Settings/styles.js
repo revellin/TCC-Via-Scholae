@@ -17,7 +17,7 @@ export const TitleText = styled.Text`
   font-size: ${theme.metrics.px(40)}px;
   fon-weight: bold;
   margin-bottom: ${theme.metrics.px(20)}px;
-  margin-top: ${theme.metrics.px(15)}px;
+  margin-top: ${theme.metrics.px(19)}px;
   margin-left: ${theme.metrics.px(20)}px;
   color: ${props => props.theme.text};
 `

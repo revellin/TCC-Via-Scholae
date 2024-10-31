@@ -32,7 +32,7 @@ export const Input = styled.TextInput.attrs(props => ({
   border-width: ${theme.metrics.px(1)}px;
   margin-bottom: ${theme.metrics.px(20)}px;
   padding-horizontal: ${theme.metrics.px(10)}px;
-  margin-left: ${theme.metrics.px(15)}px;
+  margin-left: ${theme.metrics.px(25)}px;
   border-radius: ${theme.metrics.px(10)}px;
   background: ${(props) => props.theme.background};
   color: ${props => props.theme.text};

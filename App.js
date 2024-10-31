@@ -14,17 +14,12 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from './src/styles'
 import { DatabaseProvider, UserProvider } from './src/database'
 
-// Mantém o splash screen visível até que as fontes estejam carregadas
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  // Obtém o esquema de cores do dispositivo (claro ou escuro)
   const deviceTheme = useColorScheme()
-  // Define o tema a ser usado com base no esquema de cores
   const themes = theme[deviceTheme] || theme.dark
-  const [appIsReady, setAppIsReady] = useState(false) // Estado para controlar se o app está pronto
-
-  // Carrega as fontes
+  const [appIsReady, setAppIsReady] = useState(false)
   let [fontsLoaded] = useFonts({
     SourceSansPro_400Regular,
     SourceSansPro_700Bold,
@@ -55,26 +50,22 @@ export default function App() {
       }
     }
 
-    // Efeito que é acionado quando as fontes estão carregadas
     const prepare = async () => {
-      await requestPermissions() // Solicita permissões antes de esconder o splash
+      await requestPermissions() 
       if (fontsLoaded) {
-        // Quando as fontes estiverem carregadas, esconde a tela de splash
         await SplashScreen.hideAsync()
-        setAppIsReady(true) // Atualiza o estado para indicar que o app está pronto
+        setAppIsReady(true)
       }
     }
 
     prepare()
-  }, [fontsLoaded]) // Dependência: executa o efeito quando as fontes são carregadas
+  }, [fontsLoaded])
 
   if (!appIsReady) {
-    // Exibe uma tela em branco enquanto as fontes estão carregando
     return null
   }
 
   return (
-    // Provedor do banco de dados que permite acessar a instância do banco em toda a aplicação
     <DatabaseProvider>
       <UserProvider>
         <ThemeProvider theme={themes}>

@@ -12,12 +12,14 @@ import {
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase, useUser } from '../../../database'
+import { useTheme } from 'styled-components/native';
 
 export const EditEmail = () => {
   const navigation = useNavigation()
   const { user, setUser } = useUser() // Acesse os dados do usuário e a função para atualizar o contexto
   const db = useDatabase() // Acesse a instância do banco de dados
   const [newEmail, setNewEmail] = useState(user ? user.email : '') // Estado local para o e-mail
+  const theme = useTheme();
 
   // Função para atualizar o e-mail no banco de dados
   const handleUpdateEmail = async () => {
@@ -56,7 +58,7 @@ export const EditEmail = () => {
         {/* Botão de retorno */}
         <View>
           <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
-            <AntDesign name="left" size={30} color="black" />
+            <AntDesign name="left" size={30} color={theme.text} />
           </TouchableOpacity>
         </View>
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { FlatList, Text } from 'react-native'
 import { Return, ProfilePic } from '../../../components'
+import io from 'socket.io-client' // Importando o Socket.IO Client
 import {
   styles,
   Container,
@@ -13,19 +14,39 @@ import {
   SendButtonText,
   SendButton,
   Input,
+  SubTitles,
+  HeaderInfo,
 } from './styles'
+
+// URL do seu servidor Socket.IO
+const socket = io('http://localhost:8081') // Substitua pelo URL do seu servidor
 
 export const Message = () => {
   const navigation = useNavigation()
+  const route = useRoute()
+  const { profile } = route.params || {}
   const [messages, setMessages] = useState([])
   const [messageText, setMessageText] = useState('')
 
+  useEffect(() => {
+    // Listener para receber mensagens do servidor
+    socket.on('chatMessage', (msg) => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { id: Date.now().toString(), text: msg },
+      ])
+    })
+
+    // Limpar o listener ao desmontar o componente
+    return () => {
+      socket.off('chatMessage')
+    }
+  }, [])
+
   const sendMessage = () => {
     if (messageText.trim()) {
-      setMessages([
-        ...messages,
-        { id: Date.now().toString(), text: messageText },
-      ])
+      // Enviar a mensagem para o servidor
+      socket.emit('chatMessage', messageText)
       setMessageText('') // Limpa o campo após enviar a mensagem
     }
   }
@@ -36,23 +57,36 @@ export const Message = () => {
         <Return
           style={styles.back}
           onPress={() => navigation.navigate('Mensagens')}
-        ></Return>
-        <ProfilePic style={styles.pic}></ProfilePic>
-        <Name>Caio</Name>
+        />
+        <ProfilePic style={styles.pic} />
+
+        <HeaderInfo>
+          {profile ? (
+            <>
+              <Name>
+                <Text>{profile.name}</Text>
+              </Name>
+              <SubTitles>
+                <Text>{profile.phone}</Text>
+              </SubTitles>
+            </>
+          ) : (
+            <Text>Carregando perfil...</Text>
+          )}
+        </HeaderInfo>
       </Header>
-      {/* FlatList para exibir as mensagens */}
+
       <FlatList
         data={messages}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <MessageContainer>
-            <MessageText>{item.text}</MessageText>
+            <MessageText>{item}</MessageText>
           </MessageContainer>
         )}
         inverted // Inverte a ordem das mensagens (mensagem mais recente no fim)
       />
 
-      {/* Campo de input para enviar nova mensagem */}
       <InputContainer>
         <Input
           value={messageText}

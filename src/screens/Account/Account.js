@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ProfilePic,
   ButtonChildren,
@@ -6,6 +6,7 @@ import {
   ButtonSettings,
   Line,
   BtnRotas,
+  ButtonVagas,
 } from '../../components'
 import {
   Container,
@@ -16,10 +17,33 @@ import {
   SubTitles,
   styles,
 } from './styles'
-import { useUser } from '../../database'
+import { useDatabase, useUser } from '../../database'
 
 export const Account = () => {
-  const { user } = useUser() // Acesse os dados do usuário logado
+  const { user } = useUser()
+  const db = useDatabase()
+  const [vagas, setVagas] = useState(null)
+
+  useEffect(() => {
+    const fetchVagas = async () => {
+      try {
+        if (user && user.type === 'motorista') {
+          // Consulta para buscar o número de vagas para o motorista logado
+          const result = await db.getAllAsync(
+            'SELECT vagas FROM Motorista WHERE id = ?',
+            [user.id]
+          )
+          if (result.length > 0) {
+            setVagas(result[0].vagas) // Armazena o valor das vagas
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar vagas: ', error)
+      }
+    }
+
+    fetchVagas()
+  }, [user])
 
   return (
     <Container>
@@ -30,13 +54,17 @@ export const Account = () => {
         <ProfileName>{user ? user.name : 'Usuário não logado'}</ProfileName>
         <SubTitles>{user ? user.email : 'Email não disponível'}</SubTitles>
         <SubTitles>{user ? user.phone : 'Número não disponível'}</SubTitles>
+
+        {/* Exibe as vagas se o usuário for um motorista */}
+        {user && user.type === 'motorista' && (
+          <SubTitles>Vagas na van: {vagas ?? 'Carregando...'}</SubTitles>
+        )}
       </ProfileContainer>
 
       <ButtonsContainer>
-        {/* Exibir o botão "ButtonChildren" apenas se o usuário for um responsável */}
         {user && user.type === 'responsavel' && <ButtonChildren />}
-        {/* Exibir o botão "BtnRotas" apenas se o usuário for um motorista */}
         {user && user.type === 'motorista' && <BtnRotas />}
+        {user && user.type === 'motorista' && <ButtonVagas />}
         <ButtonEdit />
       </ButtonsContainer>
 

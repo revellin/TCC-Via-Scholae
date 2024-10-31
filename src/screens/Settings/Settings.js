@@ -39,7 +39,7 @@ export const Settings = () => {
       <Header>
         <Return
           style={styles.return}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Perfil')}
         />
         <TitleText>Configurações</TitleText>
       </Header>

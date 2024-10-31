@@ -17,13 +17,17 @@
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
     "@rnmapbox/maps": "^10.1.31",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
     "expo": "~51.0.38",
     "expo-dev-client": "~4.0.28",
     "expo-font": "~12.0.10",
     "expo-image-picker": "~15.0.7",
+    "expo-location": "~17.0.1",
     "expo-splash-screen": "^0.27.6",
     "expo-sqlite": "~14.0.6",
     "expo-status-bar": "~1.12.1",
+    "express": "^4.21.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
@@ -35,8 +39,9 @@
     "react-native-screens": "3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-web": "~0.19.10",
-    "styled-components": "^6.1.13",
-    "expo-location": "~17.0.1"
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -48,7 +53,12 @@
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "nodemon": "^3.1.7",
     "prettier": "^3.3.3"
   },
-  "private": true
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
