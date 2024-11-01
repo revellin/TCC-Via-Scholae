@@ -395,6 +395,6 @@ export const BtnMessage = styled.TouchableOpacity`
 `
 
 export const BtnMessageText = styled.Text`
-  color: #EEEEEE;
+  color: ${props => props.theme.text};
   font-size: ${theme.metrics.px(16)}px;
 `

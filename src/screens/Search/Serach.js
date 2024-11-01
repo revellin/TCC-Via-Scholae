@@ -107,10 +107,7 @@ export const Search = () => {
           <CleanText>Limpar Tudo</CleanText>
         </TouchableOpacity>
       </RecentHeader>
-      {/* Exibe o perfil selecionado da mesma forma que na FlatList, abaixo da lista de resultados */}
       {selectedProfile && <View>{renderProfileItem(selectedProfile)}</View>}
-
-      {/* Exibe a lista de resultados */}
       <FlatList
         data={results}
         keyExtractor={(item) => `${item.id}-${item.type}`}

@@ -28,13 +28,12 @@ export const Account = () => {
     const fetchVagas = async () => {
       try {
         if (user && user.type === 'motorista') {
-          // Consulta para buscar o número de vagas para o motorista logado
           const result = await db.getAllAsync(
             'SELECT vagas FROM Motorista WHERE id = ?',
             [user.id]
           )
           if (result.length > 0) {
-            setVagas(result[0].vagas) // Armazena o valor das vagas
+            setVagas(result[0].vagas)
           }
         }
       } catch (error) {
@@ -57,9 +56,8 @@ export const Account = () => {
         <SubTitles>Endereço: {user ? user.end : 'Número não disponível'}</SubTitles>
         <SubTitles>CEP: {user ? user.cep : 'Número não disponível'}</SubTitles>
 
-        {/* Exibe as vagas se o usuário for um motorista */}
         {user && user.type === 'motorista' && (
-          <SubTitles>Vagas na van: {vagas ?? 'Carregando...'}</SubTitles>
+          <SubTitles>Vagas: {vagas ?? 'Carregando...'}</SubTitles>
         )}
       </ProfileContainer>
 

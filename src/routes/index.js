@@ -88,7 +88,6 @@ export const Routes = () => {
   const Stack = createNativeStackNavigator()
   return (
     <Stack.Navigator>
-      {/* Definição das rotas */}
       <Stack.Screen
         name="Splash"
         component={Initial}

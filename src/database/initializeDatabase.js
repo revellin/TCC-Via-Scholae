@@ -14,7 +14,7 @@ export const DatabaseProvider = ({ children }) => {
 
       try {
         // Removendo tabelas se existirem
-        //await database.execAsync(`DROP TABLE IF EXISTS Vagas;`)
+        await database.execAsync(`DROP TABLE IF EXISTS Vagas;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Responsavel;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Motorista;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Rota;`)

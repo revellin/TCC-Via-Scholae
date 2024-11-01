@@ -13,7 +13,7 @@ MapboxGL.setAccessToken(
 
 export const RotaMap = () => {
   const route = useRoute()
-  const { routeId, responsavelId } = route.params // Adicione responsavelId aqui
+  const { routeId, responsavelId } = route.params
   const [routeCoordinates, setRouteCoordinates] = useState([])
   const [startCoords, setStartCoords] = useState(null)
   const [endCoords, setEndCoords] = useState(null)

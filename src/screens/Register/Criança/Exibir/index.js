@@ -36,8 +36,6 @@ export const ExibirCriancas = () => {
         [responsavelId]
       )
 
-      console.log('Resultado da busca:', result)
-
       if (result.length > 0) {
         setCriancas(result)
       } else {
@@ -54,6 +52,10 @@ export const ExibirCriancas = () => {
   }, [user])
 
   const handleCadastrarNovaCrianca = () => {
+    navigation.navigate('RegisterCrianca')
+  }
+
+  const handleRoutePress = (item) => {
     navigation.navigate('RegisterCrianca')
   }
 

@@ -7,7 +7,7 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIo(server, {
   cors: {
-    origin: '*', // Permitir todas as origens (ajuste conforme necessário)
+    origin: 'http://10.10.10.117:8081',
     methods: ['GET', 'POST'],
   },
 })
@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
   console.log('Novo usuário conectado')
 
   socket.on('chatMessage', (msg) => {
-    io.emit('chatMessage', msg) // Envia a mensagem para todos os clientes conectados
+    io.emit('chatMessage', msg)
   })
 
   socket.on('disconnect', () => {

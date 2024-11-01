@@ -18,12 +18,10 @@ MapboxGL.setAccessToken(
 export const Home = () => {
   const [location, setLocation] = useState(null)
   const [errorMsg, setErrorMsg] = useState(null)
-  const [route, setRoute] = useState(null) // Armazena a rota
-  const [eta, setEta] = useState('00:00') // Armazena o tempo estimado de chegada
-
-  // Localização de destino (exemplo, a casa do responsável)
+  const [route, setRoute] = useState(null)
+  const [eta, setEta] = useState('00:00')
   const destination = {
-    latitude: -23.55052, // Substitua pela localização do responsável
+    latitude: -23.55052,
     longitude: -46.6333,
   }
 
@@ -79,7 +77,7 @@ export const Home = () => {
   }
 
   const handleRegionChange = async () => {
-    console.log('A região do mapa foi alterada')
+    
   }
 
   return (

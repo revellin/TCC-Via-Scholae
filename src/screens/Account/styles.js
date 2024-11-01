@@ -42,7 +42,7 @@ export const ProfileName = styled.Text`
 `
 export const SubTitles = styled.Text`
   align-self: flex-start;
-  padding-left: ${theme.metrics.px(50)}px;
+  padding-left: ${theme.metrics.px(35)}px;
   color: ${props => props.theme.textsecondary};
 `
 

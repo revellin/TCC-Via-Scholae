@@ -51,7 +51,6 @@ export const RegisterCrianca = () => {
     })
 
     if (!result.canceled) {
-      // Armazena a URI da imagem no estado
       setImage(result.assets[0].uri)
     }
   }
@@ -62,7 +61,6 @@ export const RegisterCrianca = () => {
       return
     }
 
-    // Obtenha o responsavelId a partir do usuário
     const responsavelId = user?.id
 
     try {
