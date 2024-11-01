@@ -19,29 +19,27 @@ import {
 export const ExibirCriancas = () => {
   const navigation = useNavigation()
   const db = useDatabase()
-  const { user } = useUser() // Use o hook para obter os dados do usuário
+  const { user } = useUser()
   const [criancas, setCriancas] = useState([])
 
-  // Função para buscar as crianças no banco de dados
   const fetchCriancas = async () => {
     try {
-      const responsavelId = user?.id // Use o ID correto do usuário
+      const responsavelId = user?.id
 
       if (!responsavelId) {
         Alert.alert('Erro', 'Responsável não encontrado.')
         return
       }
 
-      // Use o método getAllAsync para buscar as crianças
       const result = await db.getAllAsync(
         'SELECT * FROM Crianca WHERE responsavelId = ?',
         [responsavelId]
       )
 
-      console.log('Resultado da busca:', result) // Adicione isso para depuração
+      console.log('Resultado da busca:', result)
 
       if (result.length > 0) {
-        setCriancas(result) // Atualiza o estado com as crianças relacionadas ao responsável logado
+        setCriancas(result)
       } else {
         setCriancas([])
       }
@@ -51,35 +49,35 @@ export const ExibirCriancas = () => {
     }
   }
 
-  // Carregar dados das crianças ao entrar na tela
   useEffect(() => {
-    fetchCriancas() // Função que busca as crianças cadastradas no banco de dados
-  }, [user]) // Dependência user para buscar as crianças quando o usuário muda
+    fetchCriancas()
+  }, [user])
 
-  // Navegar para a tela de registro de crianças
   const handleCadastrarNovaCrianca = () => {
     navigation.navigate('RegisterCrianca')
   }
 
   // Renderiza cada linha da tabela
   const renderItem = ({ item }) => (
-    <TableRow>
-      <TableCell>{item.name}</TableCell>
-      <TableCell>{item.parentesco}</TableCell>
-      <TableCell>{item.idade}</TableCell>
-    </TableRow>
+    <TouchableOpacity onPress={() => handleRoutePress(item)}>
+      <TableRow>
+        <TableCell>{item.name}</TableCell>
+        <TableCell>{item.parentesco}</TableCell>
+        <TableCell>{item.idade}</TableCell>
+      </TableRow>
+    </TouchableOpacity>
   )
 
   return (
     <Container>
       <Header>
-      <TouchableOpacity style={styles.return}>
-        <Return
-          style={styles.return}
-          onPress={() => navigation.navigate('Perfil')}
-        />
-      </TouchableOpacity>
-      <TitleText>Crianças</TitleText>
+        <TouchableOpacity style={styles.return}>
+          <Return
+            style={styles.return}
+            onPress={() => navigation.navigate('Perfil')}
+          />
+        </TouchableOpacity>
+        <TitleText>Crianças</TitleText>
       </Header>
       <Table>
         <TableHeader>
@@ -101,7 +99,6 @@ export const ExibirCriancas = () => {
         )}
       </Table>
 
-      {/* Botão para cadastrar nova criança */}
       <Button onPress={handleCadastrarNovaCrianca}>
         <ButtonText>Cadastrar</ButtonText>
       </Button>

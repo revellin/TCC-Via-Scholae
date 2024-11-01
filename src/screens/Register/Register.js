@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { TouchableOpacity, Alert } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { TouchableOpacity, Alert, ScrollView } from 'react-native'
 import {
   CustomLogo,
   CustomLabelText,
@@ -10,7 +10,8 @@ import {
 } from '../../components'
 import { styles, Container, LogoContainer, Form, TitleText, Motorista } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { useDatabase } from '../../database' 
+import { useDatabase } from '../../database'
+import axios from 'axios'
 
 export const Register = () => {
   const navigation = useNavigation()
@@ -19,14 +20,43 @@ export const Register = () => {
   const [username, setUsername] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
+  const [end, setEnd] = useState('')
+  const [cep, setCEP] = useState('')
   const [senha, setSenha] = useState('')
   const [confSenha, setConfirmeSenha] = useState('')
+
+  const handleGetAddress = async (cep) => {
+    if (cep.length !== 8) {
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      const { logradouro, localidade, uf } = response.data;
+
+      if (logradouro) {
+        setEnd(`${logradouro}, ${localidade} - ${uf}`);
+      } else {
+        Alert.alert('Erro', 'CEP não encontrado');
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao buscar o endereço');
+    }
+  };
+
+  useEffect(() => {
+    if (cep.length === 8) {
+      handleGetAddress(cep);
+    }
+  }, [cep]);
 
   const handleRegister = async () => {
     if (
       username === '' ||
       telefone === '' ||
       email === '' ||
+      end === '' ||
+      cep === '' ||
       senha === '' ||
       confSenha === ''
     ) {
@@ -51,9 +81,9 @@ export const Register = () => {
       }
 
       await db.runAsync(
-        'INSERT INTO Responsavel (name, phone, email, password) VALUES (?, ?, ?, ?)',
-        [username, telefone, email, senha],
-        
+        'INSERT INTO Responsavel (name, phone, email, end,  cep, password) VALUES (?, ?, ?, ?, ?, ?)',
+        [username, telefone, email, end, cep, senha],
+
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -66,65 +96,84 @@ export const Register = () => {
 
   return (
     <Container>
-      <LogoContainer>
-        <TouchableOpacity
-          style={styles.return}>
-          <Return style={styles.return} onPress={() => navigation.navigate('Splash')} />
-        </TouchableOpacity>
-        <CustomLogo style={styles.img} />
-      </LogoContainer>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <LogoContainer>
+          <TouchableOpacity
+            style={styles.return}>
+            <Return style={styles.return} onPress={() => navigation.navigate('Splash')} />
+          </TouchableOpacity>
+          <CustomLogo style={styles.img} />
+        </LogoContainer>
 
-      <Form>
-        <TitleText>Registro Responsável</TitleText>
-        <Line style={styles.line}></Line>
+        <Form>
+          <TitleText>Registro Responsável</TitleText>
+          <Line style={styles.line}></Line>
 
-        <CustomLabelText>Digite seu nome completo</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu nome"
-          onChangeText={setUsername}
-          value={username}
-          maxLength={30}
-        />
+          <CustomLabelText>Digite seu nome completo</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu nome"
+            onChangeText={setUsername}
+            value={username}
+            maxLength={30}
+          />
 
-        <CustomLabelText>Digite seu telefone</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu número de telefone"
-          keyboardType="phone-pad"
-          onChangeText={setTelefone}
-          value={telefone}
-          maxLength={11}
-        />
+          <CustomLabelText>Digite seu telefone</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu número de telefone"
+            keyboardType="phone-pad"
+            onChangeText={setTelefone}
+            value={telefone}
+            maxLength={11}
+          />
 
-        <CustomLabelText>Digite seu Email</CustomLabelText>
-        <CustomInput
-          placeholder="Insira seu Email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          value={email}
-          maxLength={100}
-        />
+          <CustomLabelText>Digite seu Email</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu Email"
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            value={email}
+            maxLength={100}
+          />
 
-        <CustomLabelText>Digite uma senha</CustomLabelText>
-        <CustomInput
-          placeholder="Digite uma senha"
-          secureTextEntry
-          onChangeText={setSenha}
-          value={senha}
-          maxLength={16}
-        />
+          <CustomLabelText>Digite seu Endereço</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu Endereço"
+            onChangeText={setEnd}
+            value={end}
+            maxLength={100}
+          />
 
-        <CustomLabelText>Confirme sua senha</CustomLabelText>
-        <CustomInput
-          placeholder="Confirme sua senha"
-          secureTextEntry
-          onChangeText={setConfirmeSenha}
-          value={confSenha}
-          maxLength={16}
-        />
+          <CustomLabelText>Digite seu CEP</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu CEP"
+            onChangeText={setCEP}
+            value={cep}
+            maxLength={8}
+            keyboardType="phone-pad"
+          />
 
-        <ButtonCadastro onPress={handleRegister}>Cadastre-se</ButtonCadastro>
-        <Motorista onPress={() => navigation.navigate('RegisterMotorista')}>Sou Motorista</Motorista>
-      </Form>
+          <CustomLabelText>Digite uma senha</CustomLabelText>
+          <CustomInput
+            placeholder="Digite uma senha"
+            secureTextEntry
+            onChangeText={setSenha}
+            value={senha}
+            maxLength={16}
+          />
+
+          <CustomLabelText>Confirme sua senha</CustomLabelText>
+          <CustomInput
+            placeholder="Confirme sua senha"
+            secureTextEntry
+            onChangeText={setConfirmeSenha}
+            value={confSenha}
+            maxLength={16}
+          />
+
+          <ButtonCadastro onPress={handleRegister}>Cadastre-se</ButtonCadastro>
+          <Motorista onPress={() => navigation.navigate('RegisterMotorista')}>Sou Motorista</Motorista>
+        </Form>
+      </ScrollView>
     </Container>
   )
 }

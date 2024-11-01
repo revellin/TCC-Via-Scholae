@@ -1,4 +1,3 @@
-// ExibirRotas.js
 import React, { useEffect, useState } from 'react'
 import { FlatList, Text, View, Alert, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'

@@ -48,13 +48,14 @@ export const Initial = () => {
       )
 
       if (user) {
-        // Se o responsável existir, armazene os dados no contexto
         const userData = {
           id: user.id,
           name: user.name,
           email: user.email,
           phone: user.phone,
-          type: user.type, // Inclui o tipo do usuário
+          end: user.end,
+          cep: user.cep,
+          type: user.type,
         }
         login(userData)
         navigation.reset({
@@ -73,6 +74,8 @@ export const Initial = () => {
           name: motorista.name,
           email: motorista.email,
           phone: motorista.phone,
+          end: motorista.end,
+          cep: motorista.cep,
           type: motorista.type,
         }
         login(userData)

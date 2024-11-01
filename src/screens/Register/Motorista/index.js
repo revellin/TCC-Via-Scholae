@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, Alert, ScrollView } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import {
@@ -20,6 +20,7 @@ import {
 } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase } from '../../../database'
+import axios from 'axios'
 
 export const RegisterMotorista = () => {
   const navigation = useNavigation()
@@ -28,6 +29,8 @@ export const RegisterMotorista = () => {
   const [username, setUsername] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
+  const [end, setEnd] = useState('')
+  const [cep, setCEP] = useState('')
   const [vagas, setVagas] = useState('')
   const [senha, setSenha] = useState('')
   const [confSenha, setConfirmeSenha] = useState('')
@@ -60,11 +63,38 @@ export const RegisterMotorista = () => {
     }
   }
 
+  const handleGetAddress = async (cep) => {
+    if (cep.length !== 8) {
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      const { logradouro, localidade, uf } = response.data;
+
+      if (logradouro) {
+        setEnd(`${logradouro}, ${localidade} - ${uf}`);
+      } else {
+        Alert.alert('Erro', 'CEP não encontrado');
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao buscar o endereço');
+    }
+  };
+
+  useEffect(() => {
+    if (cep.length === 8) {
+      handleGetAddress(cep);
+    }
+  }, [cep]);
+
   const handleRegister = async () => {
     if (
       username === '' ||
       telefone === '' ||
       email === '' ||
+      end === '' ||
+      cep === '' ||
       vagas === '' ||
       senha === '' ||
       confSenha === '' ||
@@ -95,8 +125,8 @@ export const RegisterMotorista = () => {
       }
 
       await db.runAsync(
-        'INSERT INTO Motorista (name, phone, email, vagas, password) VALUES (?, ?, ?, ?, ?)',
-        [username, telefone, email, vagas, senha]
+        'INSERT INTO Motorista (name, phone, email, end, cep, vagas, password) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [username, telefone, email, end, cep, vagas, senha]
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -150,9 +180,26 @@ export const RegisterMotorista = () => {
             maxLength={100}
           />
 
-          <CustomLabelText>Insira q quantidade de vagas da vã</CustomLabelText>
+          <CustomLabelText>Digite seu Endereço</CustomLabelText>
           <CustomInput
-            placeholder="Insira a quantidades de assento que a vã possui"
+            placeholder="Insira seu Endereço"
+            onChangeText={setEnd}
+            value={end}
+            maxLength={100}
+          />
+
+          <CustomLabelText>Digite seu CEP</CustomLabelText>
+          <CustomInput
+            placeholder="Insira seu CEP"
+            onChangeText={setCEP}
+            value={cep}
+            maxLength={8}
+            keyboardType="phone-pad"
+          />
+
+          <CustomLabelText>Insira a quantidade de vagas na van</CustomLabelText>
+          <CustomInput
+            placeholder="Insira a quantidades de assento que a van possui"
             keyboardType="phone-pad"
             onChangeText={setVagas}
             value={vagas}

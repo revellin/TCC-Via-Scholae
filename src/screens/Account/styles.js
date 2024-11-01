@@ -33,6 +33,7 @@ export const ButtonsContainer = styled.View`
   margin-vertical: ${theme.metrics.px(15)}px;
 `
 
+
 export const ProfileName = styled.Text`
   font-size: ${theme.metrics.px(30)}px;
   margin-top: ${theme.metrics.px(25)}px;

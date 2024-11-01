@@ -27,6 +27,8 @@ export const DatabaseProvider = ({ children }) => {
             name TEXT NOT NULL,
             phone TEXT NOT NULL UNIQUE,
             email TEXT NOT NULL UNIQUE,
+            end TEXT NOT NULL,
+            cep TEXT NOT NULL,
             password TEXT NOT NULL,
             profilePic TEXT,
             type TEXT NOT NULL DEFAULT 'responsavel'
@@ -39,6 +41,8 @@ export const DatabaseProvider = ({ children }) => {
             name TEXT NOT NULL,
             phone TEXT NOT NULL UNIQUE,
             email TEXT NOT NULL UNIQUE,
+            end TEXT NOT NULL,
+            cep TEXT NOT NULL,
             password TEXT NOT NULL,
             profilePic TEXT,
             cnhFrente TEXT,

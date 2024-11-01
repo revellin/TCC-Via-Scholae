@@ -52,8 +52,10 @@ export const Account = () => {
           <ProfilePic style={styles.img} />
         </ConProfilePic>
         <ProfileName>{user ? user.name : 'Usuário não logado'}</ProfileName>
-        <SubTitles>{user ? user.email : 'Email não disponível'}</SubTitles>
-        <SubTitles>{user ? user.phone : 'Número não disponível'}</SubTitles>
+        <SubTitles>Email: {user ? user.email : 'Email não disponível'}</SubTitles>
+        <SubTitles>Número: {user ? user.phone : 'Número não disponível'}</SubTitles>
+        <SubTitles>Endereço: {user ? user.end : 'Número não disponível'}</SubTitles>
+        <SubTitles>CEP: {user ? user.cep : 'Número não disponível'}</SubTitles>
 
         {/* Exibe as vagas se o usuário for um motorista */}
         {user && user.type === 'motorista' && (

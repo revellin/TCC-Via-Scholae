@@ -40,8 +40,6 @@ export const EditProfile = () => {
       quality: 1,
     })
 
-    console.log(result)
-
     if (!result.canceled) {
       const imageUri = result.assets[0].uri
       setImage(imageUri)
@@ -89,6 +87,13 @@ export const EditProfile = () => {
           <Label>Email</Label>
           <ContentText>
             {user ? user.email : 'Email não disponível'}
+          </ContentText>
+        </Content>
+
+        <Content onPress={() => navigation.navigate('EditEnd')}>
+          <Label>Endereço</Label>
+          <ContentText>
+            {user ? user.end: 'Endereço não disponível'}
           </ContentText>
         </Content>
       </FormContainer>

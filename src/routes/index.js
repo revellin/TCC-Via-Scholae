@@ -9,6 +9,7 @@ import {
   EditEmail,
   EditName,
   EditPhone,
+  EditEnd,
   Home,
   Message,
   Chat,
@@ -191,6 +192,11 @@ export const Routes = () => {
       <Stack.Screen
         name="EditPhone"
         component={EditPhone}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditEnd"
+        component={EditEnd}
         options={{ headerShown: false }}
       />
       <Stack.Screen
