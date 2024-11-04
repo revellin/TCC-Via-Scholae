@@ -3,7 +3,7 @@ import { TouchableOpacity, Alert } from 'react-native'
 import { Container, Title, Header, Input } from './styles'
 import { ButtonCadastro, Return, Line } from '../../components'
 import { useNavigation } from '@react-navigation/native'
-import { useDatabase } from '../../database'
+import { useDatabase, useUser } from '../../database'
 import axios from 'axios'
 
 export const RegistroRota = () => {
@@ -16,7 +16,9 @@ export const RegistroRota = () => {
   const [nomeEscola, setNomeEscola] = useState('')
   const navigation = useNavigation()
   const db = useDatabase()
+  const { user } = useUser() // Acessar os dados do usuário
 
+  // Função para buscar endereço usando o CEP
   const handleGetAddress = async (cep, isStart) => {
     if (cep.length !== 8) {
       return
@@ -78,9 +80,19 @@ export const RegistroRota = () => {
     }
 
     try {
+      // Aqui você adiciona o motoristaId ao inserir a rota
       await db.runAsync(
-        'INSERT INTO Rota (startpoint, cep_start, endpoint, cep_end, regiao, nome_escola, numero_escola) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [startPoint, cepStart, endPoint, cepEnd, regiao, nomeEscola, numeroEscola]
+        'INSERT INTO Rota (startpoint, cep_start, endpoint, cep_end, regiao, nome_escola, numero_escola, motoristaId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          startPoint,
+          cepStart,
+          endPoint,
+          cepEnd,
+          regiao,
+          nomeEscola,
+          numeroEscola,
+          user.id,
+        ]
       )
 
       Alert.alert('Sucesso', 'Cadastro da rota realizado com sucesso!')
@@ -135,7 +147,7 @@ export const RegistroRota = () => {
         keyboardType="numeric"
       />
       <Input
-        placeholder="Area de Operação"
+        placeholder="Área de Operação"
         value={regiao}
         onChangeText={setRegiao}
       />

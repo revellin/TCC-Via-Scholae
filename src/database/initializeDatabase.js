@@ -14,7 +14,7 @@ export const DatabaseProvider = ({ children }) => {
 
       try {
         // Removendo tabelas se existirem
-        await database.execAsync(`DROP TABLE IF EXISTS Vagas;`)
+        //await database.execAsync(`DROP TABLE IF EXISTS Vagas;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Responsavel;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Motorista;`)
         //await database.execAsync(`DROP TABLE IF EXISTS Rota;`)
@@ -84,7 +84,7 @@ export const DatabaseProvider = ({ children }) => {
           CREATE TABLE IF NOT EXISTS Vagas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             type TEXT NOT NULL DEFAULT 'vaga',
-            status TEXT NOT NULL DEFAULT 'disponível',
+            status TEXT NOT NULL DEFAULT 'pendente',
             responsavelId INTEGER,
             motoristaId INTEGER,
             FOREIGN KEY (responsavelId) REFERENCES Responsavel(id) ON DELETE CASCADE,

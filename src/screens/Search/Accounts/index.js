@@ -84,7 +84,13 @@ export const PerfilSearch = ({ route }) => {
 
       <ButtonContainer>
         {profile.type === 'Responsavel' && <ButtonChildren />}
-        {profile.type === 'Motorista' && <BtnRotas />}
+        {profile.type === 'Motorista' && (
+          <BtnRotas
+            onPress={() =>
+              navigation.navigate('ExibirRota', { motoristaId: profile.id })
+            }
+          />
+        )}
       </ButtonContainer>
 
       <ButtonMessage

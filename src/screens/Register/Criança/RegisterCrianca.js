@@ -96,7 +96,7 @@ export const RegisterCrianca = () => {
             placeholder="Insira o nome da criança"
             onChangeText={setNome}
             value={nome}
-            maxLength={30}
+            maxLength={50}
           />
 
           <CustomLabelText>Digite a idade da criança</CustomLabelText>
@@ -113,7 +113,7 @@ export const RegisterCrianca = () => {
             placeholder="Digite o seu parentesco"
             onChangeText={setParentesco}
             value={parentesco}
-            maxLength={20}
+            maxLength={3}
           />
 
           <CustomLabelText>Selecione uma foto da Criança</CustomLabelText>

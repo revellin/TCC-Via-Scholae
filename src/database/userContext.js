@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
 
   // Função para definir os dados do usuário
   const login = (userData) => {
-    setUser(userData);
+    setUser(userData); // O userData deve incluir o id do motorista
   };
 
   const logout = () => {
@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser,login, logout }}>
+    <UserContext.Provider value={{ user, setUser, login, logout }}>
       {children}
     </UserContext.Provider>
   );

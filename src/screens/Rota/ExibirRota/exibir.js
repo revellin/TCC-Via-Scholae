@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, Text, View, Alert, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { useDatabase } from '../../../database'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { useDatabase, useUser } from '../../../database'
 import {
   Container,
   TitleText,
@@ -18,12 +18,18 @@ import { Return } from '../../../components'
 
 export const ExibirRotas = () => {
   const db = useDatabase()
+  const { user } = useUser()
   const [rotas, setRotas] = useState([])
   const navigation = useNavigation()
+  const route = useRoute()
+  const { motoristaId } = route.params || {}
 
   const fetchRotas = async () => {
     try {
-      const result = await db.getAllAsync('SELECT * FROM Rota')
+      const result = await db.getAllAsync(
+        'SELECT * FROM Rota WHERE motoristaId = ?',
+        [motoristaId]
+      )
       setRotas(result.length > 0 ? result : [])
     } catch (error) {
       console.error('Erro ao buscar rotas: ', error)
@@ -33,12 +39,16 @@ export const ExibirRotas = () => {
 
   useEffect(() => {
     fetchRotas()
-  }, [])
+  }, [motoristaId])
 
   const handleRoutePress = (item) => {
     navigation.navigate('RotaMap', {
-      startpoint: item.startpoint,
-      endpoint: item.endpoint,
+      routeId: item.id,
+      cepStart: item.cep_start,
+      cepEnd: item.cep_end,
+      nomeEscola: item.nome_escola,
+      numeroEscola: item.numero_escola,
+      responsavelId: user?.id, 
     })
   }
 
@@ -48,6 +58,7 @@ export const ExibirRotas = () => {
         <TableCell style={{ fontWeight: 400 }}>{item.startpoint}</TableCell>
         <TableCell style={{ fontWeight: 400 }}>{item.endpoint}</TableCell>
         <TableCell style={{ fontWeight: 400 }}>{item.nome_escola}</TableCell>
+        <TableCell style={{ fontWeight: 400 }}>{item.numero_escola}</TableCell>
         <TableCell style={{ fontWeight: 400 }}>{item.regiao}</TableCell>
       </TableRow>
     </TouchableOpacity>
@@ -66,6 +77,7 @@ export const ExibirRotas = () => {
           <TableCell>Início</TableCell>
           <TableCell>Destino</TableCell>
           <TableCell>Escola</TableCell>
+          <TableCell>Número</TableCell>
           <TableCell>Região</TableCell>
         </TableHeader>
         {rotas.length > 0 ? (
@@ -82,9 +94,9 @@ export const ExibirRotas = () => {
           </View>
         )}
       </Table>
-      <Button onPress={() => navigation.navigate('RegistroRota')}>
+      {user && user.type === 'motorista' && <Button onPress={() => navigation.navigate('RegistroRota')}>
         <ButtonText>Cadastrar</ButtonText>
-      </Button>
+      </Button>}
     </Container>
   )
 }

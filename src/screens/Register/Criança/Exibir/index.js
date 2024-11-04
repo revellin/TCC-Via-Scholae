@@ -101,9 +101,9 @@ export const ExibirCriancas = () => {
         )}
       </Table>
 
-      <Button onPress={handleCadastrarNovaCrianca}>
+      {user && user.type === 'responsavel' &&<Button onPress={handleCadastrarNovaCrianca}>
         <ButtonText>Cadastrar</ButtonText>
-      </Button>
+      </Button>}
     </Container>
   )
 }
