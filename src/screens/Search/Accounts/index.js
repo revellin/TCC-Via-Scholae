@@ -45,7 +45,6 @@ export const PerfilSearch = ({ route }) => {
         console.error('Erro ao buscar vagas: ', error)
       }
     }
-
     fetchVagas()
   }, [profile])
 
@@ -63,20 +62,16 @@ export const PerfilSearch = ({ route }) => {
         </ConProfilePic>
 
         <ProfileName>{profile.name}</ProfileName>
-
         <SubTitles>
           <Text>{profile.type}</Text>
         </SubTitles>
-
         <SubTitles>
           <Text>{profile.email}</Text>
         </SubTitles>
-
         <SubTitles>
           <Text>{profile.phone}</Text>
         </SubTitles>
 
-        {/* Exibir as vagas se o perfil for de um motorista */}
         {profile.type === 'Motorista' && (
           <SubTitles>Vagas na van: {vagas ?? 'Carregando...'}</SubTitles>
         )}
@@ -94,7 +89,12 @@ export const PerfilSearch = ({ route }) => {
       </ButtonContainer>
 
       <ButtonMessage
-        onPress={() => navigation.navigate('Message', { profile })}
+        onPress={() =>
+          navigation.navigate('Message', {
+            profileId: profile.id,
+            profileName: profile.name,
+          })
+        }
       >
         Mensagem
       </ButtonMessage>

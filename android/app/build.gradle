@@ -3,6 +3,8 @@ apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
+def hermesEnabled = true  // Ativa o Hermes
+
 
 static def versionToNumber(major, minor, patch) {
   return patch * 100 + minor * 10000 + major * 1000000

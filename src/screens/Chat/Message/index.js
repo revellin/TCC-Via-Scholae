@@ -1,55 +1,89 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useRoute } from '@react-navigation/native'
+
+import { GiftedChat } from 'react-native-gifted-chat'
+import { useCallback, useEffect, useState } from 'react'
+
+//importação do firebase e database
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+} from 'firebase/firestore'
+import { database } from '../../../config/firebase'
+
+export const Message = () => {
+
+  return (
+    <GiftedChat
+
+    />
+  )
+}
+
+/*import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { FlatList, Text } from 'react-native'
+import { Text } from 'react-native'
+import { GiftedChat } from 'react-native-gifted-chat'
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+} from 'firebase/firestore'
+import { database } from '../../../config/firebase'
 import { Return, ProfilePic } from '../../../components'
-import io from 'socket.io-client' // Importando o Socket.IO Client
 import {
   styles,
   Container,
   Header,
-  MessageContainer,
-  InputContainer,
   Name,
-  MessageText,
-  SendButtonText,
-  SendButton,
-  Input,
   SubTitles,
   HeaderInfo,
 } from './styles'
-
-// URL do seu servidor Socket.IO
-const socket = io('http://localhost:8081') // Substitua pelo URL do seu servidor
 
 export const Message = () => {
   const navigation = useNavigation()
   const route = useRoute()
   const { profile } = route.params || {}
   const [messages, setMessages] = useState([])
-  const [messageText, setMessageText] = useState('')
 
   useEffect(() => {
-    // Listener para receber mensagens do servidor
-    socket.on('chatMessage', (msg) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { id: Date.now().toString(), text: msg },
-      ])
-    })
-
-    // Limpar o listener ao desmontar o componente
-    return () => {
-      socket.off('chatMessage')
+    const getMessages = () => {
+      const values = query(
+        collection(database, 'chats'),
+        orderBy('createdAt', 'desc')
+      )
+      const unsubscribe = onSnapshot(values, (snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            _id: doc.id,
+            createdAt: doc.data().createdAt.toDate(),
+            text: doc.data().text,
+            user: doc.data().user,
+          }))
+        )
+      )
+      return () => unsubscribe()
     }
+    getMessages()
   }, [])
 
-  const sendMessage = () => {
-    if (messageText.trim()) {
-      // Enviar a mensagem para o servidor
-      socket.emit('chatMessage', messageText)
-      setMessageText('') // Limpa o campo após enviar a mensagem
-    }
-  }
+  const mensagemEnviada = useCallback((messages = []) => {
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, messages)
+    )
+    const { _id, createdAt, text, user } = messages[0]
+    addDoc(collection(database, 'chats'), {
+      _id,
+      createdAt,
+      text,
+      user,
+    })
+  }, [])
 
   return (
     <Container>
@@ -59,7 +93,6 @@ export const Message = () => {
           onPress={() => navigation.navigate('Mensagens')}
         />
         <ProfilePic style={styles.pic} />
-
         <HeaderInfo>
           {profile ? (
             <>
@@ -76,27 +109,14 @@ export const Message = () => {
         </HeaderInfo>
       </Header>
 
-      <FlatList
-        data={messages}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <MessageContainer>
-            <MessageText>{item}</MessageText>
-          </MessageContainer>
-        )}
-        inverted // Inverte a ordem das mensagens (mensagem mais recente no fim)
+      <GiftedChat
+        messages={messages}
+        onSend={(msg) => mensagemEnviada(msg)}
+        user={{
+          _id: profile?.id,
+          name: profile?.name,
+        }}
       />
-
-      <InputContainer>
-        <Input
-          value={messageText}
-          onChangeText={setMessageText}
-          placeholder="Type a message"
-        />
-        <SendButton onPress={sendMessage}>
-          <SendButtonText>Enviar</SendButtonText>
-        </SendButton>
-      </InputContainer>
     </Container>
   )
-}
+}*/
