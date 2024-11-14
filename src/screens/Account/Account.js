@@ -88,7 +88,7 @@ export const Account = () => {
       <ButtonsContainer>
         {user && user.type === 'responsavel' && <ButtonChildren />}
         {user && user.type === 'motorista' && (
-          <BtnRotas onPress={handleNavigateToRotas} /> // Adicione o onPress
+          <BtnRotas onPress={handleNavigateToRotas} /> 
         )}
         {user && user.type === 'motorista' && <ButtonVagas onPress={handleNavigateToVagas}/>}
         <ButtonEdit />

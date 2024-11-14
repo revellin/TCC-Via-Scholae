@@ -3,6 +3,7 @@ import { useColorScheme, Alert } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import * as Location from 'expo-location'
 import * as ImagePicker from 'expo-image-picker'
+import * as Notifications from 'expo-notifications'
 import {
   useFonts,
   SourceSansPro_400Regular,
@@ -48,10 +49,30 @@ export default function App() {
           [{ text: 'OK' }]
         )
       }
+
+      // Solicita permissão de notificações
+      const { status: notificationsStatus } =
+        await Notifications.requestPermissionsAsync()
+      if (notificationsStatus !== 'granted') {
+        Alert.alert(
+          'Permissão necessária',
+          'Este aplicativo precisa de permissão para enviar notificações.',
+          [{ text: 'OK' }]
+        )
+      }
     }
 
+    // Configuração do handler para notificações
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+        shouldShowAlert: true,
+      }),
+    })
+
     const prepare = async () => {
-      await requestPermissions() 
+      await requestPermissions()
       if (fontsLoaded) {
         await SplashScreen.hideAsync()
         setAppIsReady(true)

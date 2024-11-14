@@ -7,28 +7,21 @@ import { useDatabase } from '../../../../database'
 import { Container, HeaderContainer, Header } from './styles'
 import { Return, ButtonSolicitarVagas } from '../../../../components'
 
-// Define o token de acesso para o Mapbox, permitindo o uso dos serviços de mapa e geocodificação
 MapboxGL.setAccessToken(
   'sk.eyJ1IjoiY29vaW5nbXRjZG9hIiwiYSI6ImNtMmM4ejl3NDBxbW4ycm9uN3JlamtqbncifQ.hpltrhlR36OOJoDENW2YyQ'
 )
 
-// Componente principal que renderiza a tela do mapa e a funcionalidade de solicitar vaga
 export const RotaMap = () => {
-  // Pega parâmetros da rota atual (como IDs e CEPs de início e fim) para buscar a rota correta
   const route = useRoute()
   const { routeId, cepStart, cepEnd, nomeEscola, numeroEscola, responsavelId } =
     route.params
 
-  // Define estados para armazenar coordenadas da rota e pontos de início e fim
   const [routeCoordinates, setRouteCoordinates] = useState([])
   const [startCoords, setStartCoords] = useState(null)
   const [endCoords, setEndCoords] = useState(null)
-
-  // Obtém o banco de dados usando o contexto
   const db = useDatabase()
   const navigation = useNavigation()
 
-  // Função para solicitar uma vaga, inserindo um registro no banco de dados
   const solicitarVaga = async () => {
     if (!db) return
 
@@ -38,20 +31,18 @@ export const RotaMap = () => {
         return
       }
 
-      // Insere a solicitação de vaga no banco de dados
       await db.execAsync(
-        `INSERT INTO Vagas (status, responsavelId) VALUES ('pendente', ?);`,
+        `INSERT INTO Vagas (responsavelId, motoristaId, status, data_solicitacao, detalhes_rota) VALUES (?, ?, 'pendente', ?, ?);`,
         [responsavelId] 
       )
 
-      Alert.alert('Solicitação de Vaga', 'Vaga solicitada com sucesso!')
+      Alert.alert('Solicitação', 'Vaga solicitada com sucesso!')
     } catch (error) {
       console.error('Erro ao solicitar vaga:', error)
       Alert.alert('Erro', 'Não foi possível solicitar a vaga.')
     }
   }
 
-  // Função para buscar as coordenadas a partir do CEP, com opção de incluir nome e número da escola
   const fetchCoordinatesFromCEP = async (
     cep,
     schoolName = null,
@@ -205,7 +196,6 @@ export const RotaMap = () => {
   )
 }
 
-// Estilos para o componente, incluindo posição do botão de retorno e estilo da linha de rota
 const styles = StyleSheet.create({
   return: {
     top: 40,

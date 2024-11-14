@@ -9,7 +9,6 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   background: ${props => props.theme.primary};
-  margin-top: ${theme.metrics.px(30)}px;
   padding: ${theme.metrics.px(13)}px;
   flex-direction: row;
   width: ${theme.metrics.px(430)}px;

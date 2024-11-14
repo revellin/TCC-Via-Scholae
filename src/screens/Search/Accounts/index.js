@@ -91,8 +91,7 @@ export const PerfilSearch = ({ route }) => {
       <ButtonMessage
         onPress={() =>
           navigation.navigate('Message', {
-            profileId: profile.id,
-            profileName: profile.name,
+            profile: profile,
           })
         }
       >

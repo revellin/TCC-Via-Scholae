@@ -44,6 +44,19 @@
         {
           "locationWhenInUsePermission": "Show current location on map."
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/Logo_ViaScholae.png",
+          "color": "#EEEEEE",
+          "defaultChannel": "default",
+          "sounds": [
+            "./local/assets/notification_sound.wav",
+            "./local/assets/notification_sound_other.wav"
+          ],
+          "enableBackgroundRemoteNotifications": false
+        }
       ]
     ],
     "extra": {

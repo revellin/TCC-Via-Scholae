@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   CustomTitleText,
   CustomLogo,
@@ -22,12 +23,30 @@ import { useDatabase, useUser } from '../../database'
 
 export const Initial = () => {
   const navigation = useNavigation()
-  // Obtenha a instância do banco de dados
   const db = useDatabase()
-  // Acesse a função de login do contexto
   const { login } = useUser()
   const [telefone, setTelefone] = useState('')
   const [senha, setSenha] = useState('')
+
+  // Verifique o AsyncStorage ao iniciar
+  useEffect(() => {
+    const checkUserLoggedIn = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('@user_data')
+        if (userData) {
+          // Converte a string de volta para objeto e chama login
+          login(JSON.parse(userData))
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'MainHome', params: { screen: 'Home' } }],
+          })
+        }
+      } catch (error) {
+        console.log('Erro ao verificar login persistente:', error)
+      }
+    }
+    checkUserLoggedIn()
+  }, [])
 
   const handleSingIn = async () => {
     if (telefone === '' || senha === '') {
@@ -36,19 +55,19 @@ export const Initial = () => {
     }
 
     try {
-      // Verifica se o usuário existe no banco de dados (incluindo tipo)
       const user = await db.getFirstAsync(
         'SELECT * FROM Responsavel WHERE phone = ? AND password = ?',
         [telefone, senha]
       )
-
       const motorista = await db.getFirstAsync(
         'SELECT * FROM Motorista WHERE phone = ? AND password = ?',
         [telefone, senha]
       )
 
+      let userData = null
+
       if (user) {
-        const userData = {
+        userData = {
           id: user.id,
           name: user.name,
           email: user.email,
@@ -57,19 +76,8 @@ export const Initial = () => {
           cep: user.cep,
           type: user.type,
         }
-        login(userData)
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'MainHome', 
-              params: { screen: 'Home', user: user.name },
-            },
-          ],
-        })
       } else if (motorista) {
-        // Se o motorista existir, armazene os dados no contexto
-        const userData = {
+        userData = {
           id: motorista.id,
           name: motorista.name,
           email: motorista.email,
@@ -78,19 +86,23 @@ export const Initial = () => {
           cep: motorista.cep,
           type: motorista.type,
         }
-        login(userData)
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'MainHome',
-              params: { screen: 'Home', user: motorista.name },
-            },
-          ],
-        })
       } else {
         Alert.alert('Erro', 'Número de telefone ou senha incorretos.')
+        return
       }
+
+      login(userData)
+      await AsyncStorage.setItem('@user_data', JSON.stringify(userData))
+
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'MainHome',
+            params: { screen: 'Home', user: userData.name },
+          },
+        ],
+      })
     } catch (error) {
       console.error('Erro ao logar: ', error)
       Alert.alert('Erro', 'Erro ao logar. Tente novamente.')

@@ -83,10 +83,12 @@ export const DatabaseProvider = ({ children }) => {
         await database.execAsync(`
           CREATE TABLE IF NOT EXISTS Vagas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            type TEXT NOT NULL DEFAULT 'vaga',
-            status TEXT NOT NULL DEFAULT 'pendente',
             responsavelId INTEGER,
             motoristaId INTEGER,
+            status TEXT NOT NULL DEFAULT 'pendente',
+            data_solicitacao TEXT,
+            detalhes_rota TEXT,
+            type TEXT NOT NULL DEFAULT 'vaga',
             FOREIGN KEY (responsavelId) REFERENCES Responsavel(id) ON DELETE CASCADE,
             FOREIGN KEY (motoristaId) REFERENCES Motorista(id) ON DELETE SET NULL
           );
