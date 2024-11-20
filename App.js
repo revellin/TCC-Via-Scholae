@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useColorScheme, Alert } from 'react-native'
+import {
+  useColorScheme,
+  Alert,
+  StatusBar,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import * as Location from 'expo-location'
 import * as ImagePicker from 'expo-image-picker'
@@ -90,11 +96,27 @@ export default function App() {
     <DatabaseProvider>
       <UserProvider>
         <ThemeProvider theme={themes}>
-          <NavigationContainer>
-            <Routes />
-          </NavigationContainer>
+          <SafeAreaView style={styles.container}>
+            <StatusBar
+              barStyle={
+                deviceTheme === 'dark' ? 'light-content' : 'dark-content'
+              }
+              translucent={true}
+              backgroundColor="transparent"
+            />
+            <NavigationContainer>
+              <Routes />
+            </NavigationContainer>
+          </SafeAreaView>
         </ThemeProvider>
       </UserProvider>
     </DatabaseProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 0, // Isso deve ajudar a remover qualquer espaço extra
+  },
+})

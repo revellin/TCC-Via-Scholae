@@ -92,6 +92,7 @@ export const Initial = () => {
       }
 
       login(userData)
+      // Armazenando os dados no AsyncStorage para persistir o login
       await AsyncStorage.setItem('@user_data', JSON.stringify(userData))
 
       navigation.reset({

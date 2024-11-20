@@ -27,7 +27,7 @@
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION"
       ],
-      "package": "com.ViaScholae"
+      "package": "com.viascholae"
     },
     "web": {
       "favicon": "./assets/Logo_ViaScholae.png"
@@ -51,13 +51,10 @@
           "icon": "./assets/Logo_ViaScholae.png",
           "color": "#EEEEEE",
           "defaultChannel": "default",
-          "sounds": [
-            "./local/assets/notification_sound.wav",
-            "./local/assets/notification_sound_other.wav"
-          ],
           "enableBackgroundRemoteNotifications": false
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {

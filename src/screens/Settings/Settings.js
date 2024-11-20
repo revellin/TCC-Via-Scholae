@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+// Importando o AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   ButtonProfile,
@@ -32,10 +33,10 @@ export const Settings = () => {
       // Limpa o estado do usuário no contexto
       setUser(null)
 
-      // Redireciona para a tela de login
+      // Redireciona para a tela de login ou splash
       navigation.reset({
         index: 0,
-        routes: [{ name: 'Splash' }],
+        routes: [{ name: 'Splash' }], // Ou 'Login' se tiver uma tela de login
       })
     } catch (error) {
       console.error('Erro ao fazer logout:', error)
