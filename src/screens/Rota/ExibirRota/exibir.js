@@ -32,8 +32,6 @@ export const ExibirRotas = () => {
       )
       setRotas(result.length > 0 ? result : [])
     } catch (error) {
-      console.error('Erro ao buscar rotas: ', error)
-      Alert.alert('Erro', 'Erro ao buscar rotas.')
     }
   }
 
@@ -48,12 +46,13 @@ export const ExibirRotas = () => {
       cepEnd: item.cep_end,
       nomeEscola: item.nome_escola,
       numeroEscola: item.numero_escola,
+      motoristaId: user?.id,
       responsavelId: user?.id, 
     })
   }
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleRoutePress(item)}>
+    <TouchableOpacity onPress={() => handleRoutePress(item)} >
       <TableRow>
         <TableCell style={{ fontWeight: 400 }}>{item.startpoint}</TableCell>
         <TableCell style={{ fontWeight: 400 }}>{item.endpoint}</TableCell>

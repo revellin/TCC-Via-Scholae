@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import {
-  TouchableOpacity,
-  Alert,
-} from 'react-native'
+import { TouchableOpacity, Alert } from 'react-native'
 import { ProfilePic, Return } from '../../components'
 import {
   styles,
@@ -17,6 +14,7 @@ import {
   EditPictureText,
 } from './styles'
 import * as ImagePicker from 'expo-image-picker'
+import * as FileSystem from 'expo-file-system' 
 import { useNavigation } from '@react-navigation/native'
 import { useUser, saveProfilePic } from '../../database'
 
@@ -33,6 +31,7 @@ export const EditProfile = () => {
       Alert.alert('Erro', 'É necessário permitir o acesso à galeria!')
       return
     }
+
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -42,11 +41,23 @@ export const EditProfile = () => {
 
     if (!result.canceled) {
       const imageUri = result.assets[0].uri
-      setImage(imageUri)
 
-      if (user && db) {
-        saveProfilePic(db, user, imageUri) // Passa o banco, usuário e URI da imagem
-        useUser({ ...user, profilePic: imageUri }) // Atualiza o estado do usuário
+      // Defina o caminho de destino no armazenamento local
+      const fileName = imageUri.split('/').pop() 
+      const path = FileSystem.documentDirectory + fileName
+
+      // Copiar a imagem para o diretório de documentos
+      await FileSystem.copyAsync({
+        from: imageUri,
+        to: path,
+      })
+
+      // Salva o caminho local no banco de dados (não a imagem inteira)
+      setImage(path)
+
+      if (user) {
+        saveProfilePic(path) // Passando o caminho local para salvar no banco de dados
+        useUser({ ...user, profilePic: path }) // Atualiza o estado do usuário
       }
     }
   }
@@ -62,10 +73,9 @@ export const EditProfile = () => {
       </Header>
 
       <ProfileContainer>
-        {/* Passa a URI da imagem para o ProfilePic*/}
+        {/* Passa o caminho local da imagem para o ProfilePic */}
         <ProfilePic uri={image || user?.profilePic} />
         <TouchableOpacity onPress={pickImage}>
-          {/* Corrigido para chamar pickImage */}
           <EditPictureText>Edit Picture</EditPictureText>
         </TouchableOpacity>
       </ProfileContainer>
@@ -93,7 +103,7 @@ export const EditProfile = () => {
         <Content onPress={() => navigation.navigate('EditEnd')}>
           <Label>Endereço</Label>
           <ContentText>
-            {user ? user.end: 'Endereço não disponível'}
+            {user ? user.end : 'Endereço não disponível'}
           </ContentText>
         </Content>
       </FormContainer>

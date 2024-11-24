@@ -117,6 +117,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 0, // Isso deve ajudar a remover qualquer espaço extra
+    marginTop: 0, 
   },
 })

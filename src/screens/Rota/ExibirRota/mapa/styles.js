@@ -14,6 +14,7 @@ export const Header = styled.View`
 export const HeaderContainer = styled.View`
   width: ${theme.metrics.px(430)}px;
   height: ${theme.metrics.px(570)}px;
+  margin-bottom: ${theme.metrics.px(20)}px;
   background-color: #363636;
   justify-content: center;
 `

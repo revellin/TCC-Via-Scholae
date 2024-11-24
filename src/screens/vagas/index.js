@@ -32,9 +32,10 @@ export const Vagas = () => {
 
     try {
       const result = await db.getAllAsync(
-        `SELECT * FROM Vagas WHERE motoristaId = ? AND status = 'pendente'`,
+        `SELECT * FROM Vagas`,
         [motoristaId]
       )
+      console.log('Resultado da consulta:', result) // Verifique os dados retornados
       setVagasPendentes(result)
     } catch (error) {
       console.error('Erro ao buscar vagas pendentes:', error)

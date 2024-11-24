@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, Alert, ScrollView } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
+import * as FileSystem from 'expo-file-system'
+import { useNavigation } from '@react-navigation/native'
+import { useDatabase } from '../../../database'
+import axios from 'axios'
+import Constants from 'expo-constants'
 import {
   CustomLogo,
   CustomLabelText,
@@ -18,14 +23,11 @@ import {
   ImgContainer,
   ImagePreview,
 } from './styles'
-import { useNavigation } from '@react-navigation/native'
-import { useDatabase } from '../../../database'
-import axios from 'axios'
 
+// Componente principal
 export const RegisterMotorista = () => {
   const navigation = useNavigation()
   const db = useDatabase()
-
   const [username, setUsername] = useState('')
   const [telefone, setTelefone] = useState('')
   const [email, setEmail] = useState('')
@@ -42,16 +44,17 @@ export const RegisterMotorista = () => {
     return
   }
 
-  const pickImage = async (setImage) => {
+  // Ao selecionar a imagem, chame saveImageLocally e passe o caminho da imagem não criptografada
+  const pickImage = async (setImage, filename) => {
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync()
 
-    if (permissionResult.granted === false) {
+    if (!permissionResult.granted) {
       Alert.alert('Erro', 'É necessário permitir o acesso à galeria!')
       return
     }
 
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
@@ -59,35 +62,60 @@ export const RegisterMotorista = () => {
     })
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri)
+      const savedPath = await saveImageLocally(result.assets[0].uri, filename)
+      if (savedPath) {
+        setImage(savedPath)
+      } else {
+        Alert.alert('Erro', 'Não foi possível salvar a imagem')
+      }
     }
   }
 
+  // Função para salvar a imagem localmente sem criptografá-la
+  const saveImageLocally = async (imageUri, filename) => {
+    try {
+      // Diretório onde as imagens serão salvas
+      const localDir = `${FileSystem.documentDirectory}images/`
+
+      // Verifica se o diretório existe, se não, cria-o
+      const dirInfo = await FileSystem.getInfoAsync(localDir)
+      if (!dirInfo.exists) {
+        await FileSystem.makeDirectoryAsync(localDir, { intermediates: true })
+      }
+
+      // Caminho completo para salvar o arquivo
+      const localPath = `${localDir}${filename}`
+
+      // Copia a imagem para o diretório local
+      await FileSystem.copyAsync({ from: imageUri, to: localPath })
+
+      return localPath
+    } catch (error) {
+      console.error('Erro ao salvar imagem localmente:', error)
+      return null
+    }
+  }
+
+  // Buscar endereço pelo CEP
   const handleGetAddress = async (cep) => {
     if (cep.length !== 8) {
-      return;
+      return
     }
-
     try {
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-      const { logradouro, localidade, uf } = response.data;
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+      const { logradouro, localidade, uf } = response.data
 
       if (logradouro) {
-        setEnd(`${logradouro}, ${localidade} - ${uf}`);
+        setEnd(`${logradouro}, ${localidade} - ${uf}`)
       } else {
-        Alert.alert('Erro', 'CEP não encontrado');
+        Alert.alert('Erro', 'CEP não encontrado')
       }
     } catch (error) {
-      Alert.alert('Erro', 'Erro ao buscar o endereço');
+      Alert.alert('Erro', 'Erro ao buscar o endereço')
     }
-  };
+  }
 
-  useEffect(() => {
-    if (cep.length === 8) {
-      handleGetAddress(cep);
-    }
-  }, [cep]);
-
+  // Registrar motorista no banco de dados
   const handleRegister = async () => {
     if (
       username === '' ||
@@ -125,8 +153,10 @@ export const RegisterMotorista = () => {
       }
 
       await db.runAsync(
-        'INSERT INTO Motorista (name, phone, email, end, cep, vagas, password) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [username, telefone, email, end, cep, vagas, senha]
+        `INSERT INTO Motorista 
+          (name, phone, email, end, cep, vagas, password, cnhFrente, cnhVerso) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [username, telefone, email, end, cep, vagas, senha, cnhFrente, cnhVerso]
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -136,6 +166,12 @@ export const RegisterMotorista = () => {
       Alert.alert('Erro', 'Erro ao cadastrar. Tente novamente.')
     }
   }
+
+  useEffect(() => {
+    if (cep.length === 8) {
+      handleGetAddress(cep)
+    }
+  }, [cep])
 
   return (
     <Container>
@@ -199,7 +235,7 @@ export const RegisterMotorista = () => {
 
           <CustomLabelText>Insira a quantidade de vagas na van</CustomLabelText>
           <CustomInput
-            placeholder="Insira a quantidades de assento que a van possui"
+            placeholder="Insira a quantidades de assentos que a van possui"
             keyboardType="phone-pad"
             onChangeText={setVagas}
             value={vagas}
@@ -225,24 +261,38 @@ export const RegisterMotorista = () => {
           />
 
           {/* Campo para imagem da CNH (frente) */}
-          <CustomLabelText>Imagem da CNH (Frente)</CustomLabelText>
-          <TouchableOpacity onPress={() => pickImage(setCnhFrente)}>
+          <CustomLabelText>Adicione a frente da CNH</CustomLabelText>
+          <TouchableOpacity
+            title={cnhFrente ? 'Alterar imagem' : 'Escolha uma imagem'}
+            onPress={() => pickImage(setCnhFrente, 'cnhFrente.jpg')}
+          >
             <ImgContainer>
               <CustomLabelText>Selecionar Imagem</CustomLabelText>
-              {cnhFrente && <ImagePreview source={{ uri: cnhFrente }} />}
+              {cnhFrente && (
+                <ImagePreview source={{ uri: cnhFrente }} resizeMode="cover" />
+              )}
             </ImgContainer>
           </TouchableOpacity>
 
           {/* Campo para imagem da CNH (verso) */}
-          <CustomLabelText>Imagem da CNH (Verso)</CustomLabelText>
-          <TouchableOpacity onPress={() => pickImage(setCnhVerso)}>
+          <CustomLabelText>Adicione o verso da CNH</CustomLabelText>
+          <TouchableOpacity
+            title={cnhVerso ? 'Alterar imagem' : 'Escolha uma imagem'}
+            onPress={() => pickImage(setCnhVerso, 'cnhVerso.jpg')}
+          >
             <ImgContainer>
               <CustomLabelText>Selecionar Imagem</CustomLabelText>
-              {cnhVerso && <ImagePreview source={{ uri: cnhVerso }} />}
+              {cnhVerso && (
+                <ImagePreview source={{ uri: cnhVerso }} resizeMode="cover" />
+              )}
             </ImgContainer>
           </TouchableOpacity>
 
-          <ButtonCadastro onPress={handleRegister}>Cadastre-se</ButtonCadastro>
+          <ButtonCadastro onPress={handleRegister}>
+            <CustomLabelText style={{ color: '#FFF' }}>
+              Cadastrar
+            </CustomLabelText>
+          </ButtonCadastro>
         </Form>
       </ScrollView>
     </Container>

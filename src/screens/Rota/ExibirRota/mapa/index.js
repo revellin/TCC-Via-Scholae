@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import MapboxGL from '@rnmapbox/maps'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import { useDatabase } from '../../../../database'
 import { Container, HeaderContainer, Header } from './styles'
 import { Return, ButtonSolicitarVagas } from '../../../../components'
+import { useUser } from '../../../../database'
 
 MapboxGL.setAccessToken(
   'sk.eyJ1IjoiY29vaW5nbXRjZG9hIiwiYSI6ImNtMmM4ejl3NDBxbW4ycm9uN3JlamtqbncifQ.hpltrhlR36OOJoDENW2YyQ'
@@ -13,14 +14,22 @@ MapboxGL.setAccessToken(
 
 export const RotaMap = () => {
   const route = useRoute()
-  const { routeId, cepStart, cepEnd, nomeEscola, numeroEscola, responsavelId } =
-    route.params
+  const {
+    routeId,
+    cepStart,
+    cepEnd,
+    nomeEscola,
+    numeroEscola,
+    motoristaId,
+    responsavelId,
+  } = route.params
 
   const [routeCoordinates, setRouteCoordinates] = useState([])
   const [startCoords, setStartCoords] = useState(null)
   const [endCoords, setEndCoords] = useState(null)
   const db = useDatabase()
   const navigation = useNavigation()
+  const { user } = useUser()
 
   const solicitarVaga = async () => {
     if (!db) return
@@ -31,9 +40,26 @@ export const RotaMap = () => {
         return
       }
 
+      // Dados que serão enviados para a tabela Vagas
+      const vagaData = {
+        responsavelId,
+        motoristaId,
+        status: 'pendente',
+        data_solicitacao: new Date().toISOString(),
+        detalhes_rota: `${cepStart} - ${cepEnd}`,
+      }
+
+      // Imprime os dados antes de inserir no banco de dados
+      console.log('Dados sendo enviados para a tabela Vagas:', vagaData)
+
       await db.execAsync(
         `INSERT INTO Vagas (responsavelId, motoristaId, status, data_solicitacao, detalhes_rota) VALUES (?, ?, 'pendente', ?, ?);`,
-        [responsavelId] 
+        [
+          responsavelId,
+          user?.id,
+          vagaData.data_solicitacao,
+          vagaData.detalhes_rota,
+        ]
       )
 
       Alert.alert('Solicitação', 'Vaga solicitada com sucesso!')
@@ -142,7 +168,6 @@ export const RotaMap = () => {
     }
   }
 
-  // useEffect para buscar a rota ao carregar o componente ou mudar o banco de dados
   useEffect(() => {
     fetchRoute()
   }, [db])
@@ -189,9 +214,11 @@ export const RotaMap = () => {
           )}
         </MapboxGL.MapView>
       </HeaderContainer>
-      <ButtonSolicitarVagas onPress={solicitarVaga}>
-        Solicitar Vaga
-      </ButtonSolicitarVagas>
+      {user && user.type === 'responsavel' && (
+        <ButtonSolicitarVagas onPress={solicitarVaga}>
+          Solicitar Vaga
+        </ButtonSolicitarVagas>
+      )}
     </Container>
   )
 }
