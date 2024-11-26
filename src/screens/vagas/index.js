@@ -26,22 +26,29 @@ export const Vagas = () => {
   const route = useRoute()
   const { motoristaId } = route.params || {}
 
+  console.log('id do motorista', motoristaId)
+
   // Função para buscar vagas pendentes
   const fetchVagasPendentes = async () => {
-    if (!db) return
+    if (!db || !motoristaId) return // Verifica se o motoristaId não está null
 
     try {
       const result = await db.getAllAsync(
-        `SELECT * FROM Vagas`,
-        [motoristaId]
+        `SELECT * FROM Vagas WHERE status = 'pendente'`,
+        [motoristaId] // Passando o motoristaId
       )
-      console.log('Resultado da consulta:', result) // Verifique os dados retornados
+      console.log('Vagas pendentes:', result) // Adicione um log aqui para ver as vagas retornadas
       setVagasPendentes(result)
     } catch (error) {
       console.error('Erro ao buscar vagas pendentes:', error)
       Alert.alert('Erro', 'Não foi possível buscar as vagas pendentes.')
     }
   }
+  useEffect(() => {
+    console.log("Motorista ID durante a execução:", motoristaId); // Adicione este log
+    fetchVagasPendentes();
+  }, [db, motoristaId]); // Certifique-se de que a função é chamada quando o motoristaId mudar
+  
 
   const enviarNotificacao = async (responsavelId, statusVaga) => {
     // Criando a notificação

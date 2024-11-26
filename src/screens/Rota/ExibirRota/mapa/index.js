@@ -24,6 +24,8 @@ export const RotaMap = () => {
     responsavelId,
   } = route.params
 
+  console.log("id do motorista", motoristaId, "id do responsavel:", responsavelId, "id da rota:", routeId)
+
   const [routeCoordinates, setRouteCoordinates] = useState([])
   const [startCoords, setStartCoords] = useState(null)
   const [endCoords, setEndCoords] = useState(null)
@@ -40,27 +42,34 @@ export const RotaMap = () => {
         return
       }
 
-      // Dados que serão enviados para a tabela Vagas
+      // Dados sendo enviados para a tabela Vagas
       const vagaData = {
         responsavelId,
         motoristaId,
         status: 'pendente',
         data_solicitacao: new Date().toISOString(),
         detalhes_rota: `${cepStart} - ${cepEnd}`,
+        routeId,
       }
 
-      // Imprime os dados antes de inserir no banco de dados
-      console.log('Dados sendo enviados para a tabela Vagas:', vagaData)
 
-      await db.execAsync(
-        `INSERT INTO Vagas (responsavelId, motoristaId, status, data_solicitacao, detalhes_rota) VALUES (?, ?, 'pendente', ?, ?);`,
-        [
-          responsavelId,
-          user?.id,
-          vagaData.data_solicitacao,
-          vagaData.detalhes_rota,
-        ]
-      )
+      // Query de inserção
+      const query = `
+        INSERT INTO Vagas (responsavelId, motoristaId, status, data_solicitacao, detalhes_rota, routeId)
+        VALUES (?, ?, 'pendente', ?, ?, ?);
+      `
+      const values = [
+        vagaData.responsavelId,
+        vagaData.motoristaId,
+        vagaData.data_solicitacao,
+        vagaData.detalhes_rota,
+        vagaData.routeId,
+      ]
+
+      // Executando a inserção
+      console.log('Dados sendo enviados para a tabela Vagas:', vagaData)
+      console.log('Vaga inserida com motoristaId:', motoristaId);
+      await db.execAsync(query, values)
 
       Alert.alert('Solicitação', 'Vaga solicitada com sucesso!')
     } catch (error) {

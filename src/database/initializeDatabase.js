@@ -86,11 +86,12 @@ export const DatabaseProvider = ({ children }) => {
             responsavelId INTEGER,
             motoristaId INTEGER,
             status TEXT NOT NULL DEFAULT 'pendente',
-            data_solicitacao TEXT,
+            data_solicitacao DATETIME,
             detalhes_rota TEXT,
+            routeId INTEGER,
             type TEXT NOT NULL DEFAULT 'vaga',
             FOREIGN KEY (responsavelId) REFERENCES Responsavel(id) ON DELETE CASCADE,
-            FOREIGN KEY (motoristaId) REFERENCES Motorista(id) ON DELETE SET NULL
+            FOREIGN KEY (motoristaId) REFERENCES Motorista(id) ON DELETE CASCADE
           );
         `)
 
