@@ -100,6 +100,27 @@ export const BtnEditeText = styled.Text`
 `
 //----------------------
 
+//Botão Crianças
+export const BtnVagas = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  background: ${(props) => props.theme.primary};
+  width: ${theme.metrics.px(155)}px;
+  height: ${theme.metrics.px(50)}px;
+  padding: ${theme.metrics.px(11)}px;
+  border-radius: ${theme.metrics.px(10)}px;
+  min-width: 40%;
+  justify-content: center;
+`
+
+export const BtnVagasText = styled.Text`
+  margin-left: ${theme.metrics.px(10)}px;
+  font-size: ${theme.metrics.px(20)}px;
+  justify-content: center;
+  color: ${(props) => props.theme.text};
+`
+//---------------
+
 //Btn Profile de Configurações
 export const BtnProfile = styled.TouchableOpacity`
   flex-direction: row;
@@ -181,26 +202,6 @@ export const OptionTextCr = styled.Text`
   color: ${(props) => props.theme.text};
 `
 //---------------------
-
-//Btn Rotas das Configurações
-export const BtnRotasOption = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-vertical: ${theme.metrics.px(15)}px;
-  border-bottom-width: ${theme.metrics.px(1)}px;
-  border-bottom-color: ${(props) => props.theme.yellow};
-`
-export const IconRotasContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`
-export const OptionTextRotas = styled.Text`
-  font-size: ${theme.metrics.px(16)}px;
-  margin-left: ${theme.metrics.px(12)}px;
-  color: ${(props) => props.theme.text};
-`
-//--------------------
 
 //Btn Acessibilidade
 export const BtnAcessibilidadeOption = styled.TouchableOpacity`

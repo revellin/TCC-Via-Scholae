@@ -49,9 +49,6 @@ export * from './buttonAtualizar';
 //Btn Rotas
 export * from './buttonManegeRoutes';
 
-//Btn Rotas Config
-export * from './buttonRotasConfig';
-
 //Btn Mensagem
 export * from './buttonMessage'
 

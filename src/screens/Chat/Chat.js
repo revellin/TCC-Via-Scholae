@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
 import { ProfilePic } from '../../components'
 import { useNavigation } from '@react-navigation/native'
@@ -14,18 +14,29 @@ import {
   TitleText,
   ChatItem,
 } from './styles'
+import { useUser } from '../../database'
 
 export const Chat = () => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [chatList, setChatList] = useState([
-    { id: '1', name: 'Caio', message: 'Message', profilePic: 'CaioProfilePic' },
-    {
-      id: '2',
-      name: 'Lucas',
-      message: 'Message',
-      profilePic: 'LucasProfilePic',
-    },
-  ])
+  const [chatList, setChatList] = useState([])
+  const { user } = useUser() // Usuário logado
+
+  useEffect(() => {
+    const getChats = async () => {
+      const queryChats = query(
+        collection(database, `chats/${user.id}`),
+        orderBy('lastMessage', 'desc')
+      )
+      const unsubscribe = onSnapshot(queryChats, (snapshot) => {
+        const chats = snapshot.docs.map((doc) => doc.data())
+        setChatList(chats)
+      })
+
+      return () => unsubscribe()
+    }
+
+    getChats()
+  }, [user.id])
 
   const filteredChats = chatList.filter((chat) =>
     chat.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -33,18 +44,26 @@ export const Chat = () => {
 
   const navigation = useNavigation()
 
-  const openChat = (Message) => {
-    // Redireciona para a tela de conversa com os dados do chat selecionado
-    navigation.navigate('ChatScreen', { Message })
+  const openChat = (chatId, name) => {
+    // Adiciona o chat na lista de chats
+    setChatList((prevChatList) => [
+      ...prevChatList,
+      {
+        id: chatId,
+        name: name,
+        message: 'New message',
+        profilePic: 'ProfilePic',
+      },
+    ])
+
+    navigation.navigate('Message', { chatId })
   }
 
   return (
     <Container>
       <TitleText>Chats</TitleText>
 
-      {/* Barra de Pesquisa */}
       <SearchContainer>
-        {/*<Ionicons name="search" size={24} color="#ACACAC" style={styles.searchIcon} />*/}
         <Input
           placeholder="Search"
           value={searchQuery}
@@ -52,17 +71,16 @@ export const Chat = () => {
         />
       </SearchContainer>
 
-      {/* Lista de Conversas */}
       <FlatList
         data={filteredChats}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.chatId}
         renderItem={({ item }) => (
-          <ChatItem onPress={() => navigation.navigate('Message')}>
+          <ChatItem onPress={() => openChat(item.chatId, item.name)}>
             <ChatContent>
-              <ProfilePic style={styles.pic}></ProfilePic>
+              <ProfilePic style={styles.pic} />
               <ChatTextContainer>
                 <ChatName>{item.name}</ChatName>
-                <ChatMessage>{item.message}</ChatMessage>
+                <ChatMessage>{item.lastMessage}</ChatMessage>
               </ChatTextContainer>
             </ChatContent>
           </ChatItem>

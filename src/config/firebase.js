@@ -1,10 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app'
-import {
-  getAuth,
-  initializeAuth,
-  getReactNativePersistence,
-} from 'firebase/auth' // Adicionando initializeAuth e getReactNativePersistence
-import { getFirestore } from 'firebase/firestore'
+import { getReactNativePersistence, initializeAuth } from 'firebase/auth'
+import { getFirestore, collection} from 'firebase/firestore'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const firebaseConfig = {
@@ -17,7 +13,6 @@ const firebaseConfig = {
   measurementId: 'G-D015QEDVVW',
 }
 
-let app
 if (!getApps().length) {
   console.log('Conectando ao Firebase...')
   app = initializeApp(firebaseConfig)
@@ -26,12 +21,14 @@ if (!getApps().length) {
   app = getApps()[0]
 }
 
-// Inicializa o Firestore
-export const database = getFirestore(app)
-
-// Inicializa o Firebase Auth com persistência no AsyncStorage
 export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
+  persistence: getReactNativePersistence(AsyncStorage)
 })
+
+// Inicializa o Firestore
+export const database = getFirestore(app);
+
+export const usersRef = collection(database, 'users')
+export const roomRef = collection(database, 'room')
 
 export default app

@@ -3,8 +3,6 @@ import {
   useColorScheme,
   Alert,
   StatusBar,
-  SafeAreaView,
-  StyleSheet,
 } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen'
 import * as Location from 'expo-location'
@@ -96,7 +94,6 @@ export default function App() {
     <DatabaseProvider>
       <UserProvider>
         <ThemeProvider theme={themes}>
-          <SafeAreaView style={styles.container}>
             <StatusBar
               barStyle={
                 deviceTheme === 'dark' ? 'light-content' : 'dark-content'
@@ -107,16 +104,9 @@ export default function App() {
             <NavigationContainer>
               <Routes />
             </NavigationContainer>
-          </SafeAreaView>
         </ThemeProvider>
       </UserProvider>
     </DatabaseProvider>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 0, 
-  },
-})

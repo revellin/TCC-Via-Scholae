@@ -34,8 +34,8 @@ export const Initial = () => {
       try {
         const userData = await AsyncStorage.getItem('@user_data')
         if (userData) {
-          // Converte a string de volta para objeto e chama login
-          login(JSON.parse(userData))
+          const parsedUser = JSON.parse(userData)
+          login(parsedUser) // Chama o login com os dados do usuário
           navigation.reset({
             index: 0,
             routes: [{ name: 'MainHome', params: { screen: 'Home' } }],
@@ -55,6 +55,7 @@ export const Initial = () => {
     }
 
     try {
+      // Verifica se existe um usuário com o telefone e senha na tabela Responsavel ou Motorista
       const user = await db.getFirstAsync(
         'SELECT * FROM Responsavel WHERE phone = ? AND password = ?',
         [telefone, senha]
@@ -74,7 +75,7 @@ export const Initial = () => {
           phone: user.phone,
           end: user.end,
           cep: user.cep,
-          type: user.type,
+          type: 'responsavel', // Tipo de usuário
         }
       } else if (motorista) {
         userData = {
@@ -84,14 +85,16 @@ export const Initial = () => {
           phone: motorista.phone,
           end: motorista.end,
           cep: motorista.cep,
-          type: motorista.type,
+          type: 'motorista', // Tipo de usuário
         }
       } else {
         Alert.alert('Erro', 'Número de telefone ou senha incorretos.')
         return
       }
 
+      // Chama o login com os dados do usuário
       login(userData)
+
       // Armazenando os dados no AsyncStorage para persistir o login
       await AsyncStorage.setItem('@user_data', JSON.stringify(userData))
 

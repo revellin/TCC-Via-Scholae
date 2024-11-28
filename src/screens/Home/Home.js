@@ -25,6 +25,7 @@ export const Home = () => {
     longitude: -46.6333,
   }
 
+
   useEffect(() => {
     const getLocation = async () => {
       let { status } = await Location.getForegroundPermissionsAsync()

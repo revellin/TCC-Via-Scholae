@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { GiftedChat } from 'react-native-gifted-chat'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity, StatusBar } from 'react-native'
 import {
   collection,
   addDoc,
@@ -18,59 +18,73 @@ import {
   Name,
   SubTitles,
   HeaderInfo,
+  renderCustomBubble,
+  renderCustomInputToolbar,
+  renderCustomSend
 } from './styles'
+import { useUser } from '../../../database'
 
 export const Message = () => {
   const navigation = useNavigation()
   const route = useRoute()
-  const { profile } = route.params || {}
-
-  if (!profile) {
-    return <Text>Carregando perfil...</Text>
-  }
-
+  const { profile, chatId } = route.params
+  const { user } = useUser()
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
-    async function getMessages() {
+    StatusBar.setHidden(true)
+    return () => StatusBar.setHidden(false)
+  }, [])
+
+  useEffect(() => {
+    const getMessages = async () => {
       const values = query(
-        collection(database, 'chats'),
+        collection(database, `chats/${chatId}/messages`),
         orderBy('createdAt', 'desc')
       )
-      onSnapshot(values, (snapshot) =>
+      const unsubscribe = onSnapshot(values, (snapshot) =>
         setMessages(
           snapshot.docs.map((doc) => ({
-            _id: doc.data()._id,
+            _id: doc.id,
             createdAt: doc.data().createdAt.toDate(),
             text: doc.data().text,
             user: doc.data().user,
           }))
         )
       )
+      return () => unsubscribe()
     }
     getMessages()
-  }, [])
+  }, [chatId])
 
-  const mensagemEnviada = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages)
-    )
-    const { _id, createdAt, text, user } = messages[0]
+  const mensagemEnviada = useCallback(
+    async (messages = []) => {
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, messages)
+      )
+      const { _id, createdAt, text, user } = messages[0]
+      await addDoc(collection(database, `chats/${chatId}/messages`), {
+        _id,
+        createdAt,
+        text,
+        user,
+      })
+      await addDoc(collection(database, `chats/${user.id}`), {
+        chatId,
+        name: profile.name,
+        profilePic: profile.profilePic || 'defaultPic',
+        lastMessage: text,
+      })
+    },
+    [chatId, user.id, profile.name, profile.profilePic]
+  )
 
-    addDoc(collection(database, 'chats'), {
-      _id,
-      createdAt,
-      text,
-      user,
-    })
-  }, [])
   return (
     <Container>
       <Header>
-        <Return
-          style={styles.back}
-          onPress={() => navigation.navigate('Chats')}
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Mensagens')}>
+          <Return style={styles.back} />
+        </TouchableOpacity>
         <ProfilePic style={styles.pic} />
         <HeaderInfo>
           <Name>
@@ -86,13 +100,14 @@ export const Message = () => {
         messages={messages}
         onSend={(messages) => mensagemEnviada(messages)}
         user={{
-          _id: profile.id,
-          name: profile.name,
-          avatar: ''
+          _id: user.id,
+          name: user.name,
+          avatar: user.avatar || '',
+          type: user.type,
         }}
-        messagesContainerStyle={{
-          backgroundColor: '#595959',
-        }}
+        renderBubble={renderCustomBubble}
+        renderInputToolbar={renderCustomInputToolbar}
+        renderSend={renderCustomSend}
       />
     </Container>
   )

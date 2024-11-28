@@ -20,13 +20,14 @@ import {
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { useTheme } from 'styled-components/native'
 import { useNavigation } from '@react-navigation/native'
-import { useDatabase } from '../../../database'
+import { useDatabase, useUser } from '../../../database'
 
 export const PerfilSearch = ({ route }) => {
   const { profile } = route.params
   const theme = useTheme()
   const navigation = useNavigation()
   const db = useDatabase()
+  const { user } = useUser()
   const [vagas, setVagas] = useState(null)
 
   useEffect(() => {
@@ -89,11 +90,30 @@ export const PerfilSearch = ({ route }) => {
       </ButtonContainer>
 
       <ButtonMessage
-        onPress={() =>
+        onPress={() => {
+          // Criar identificadores únicos baseados no tipo de perfil
+          const motoristaId =
+            profile.type === 'Motorista'
+              ? `motorista_${profile.id}`
+              : `motorista_${user.id}`
+          const responsavelId =
+            profile.type === 'Responsavel'
+              ? `responsavel_${profile.id}`
+              : `responsavel_${user.id}`
+
+          // Ordenar para garantir consistência
+          const chatId =
+            motoristaId < responsavelId
+              ? `${motoristaId}_${responsavelId}`
+              : `${responsavelId}_${motoristaId}`
+
+          // Navegar para a tela de mensagens
           navigation.navigate('Message', {
-            profile: profile,
+            profile: profile, // Dados do perfil com quem está conversando
+            user: user, // Usuário logado
+            chatId: chatId, // ID único do chat
           })
-        }
+        }}
       >
         Mensagem
       </ButtonMessage>

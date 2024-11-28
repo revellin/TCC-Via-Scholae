@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 import { IconUser, IconHome, IconMessage, IconSearch } from '../../assets/icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -31,31 +32,42 @@ import {
   Vagas,
 } from '../screens'
 
-// BottomRoute.js
 export const BottomRoute = () => {
   const Tab = createBottomTabNavigator()
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
+          let icon
           if (route.name === 'Home') {
-            return <IconHome width={size} height={size} color={color} />
+            icon = <IconHome width={size} height={size} color={color} />
           } else if (route.name === 'Mensagens') {
-            return <IconMessage width={size} height={size} color={color} />
+            icon = <IconMessage width={size} height={size} color={color} />
           } else if (route.name === 'Pesquisa') {
-            return <IconSearch width={size} height={size} color={color} />
+            icon = <IconSearch width={size} height={size} color={color} />
           } else if (route.name === 'Perfil') {
-            return <IconUser width={size} height={size} color={color} />
+            icon = <IconUser width={size} height={size} color={color} />
           }
+
+          return icon
         },
-        tabBarActiveTintColor: '#272727',
-        tabBarInactiveTintColor: '#838383',
+        tabBarLabel: () => null, // Remover os rótulos
+        tabBarActiveTintColor: '#272727', // Cor do ícone quando ativo
+        tabBarInactiveTintColor: '#838383', // Cor do ícone quando inativo
         tabBarStyle: {
-          paddingBottom: 5,
-          paddingTop: 5,
-          height: 55,
-          borderTopWidth: 2,
-          borderTopColor: '#E9B224',
+          position: 'absolute', // Torna o bottom tab flutuante
+          bottom: 15,
+          left: 20,
+          right: 20,
+          height: 60,
+          borderRadius: 30,
+          backgroundColor: '#EEEEEE',
+          elevation: 10,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: 10 },
+          shadowOpacity: 0.1,
+          shadowRadius: 10,
         },
       })}
     >

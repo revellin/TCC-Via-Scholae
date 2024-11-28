@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TouchableOpacity, Alert } from 'react-native'
 import { ProfilePic, Return } from '../../components'
 import {
@@ -14,51 +14,64 @@ import {
   EditPictureText,
 } from './styles'
 import * as ImagePicker from 'expo-image-picker'
-import * as FileSystem from 'expo-file-system' 
+import * as FileSystem from 'expo-file-system'
 import { useNavigation } from '@react-navigation/native'
 import { useUser, saveProfilePic } from '../../database'
 
 export const EditProfile = () => {
   const navigation = useNavigation()
-  const { user } = useUser()
-  const [image, setImage] = useState(null)
+  const { user, setUser } = useUser()
+  const [image, setImage] = useState(user?.profilePic || null)
+
+  useEffect(() => {
+    if (user?.profilePic) {
+      setImage(user.profilePic)
+    }
+  }, [user])
 
   const pickImage = async () => {
+    // Solicita permissões para acessar a galeria
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync()
-
     if (permissionResult.granted === false) {
       Alert.alert('Erro', 'É necessário permitir o acesso à galeria!')
       return
     }
 
+    // Abre a galeria para escolher a imagem
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Atualização para MediaTypeOptions
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     })
 
-    if (!result.canceled) {
-      const imageUri = result.assets[0].uri
+    console.log(result) // Adicionando log para inspecionar o retorno
 
-      // Defina o caminho de destino no armazenamento local
-      const fileName = imageUri.split('/').pop() 
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      const imageUri = result.assets[0].uri
+      const fileName = imageUri.split('/').pop()
       const path = FileSystem.documentDirectory + fileName
 
-      // Copiar a imagem para o diretório de documentos
-      await FileSystem.copyAsync({
-        from: imageUri,
-        to: path,
-      })
+      // Copia a imagem para o diretório de documentos
+      try {
+        await FileSystem.copyAsync({ from: imageUri, to: path })
+        console.log('Imagem copiada com sucesso', path)
 
-      // Salva o caminho local no banco de dados (não a imagem inteira)
-      setImage(path)
+        // Salva o caminho da imagem no banco de dados
+        await saveProfilePic(path, user)
 
-      if (user) {
-        saveProfilePic(path) // Passando o caminho local para salvar no banco de dados
-        useUser({ ...user, profilePic: path }) // Atualiza o estado do usuário
+        // Atualiza o estado com a nova imagem
+        setImage(path)
+        if (user) {
+          setUser({ ...user, profilePic: path })
+        }
+      } catch (error) {
+        console.error('Erro ao copiar imagem', error)
+        Alert.alert('Erro', 'Falha ao salvar a imagem.')
       }
+    } else {
+      console.log('Nenhuma imagem selecionada ou operação cancelada')
     }
   }
 
@@ -73,7 +86,6 @@ export const EditProfile = () => {
       </Header>
 
       <ProfileContainer>
-        {/* Passa o caminho local da imagem para o ProfilePic */}
         <ProfilePic uri={image || user?.profilePic} />
         <TouchableOpacity onPress={pickImage}>
           <EditPictureText>Edit Picture</EditPictureText>
