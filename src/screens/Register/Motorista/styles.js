@@ -21,10 +21,10 @@ export const Form = styled.View`
   padding-horizontal: ${theme.metrics.px(10)}px;
 `
 export const ImgContainer = styled.View`
-  background: ${props => props.theme.primary};
+  background: ${(props) => props.theme.primary};
   border-radius: ${theme.metrics.px(8)}px;
   padding: ${theme.metrics.px(10)}px;
-  margin-vertical: ${theme.metrics.px(10)}px; 
+  margin-vertical: ${theme.metrics.px(10)}px;
   align-items: center;
   justify-content: center;
   shadow-color: #000000;
@@ -33,19 +33,33 @@ export const ImgContainer = styled.View`
   shadow-radius: ${theme.metrics.px(10)}px;
   elevation: 5;
   margin-bottom: ${theme.metrics.px(20)}px;
-`;
+`
+
+export const CheckBoxContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${theme.metrics.px(10)}px;
+`
 
 export const TitleText = styled.Text`
   font-size: ${theme.metrics.px(40)}px;
   text-align: center;
   color: ${(props) => props.theme.text};
 `
+export const TermsText = styled.Text`
+  color: ${(props) => props.theme.yellow};
+  text-decoration: underline;
+`
+export const TermsText1 = styled.Text`
+  color: ${(props) => props.theme.text};
+`
+
 export const ImagePreview = styled.Image`
   width: ${theme.metrics.px(250)}px;
   height: ${theme.metrics.px(150)}px;
   border-radius: ${theme.metrics.px(5)}px;
   margin-top: ${theme.metrics.px(5)}px;
-`;
+`
 
 export const styles = StyleSheet.create({
   return: {

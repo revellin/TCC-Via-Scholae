@@ -23,7 +23,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const deviceTheme = useColorScheme()
-  const themes = theme[deviceTheme] || theme.dark
+  const themes = theme[theme.dark] || theme.dark
   const [appIsReady, setAppIsReady] = useState(false)
   let [fontsLoaded] = useFonts({
     SourceSansPro_400Regular,
@@ -98,6 +98,7 @@ export default function App() {
               barStyle={
                 deviceTheme === 'dark' ? 'light-content' : 'dark-content'
               }
+              hidden={true} 
               translucent={true}
               backgroundColor="transparent"
             />

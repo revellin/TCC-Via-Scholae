@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { TouchableOpacity, Alert, ScrollView } from 'react-native'
+import { TouchableOpacity, Alert, ScrollView} from 'react-native'
+import CheckBox from '@react-native-community/checkbox'
 import {
   CustomLogo,
   CustomLabelText,
@@ -8,7 +9,17 @@ import {
   Line,
   Return,
 } from '../../components'
-import { styles, Container, LogoContainer, Form, TitleText, Motorista } from './styles'
+import {
+  styles,
+  Container,
+  LogoContainer,
+  Form,
+  TitleText,
+  Motorista,
+  TermsText,
+  TermsText1,
+  CheckBoxContainer,
+} from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase } from '../../database'
 import axios from 'axios'
@@ -24,33 +35,42 @@ export const Register = () => {
   const [cep, setCEP] = useState('')
   const [senha, setSenha] = useState('')
   const [confSenha, setConfirmeSenha] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
 
   const handleGetAddress = async (cep) => {
     if (cep.length !== 8) {
-      return;
+      return
     }
 
     try {
-      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
-      const { logradouro, localidade, uf } = response.data;
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+      const { logradouro, localidade, uf } = response.data
 
       if (logradouro) {
-        setEnd(`${logradouro}, ${localidade} - ${uf}`);
+        setEnd(`${logradouro}, ${localidade} - ${uf}`)
       } else {
-        Alert.alert('Erro', 'CEP não encontrado');
+        Alert.alert('Erro', 'CEP não encontrado')
       }
     } catch (error) {
-      Alert.alert('Erro', 'Erro ao buscar o endereço');
+      Alert.alert('Erro', 'Erro ao buscar o endereço')
     }
-  };
+  }
 
   useEffect(() => {
     if (cep.length === 8) {
-      handleGetAddress(cep);
+      handleGetAddress(cep)
     }
-  }, [cep]);
+  }, [cep])
 
   const handleRegister = async () => {
+    if (!isChecked) {
+      Alert.alert(
+        'Atenção!',
+        'Você deve aceitar os Termos de Uso para prosseguir.'
+      )
+      return
+    }
+
     if (
       username === '' ||
       telefone === '' ||
@@ -81,9 +101,8 @@ export const Register = () => {
       }
 
       await db.runAsync(
-        'INSERT INTO Responsavel (name, phone, email, end,  cep, password) VALUES (?, ?, ?, ?, ?, ?)',
-        [username, telefone, email, end, cep, senha],
-
+        'INSERT INTO Responsavel (name, phone, email, end, cep, password) VALUES (?, ?, ?, ?, ?, ?)',
+        [username, telefone, email, end, cep, senha]
       )
 
       Alert.alert('Sucesso', 'Cadastro realizado com sucesso!')
@@ -98,9 +117,11 @@ export const Register = () => {
     <Container>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <LogoContainer>
-          <TouchableOpacity
-            style={styles.return}>
-            <Return style={styles.return} onPress={() => navigation.navigate('Splash')} />
+          <TouchableOpacity style={styles.return}>
+            <Return
+              style={styles.return}
+              onPress={() => navigation.navigate('Splash')}
+            />
           </TouchableOpacity>
           <CustomLogo style={styles.img} />
         </LogoContainer>
@@ -170,8 +191,23 @@ export const Register = () => {
             maxLength={16}
           />
 
+          <CheckBoxContainer>
+            <CheckBox
+              value={isChecked}
+              onValueChange={setIsChecked}
+              tintColors={{ true: '#E1B415', false: '#A7A6A6' }}
+            />
+
+            <TermsText1>Aceito os </TermsText1>
+            <TermsText onPress={() => navigation.navigate('TermosdeUso')}>
+              Termos de Uso
+            </TermsText>
+          </CheckBoxContainer>
+
           <ButtonCadastro onPress={handleRegister}>Cadastre-se</ButtonCadastro>
-          <Motorista onPress={() => navigation.navigate('RegisterMotorista')}>Sou Motorista</Motorista>
+          <Motorista onPress={() => navigation.navigate('RegisterMotorista')}>
+            Sou Motorista
+          </Motorista>
         </Form>
       </ScrollView>
     </Container>

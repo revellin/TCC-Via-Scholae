@@ -1,12 +1,10 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-// Importando o AsyncStorage
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {
   ButtonProfile,
   ButtonYourAccount,
   ButtonChildrenSettings,
-  ButtonRotasSettings,
   ButtonAccessibility,
   Return,
 } from '../../components'
@@ -59,7 +57,6 @@ export const Settings = () => {
 
       <ButtonYourAccount />
 
-      {user?.type === 'motorista' && <ButtonRotasSettings />}
       {user && user.type === 'responsavel' && <ButtonChildrenSettings />}
 
       <ButtonAccessibility />

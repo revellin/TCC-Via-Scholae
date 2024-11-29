@@ -7,8 +7,7 @@ export const Accessibility = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  // Pega o status do tema a partir dos parâmetros passados ou usa o valor padrão 'off'
-  const { themeStatus } = route.params || { themeStatus: 'off' };
+  const { themeStatus } = route.params || { themeStatus: 'On' };
 
   return (
     <Container>

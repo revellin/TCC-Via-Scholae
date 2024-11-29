@@ -1,12 +1,11 @@
-import { StyleSheet } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native'
+import styled from 'styled-components/native'
 import { theme } from '../../styles'
-
 
 export const Container = styled.View`
   flex-grow: 1;
   padding: ${theme.metrics.px(20)}px;
-  background: ${props => props.theme.background};
+  background: ${(props) => props.theme.background};
 `
 
 export const LogoContainer = styled.View`
@@ -21,20 +20,32 @@ export const LogoContainer = styled.View`
 export const Form = styled.View`
   padding-horizontal: ${theme.metrics.px(10)}px;
 `
+export const CheckBoxContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${theme.metrics.px(10)}px;
+`
 
 export const TitleText = styled.Text`
   font-size: ${theme.metrics.px(40)}px;
   text-align: center;
-  color: ${props => props.theme.text};
-`;
+  color: ${(props) => props.theme.text};
+`
 
+export const TermsText = styled.Text`
+  color: ${(props) => props.theme.yellow};
+  text-decoration: underline;
+`
+export const TermsText1 = styled.Text`
+  color: ${(props) => props.theme.text};
+`
 export const Motorista = styled.Text`
   font-size: ${theme.metrics.px(18)}px;
-  color: ${props => props.theme.yellow};
+  color: ${(props) => props.theme.yellow};
   text-decoration: underline;
   text-align: center;
-  margin-top: ${theme.metrics.px(10)}px;
-`;
+  margin-top: ${theme.metrics.px(15)}px;
+`
 
 export const styles = StyleSheet.create({
   return: {
@@ -53,4 +64,4 @@ export const styles = StyleSheet.create({
     marginVertical: 3,
     marginBottom: 25,
   },
-});
+})

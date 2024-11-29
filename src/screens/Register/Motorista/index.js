@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, Alert, ScrollView } from 'react-native'
+import CheckBox from '@react-native-community/checkbox'
 import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
 import { useNavigation } from '@react-navigation/native'
 import { useDatabase } from '../../../database'
 import axios from 'axios'
-import Constants from 'expo-constants'
 import {
   CustomLogo,
   CustomLabelText,
@@ -22,9 +22,11 @@ import {
   TitleText,
   ImgContainer,
   ImagePreview,
+  CheckBoxContainer,
+  TermsText,
+  TermsText1,
 } from './styles'
 
-// Componente principal
 export const RegisterMotorista = () => {
   const navigation = useNavigation()
   const db = useDatabase()
@@ -38,6 +40,7 @@ export const RegisterMotorista = () => {
   const [confSenha, setConfirmeSenha] = useState('')
   const [cnhFrente, setCnhFrente] = useState(null)
   const [cnhVerso, setCnhVerso] = useState(null)
+  const [isChecked, setIsChecked] = useState(false)
 
   if (!db) {
     Alert.alert('Erro', 'Banco de dados não está disponível.')
@@ -117,6 +120,14 @@ export const RegisterMotorista = () => {
 
   // Registrar motorista no banco de dados
   const handleRegister = async () => {
+    if (!isChecked) {
+      Alert.alert(
+        'Atenção!',
+        'Você deve aceitar os Termos de Uso para prosseguir.'
+      )
+      return
+    }
+
     if (
       username === '' ||
       telefone === '' ||
@@ -274,7 +285,6 @@ export const RegisterMotorista = () => {
             </ImgContainer>
           </TouchableOpacity>
 
-          {/* Campo para imagem da CNH (verso) */}
           <CustomLabelText>Adicione o verso da CNH</CustomLabelText>
           <TouchableOpacity
             title={cnhVerso ? 'Alterar imagem' : 'Escolha uma imagem'}
@@ -287,6 +297,19 @@ export const RegisterMotorista = () => {
               )}
             </ImgContainer>
           </TouchableOpacity>
+
+          <CheckBoxContainer>
+            <CheckBox
+              value={isChecked}
+              onValueChange={setIsChecked}
+              tintColors={{ true: '#E1B415', false: '#A7A6A6' }}
+            />
+
+            <TermsText1>Aceito os </TermsText1>
+            <TermsText onPress={() => navigation.navigate('TermosdeUso')}>
+              Termos de Uso
+            </TermsText>
+          </CheckBoxContainer>
 
           <ButtonCadastro onPress={handleRegister}>
             <CustomLabelText style={{ color: '#FFF' }}>

@@ -15,6 +15,7 @@ import {
   Message,
   Chat,
   Register,
+  TermosdeUso,
   Search,
   Settings,
   Accessibility,
@@ -53,16 +54,18 @@ export const BottomRoute = () => {
           return icon
         },
         tabBarLabel: () => null, // Remover os rótulos
-        tabBarActiveTintColor: '#272727', // Cor do ícone quando ativo
-        tabBarInactiveTintColor: '#838383', // Cor do ícone quando inativo
+        tabBarActiveTintColor: '#EEEEEE', // Cor do ícone quando ativo
+        tabBarInactiveTintColor: '#565656', // Cor do ícone quando inativo
         tabBarStyle: {
-          position: 'absolute', // Torna o bottom tab flutuante
+          position: 'absolute',
           bottom: 15,
           left: 20,
           right: 20,
           height: 60,
           borderRadius: 30,
-          backgroundColor: '#EEEEEE',
+          borderWidth: 2,
+          borderColor: '#EEEEEE',
+          backgroundColor: '#262626',
           elevation: 10,
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 10 },
@@ -113,12 +116,17 @@ export const Routes = () => {
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ title: 'Cadastrar_Criancas', headerShown: false }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TermosdeUso"
+        component={TermosdeUso}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="RegisterMotorista"
         component={RegisterMotorista}
-        options={{ title: 'Criancas', headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="RegisterCrianca"
@@ -153,7 +161,8 @@ export const Routes = () => {
       <Stack.Screen
         name="Message"
         component={Message}
-        options={{ headerShown: false }}
+        options={{ headerShown: false,
+         }}
       />
       <Stack.Screen
         name="Settings"

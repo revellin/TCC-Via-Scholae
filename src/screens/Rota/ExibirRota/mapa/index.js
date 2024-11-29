@@ -196,9 +196,9 @@ export const RotaMap = () => {
           {startCoords && (
             <MapboxGL.Camera
               centerCoordinate={startCoords}
-              zoomLevel={18.5}
-              minZoomLevel={15.5}
-              maxZoomLevel={30}
+              zoomLevel={14}
+              minZoomLevel={12}
+              maxZoomLevel={16}
             />
           )}
           {startCoords && (

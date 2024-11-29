@@ -32,11 +32,6 @@ export const Message = () => {
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
-    StatusBar.setHidden(true)
-    return () => StatusBar.setHidden(false)
-  }, [])
-
-  useEffect(() => {
     const getMessages = async () => {
       const values = query(
         collection(database, `chats/${chatId}/messages`),
