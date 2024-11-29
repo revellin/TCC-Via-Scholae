@@ -23,6 +23,7 @@ import {
   renderCustomSend
 } from './styles'
 import { useUser } from '../../../database'
+import * as Notifications from 'expo-notifications'
 
 export const Message = () => {
   const navigation = useNavigation()
@@ -37,20 +38,32 @@ export const Message = () => {
         collection(database, `chats/${chatId}/messages`),
         orderBy('createdAt', 'desc')
       )
-      const unsubscribe = onSnapshot(values, (snapshot) =>
-        setMessages(
-          snapshot.docs.map((doc) => ({
-            _id: doc.id,
-            createdAt: doc.data().createdAt.toDate(),
-            text: doc.data().text,
-            user: doc.data().user,
-          }))
-        )
-      )
+      const unsubscribe = onSnapshot(values, (snapshot) => {
+        const newMessages = snapshot.docs.map((doc) => ({
+          _id: doc.id,
+          createdAt: doc.data().createdAt.toDate(),
+          text: doc.data().text,
+          user: doc.data().user,
+        }))
+        setMessages(newMessages)
+
+        // Enviar notificação se for uma nova mensagem e não for do próprio usuário
+        const lastMessage = newMessages[0]
+        if (lastMessage.user._id !== user.id) {
+          Notifications.scheduleNotificationAsync({
+            content: {
+              title: 'Nova mensagem!',
+              body: lastMessage.text,
+              data: { chatId: chatId },
+            },
+            trigger: null, // Envia imediatamente
+          })
+        }
+      })
       return () => unsubscribe()
     }
     getMessages()
-  }, [chatId])
+  }, [chatId, user.id])
 
   const mensagemEnviada = useCallback(
     async (messages = []) => {
